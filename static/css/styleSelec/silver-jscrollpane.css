@@ -1,0 +1,124 @@
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.fx_styleselect_silver .jspContainer
+{
+	overflow: hidden;
+	position: relative;
+}
+
+.fx_styleselect_silver .jspPane
+{
+	position: absolute;
+}
+
+.fx_styleselect_silver .jspVerticalBar
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 2px;
+	margin-right:15px;
+	height: 100%;
+	background: red;
+}
+
+.fx_styleselect_silver .jspHorizontalBar
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+	background: red;
+}
+
+.fx_styleselect_silver .jspVerticalBar *,
+.fx_styleselect_silver .jspHorizontalBar *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.fx_styleselect_silver .jspCap
+{
+	display: none;
+}
+
+.fx_styleselect_silver .jspHorizontalBar .jspCap
+{
+	float: left;
+}
+
+.fx_styleselect_silver .jspTrack
+{
+	background: #a3a3a3;
+	position: relative;
+}
+
+.fx_styleselect_silver .jspDrag
+{
+	background: #02b5ef;
+	position: relative;
+	top: 0;
+	right: 3px;
+    _right:0px;
+	left: -5;
+	cursor: pointer;
+	width: 8px;
+}
+
+.fx_styleselect_silver .jspHorizontalBar .jspTrack,
+.fx_styleselect_silver .jspHorizontalBar .jspDrag
+{
+	float: left;
+	height: 100%;
+}
+
+.fx_styleselect_silver .jspArrow
+{
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.fx_styleselect_silver .jspArrow.jspDisabled
+{
+	cursor: default;
+	background: #80808d;
+}
+
+.fx_styleselect_silver .jspVerticalBar .jspArrow
+{
+	height: 16px;
+}
+
+.fx_styleselect_silver .jspHorizontalBar .jspArrow
+{
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.fx_styleselect_silver .jspVerticalBar .jspArrow:focus
+{
+	outline: none;
+}
+
+.fx_styleselect_silver .jspCorner
+{
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+	margin: 0 -3px 0 0;
+}

@@ -1,0 +1,91 @@
+/*------------------ select Silver -----------------*/
+		
+
+.fx_styleselect_silver {
+    width:180px;
+    height: 34px;
+    background: url("silver_images/silver_bg.gif") no-repeat top left;
+    font-size:14px;
+    }
+
+.fx_styleselect_silver .fx_styleselect_item{
+    top: 32px;
+    left: 0;
+    width:180px;
+    z-index: 20000;
+    }
+    
+.fx_styleselect_silver .fx_styleselect_item_start{
+    height:8px;
+    background:url("silver_images/silverFirst.jpg") no-repeat top left;
+    }
+    
+.fx_styleselect_silver .fx_styleselect_item_content{
+    _position:relative; _top:-9px; /*针对ie6图片之间产生空隙的hack*/
+    height:140px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background:#f2f2f2;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    }
+    
+.fx_styleselect_silver .fx_styleselect_item_end{
+    _position:relative; _top:-9px; /*针对ie6图片之间产生空隙的hack*/
+    height:8px;
+    background:url("silver_images/silverLast.jpg") no-repeat top left;
+    }
+
+.fx_styleselect_silver .fx_passive, .fx_styleselect_silver .fx_active{
+    height:34px;
+    line-height:34px;
+    display:block;
+    cursor:pointer;	
+    padding-left:10px;
+    margin-left:10px;
+    }
+    
+.fx_styleselect_silver .fx_passive{
+    color:#888;
+    line-height:34px;
+    }
+.fx_styleselect_silver .fx_active{
+    color:#888;
+    line-height:34px;
+    }
+    
+.fx_styleselect_silver .fx_closed{
+    background:url("silver_images/silver_normal.gif") no-repeat top right;
+    line-height:34px;
+}
+
+.fx_styleselect_silver .fx_expended{
+    background:url("silver_images/silver_active.gif") no-repeat top right;
+    line-height:34px;
+}
+    
+.fx_styleselect_silver ul{
+    padding:0;
+    margin:0;
+    list-style:none;
+    cursor:pointer;	
+    }
+    
+.fx_styleselect_silver li{
+    font-size:13px;
+    line-height:20px;
+    padding:0;
+    margin:0;
+    font-weight:bold;
+    padding:2px 0 2px 12px;
+    color:#666;
+    }
+    
+.fx_styleselect_silver li:hover {
+    color:#888;
+    }
+    
+.fx_styleselect_silver .selected{
+    color:#bbb;
+    }
+    

@@ -1,0 +1,71 @@
+/*------------------ default -----------------*/
+		
+.default .styleSelect_item{
+		width:203px;
+		}
+		
+.default .styleSelect_item_start{
+		height:8px;
+		background:url("images/darkFirst.jpg") no-repeat top left;
+		}
+		
+.default .styleSelect_item_content{
+		height:140px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		background:#525252;
+		}
+		
+.default .styleSelect_item_end{
+		height:8px;
+		background:url("images/darkLast.jpg") no-repeat top left;
+		}
+
+.default{
+		background: url("images/darkBackground.jpg") no-repeat top left;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:12px;
+		}
+
+.default .passiveSelect,.default .activeSelect{
+		height:25px;
+		line-height:2em;
+		display:block;
+		cursor:pointer;	
+		padding-left:10px;
+		margin-right:10px;
+		}
+		
+.default .passiveSelect{
+		background:url("images/darkNormal.jpg") no-repeat top right;
+		color:#fff;
+		}
+		
+.default .activeSelect{
+		background:url("images/darkActive.jpg") no-repeat top right;
+		color:#00aeef;
+		}
+		
+.default ul{
+		padding:0;
+		margin:0;
+		list-style:none;
+		cursor:pointer;	
+		}
+		
+.default li{
+		padding:0;
+		margin:0;
+		font-weight:normal;
+		padding:2px 0 2px 12px;
+		color:#aeaeae;
+		}
+		
+.default li:hover{
+		color:#00aeef;
+		}
+		
+.default .selected{
+		color:#fff;
+		}
+		

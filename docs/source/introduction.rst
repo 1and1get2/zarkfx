@@ -41,8 +41,10 @@ ZarkFX是 `Sparker5 <http://sparker5.com>`_ 团队在实际工作经验中总结
 到github下载完整版: `github:ZarkFX <http://github.com/sdjl/zarkfx>`_
 
 
-使用ZarkFX不需要懂得js与css
----------------------------
+使用ZarkFX需要懂得js与css吗?
+-------------------------------
+
+完全不需要。
 
 从表面上看，ZarkFX与其它js库最大的区别恐怕就是调用方式上的不同。正如你所见，我们是通过给html元素添加fx属性来实现js效果的，这就是使用ZarkFX的唯一方式。
 

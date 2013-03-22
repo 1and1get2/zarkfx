@@ -96,7 +96,7 @@ FX.getFrame('jquery-1.3.2', function($) {
     
     }
 
-    FX.run('share', function(attrs) {
+    FX.register('share', [], function(attrs) {
         var $this = $(this);
 
         $this.bind(attrs.event_type, function(){

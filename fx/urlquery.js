@@ -1,6 +1,6 @@
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('urlquery', function(attrs){
+    FX.register('urlquery', [ ['js', 'url'] ], function(attrs){
         var $this = $(this),
             href;
 
@@ -48,7 +48,7 @@ FX.getFrame('jquery-1.3.2', function($){
         chosedClass : 'chosed',
         keepValue: false,
         quote       : true
-    }, 'url');
+    });
 
 });
 

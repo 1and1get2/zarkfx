@@ -3,10 +3,10 @@
  *
  * */
 
-FX.getCSS(FX.CSS_PATH + 'fancybox/fancybox.css');
+FX.loadCSS(FX.CSS_PATH + 'fancybox/fancybox.css');
 
 FX.getFrame('jquery-1.3.2', function($){
-    FX.run('popvideo', function(attrs){
+    FX.register('popvideo', [ ['js', 'fancybox'] ], function(attrs){
 
         $(this).fancybox({
             'padding'           : 0,
@@ -17,5 +17,5 @@ FX.getFrame('jquery-1.3.2', function($){
             'hideOnOverlayClick': false
         });
 
-    }, {}, 'fancybox');
+    }, {});
 });

@@ -100,7 +100,7 @@ FX.getFrame('jquery-1.3.2', function($){
         };
     });
 
-    FX.run('scroll', function(attrs){
+    FX.register('scroll', [ ['js', 'detect'] ], function(attrs){
         var $this = $(this);
         var $scroll_obj;
         var fx_name = 'scroll';
@@ -176,5 +176,5 @@ FX.getFrame('jquery-1.3.2', function($){
         right:          undefined,
         targetid:       undefined,
         style:          'none'
-    }, 'detect');
+    });
 });

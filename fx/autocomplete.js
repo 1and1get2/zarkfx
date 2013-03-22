@@ -34,10 +34,10 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.getCSS(FX.CSS_PATH + 'autocomplete.css');
+    FX.loadCSS(FX.CSS_PATH + 'autocomplete.css');
     var source_cache = {};
 
-    FX.run('autocomplete', function(attrs){
+    FX.register('autocomplete', [ ['js', 'autocomplete'] ], function(attrs){
 
         var $this = $(this);
         var source;
@@ -72,6 +72,6 @@ FX.getFrame('jquery-1.3.2', function($){
             max             :  10
         });
 
-    }, {data:  undefined, src: undefined}, 'autocomplete' );
+    }, {data:  undefined, src: undefined});
 
 });

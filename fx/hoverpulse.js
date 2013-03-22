@@ -92,7 +92,7 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
 
     })(jQuery);
 
-    FX.run('hoverpulse', function(attrs){
+    FX.register('hoverpulse', [], function(attrs){
         var $this = jQuery(this);
         if(attrs.size !== undefined) { attrs.size  = parseInt(attrs.size);  };
         if(attrs.speed !== undefined){ attrs.speed = parseInt(attrs.speed); };

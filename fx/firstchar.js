@@ -7,7 +7,7 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('firstchar', function(attrs){
+    FX.register('firstchar', [], function(attrs){
 
         var $this = $(this);
         if (attrs.class){

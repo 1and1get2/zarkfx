@@ -1,9 +1,9 @@
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('elastic', function(attrs){
+    FX.register('elastic', [ ['js', 'elastic'] ], function(attrs){
         var $this = $(this);
         $this.elastic();
     }, {
-    }, 'elastic');
+    });
 
 });

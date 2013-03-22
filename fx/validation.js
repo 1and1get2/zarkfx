@@ -61,7 +61,7 @@
 
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.run('validation', function(attrs) {
+    FX.register('validation', [], function(attrs) {
 
         var $this = $(this);
         // 获得错误提示的对象

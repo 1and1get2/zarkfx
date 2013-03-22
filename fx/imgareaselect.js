@@ -38,10 +38,10 @@
 FX.getFrame('jquery-1.3.2', function($) {
 
 
-    FX.run('imgareaselect', function(attrs) {
+    FX.register('imgareaselect', [ ['js', 'imgareaselect'] ], function(attrs) {
 
         if (attrs.style !== 'none'){
-            FX.getCSS(FX.CSS_PATH + 'imgareaselect/imgareaselect-'+attrs.style+'.css');
+            FX.loadCSS(FX.CSS_PATH + 'imgareaselect/imgareaselect-'+attrs.style+'.css');
         };
 
         var $this = $(this);
@@ -135,7 +135,7 @@ FX.getFrame('jquery-1.3.2', function($) {
         show:       true,
         keys:       false
 
-    }, 'imgareaselect');
+    });
 
 });
 

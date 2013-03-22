@@ -2,7 +2,7 @@
 
 FX.getFrame('jquery-1.5.1', function($){
 
-    FX.run('lazyload', function(attrs){
+    FX.register('lazyload', [ ['js', 'lazyload'] ], function(attrs){
 
         var $this = $(this);
 
@@ -18,6 +18,6 @@ FX.getFrame('jquery-1.5.1', function($){
         skip_invisible: false,
         effectSpeed: 1000,
         effect:     'show' // 可选参数: show fadeIn
-    }, 'lazyload' );
+    });
 });
 

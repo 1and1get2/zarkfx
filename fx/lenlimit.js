@@ -1,5 +1,5 @@
 FX.getFrame('jquery-1.3.2', function($){
-    FX.run('lenlimit', function(attrs){
+    FX.register('lenlimit', [], function(attrs){
 
         var $this = $(this),
             target, show_handle;

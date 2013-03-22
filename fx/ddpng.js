@@ -32,10 +32,10 @@
 try { document.execCommand("BackgroundImageCache", false, true); }
 catch (err) {};
 
-FX.getFrame('jquery-1.3.2', function($){
-    FX.run('ddpng', function(attrs){
+FX.getFrame('jquery-1.3.2', [ ['js', 'detect'], ['js', 'ddpng'] ], function($){
+    FX.register('ddpng', function(attrs){
         if(FX.detect.browser === 'IE' && FX.detect.version === 6){
             DD_belatedPNG.fixPng(this);
         };
-    }, {}, ['detect','ddpng']);
+    }, {});
 });

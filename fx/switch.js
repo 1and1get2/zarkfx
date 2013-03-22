@@ -28,7 +28,7 @@ FX.getFrame('jquery-1.5.1', function($){
     var lazyload_top  = {}; // only for with lazyload
     var lazyload_left = {}; // only for with lazyload
 
-    FX.run('switch', function(attrs){
+    FX.register('switch', [], function(attrs){
 
         var $this = $(this);
         var group = attrs.group !== undefined ? attrs.group : 'default_group';

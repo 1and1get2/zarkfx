@@ -74,7 +74,7 @@ FX.getFrame('jquery-1.3.2', function($){
 
     };
 
-    FX.run('choosebox', function(attrs){
+    FX.register('choosebox', [], function(attrs){
         var $this = $(this);
         var $switch;
 

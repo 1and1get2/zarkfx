@@ -43,7 +43,7 @@ FX.getFrame('jquery-1.3.2', function($){
         return actualTop;
     };
 
-    FX.run('staytop', function(attrs){
+    FX.register('staytop', [], function(attrs){
 
         var $this = $(this);
         var old_position = getElementTop(this);

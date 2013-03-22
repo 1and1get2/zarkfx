@@ -38,16 +38,33 @@
  *
  * .. topic:: Arguments
  *
- *    =======   ========   =============   =======   ===========
- *    Param     R/O        Values          Default   Description
- *    =======   ========   =============   =======   ===========
- *    fx        required   fade|\          fade      Cycle method,
- *                         shuffle|\                 see
- *                         others                    :ref:`cycle-example1`
- *    timeout   optional   non-negative    4000      Cycle interval
- *                         integer
- *    blabla    optional   blabla                    blabla
- *    =======   ========   =============   =======   ===========
+ *    .. list-table::
+ *       :widths: 1 1 1 1 5
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - R/O
+ *         - Values
+ *         - Default
+ *         - Description
+ *
+ *       * - fx
+ *         - required
+ *         - fade|shuffle|others
+ *         - fade
+ *         - Cycle method, see :ref:`cycle-example1`
+ *
+ *       * - timeout
+ *         - optional
+ *         - non-negative integer
+ *         - 4000
+ *         - Cycle interval
+ *
+ *       * - blabla
+ *         - optional
+ *         - blabla
+ *         -
+ *         - blabla
  *
  * .. _cycle-example1:
  *
@@ -88,7 +105,7 @@
 
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.run('cycle', function(attrs) {
+    FX.register('cycle', [ ['js', 'cycle'] ], function(attrs) {
 
         if(!attrs["fx_var"]) {
             $(this).cycle(attrs);
@@ -102,7 +119,6 @@ FX.getFrame('jquery-1.3.2', function($) {
         speed:  1000,
         pause:  0 // hover时暂停
 
-    }, 'cycle');
+    });
 
 });
-

@@ -75,11 +75,11 @@ FX.getFrame('jquery-1.3.2', function($){
     var this_url = window.location.href.replace('http://','');
     var this_url_relative = this_url.substr(this_url.indexOf('/'));
 
-    FX.run('accordion', function(attrs){
+    FX.register('accordion', [ ['js', 'jqueryui-1.8.14'] ], function(attrs){
 
         var $this = $(this);                 
         if (attrs.style !== 'none'){
-            FX.getCSS(FX.CSS_PATH + 'accordion/' + attrs.style +'.css');
+            FX.loadCSS(FX.CSS_PATH + 'accordion/' + attrs.style +'.css');
             $this.addClass('zarkfx_accordion_div1')
         };
         /*set class*/
@@ -171,6 +171,6 @@ FX.getFrame('jquery-1.3.2', function($){
         right_img   : FX.IMG_PATH + 'accordion/right.png',
         down_img    : FX.IMG_PATH + 'accordion/down.png',
         style       : 'none'
-    }, 'jqueryui-1.8.14');
+    });
 });
 

@@ -19,7 +19,7 @@ FX.getFrame('jquery-1.3.2', function($){
         };
     };
 
-    FX.run('overlayer', function(attrs){
+    FX.register('overlayer', [ ['js', 'detect'] ], function(attrs){
 
         if (attrs.target === 'screen'){
             var $this = $(this);
@@ -61,6 +61,6 @@ FX.getFrame('jquery-1.3.2', function($){
         opacity:    0.6,
         scroll:     false,
         zIndex:     1000
-    }, 'detect');
+    });
 
 });

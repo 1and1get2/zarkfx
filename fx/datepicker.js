@@ -23,12 +23,12 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('datepicker', function(attrs){
+    FX.register('datepicker', [ ['js', 'jqueryui-1.8.14'] ], function(attrs){
     
         if (attrs.style === 'default'){
-            FX.getCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');
+            FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');
         }else if (attrs.style === 'overcast'){
-            FX.getCSS(FX.CSS_PATH + 'jqueryui/jqueryui-overcast/jquery-ui-1.8.19.custom.css');
+            FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-overcast/jquery-ui-1.8.19.custom.css');
         };
 
         if (attrs.language === 'chinese'){
@@ -46,6 +46,6 @@ FX.getFrame('jquery-1.3.2', function($){
         dateFormat: 'yy-mm-dd',
         language: 'english'
 
-    }, 'jqueryui-1.8.14' );
+    });
 
 });

@@ -1,7 +1,7 @@
 FX.getFrame('jquery-1.3.2', function($){
 
     if(FX.detect.browser === 'IE' && FX.detect.version === 6){ // ie6 hack
-        FX.getCSS(FX.CSS_PATH + 'styleSelect/default-ie6.css');
+        FX.loadCSS(FX.CSS_PATH + 'styleSelect/default-ie6.css');
     };
 
 
@@ -15,13 +15,13 @@ FX.getFrame('jquery-1.3.2', function($){
             }
         }
 
-    FX.run('styleselect', function(attrs){
+    FX.register('styleselect', [ ['js', 'detect'], ['js', 'mousewheel'], ['js', 'jscrollpane'] ], function(attrs){
     
         var $old_select = $(this);
         if (attrs.jScrollPane){
-            FX.getCSS(FX.CSS_PATH + 'styleSelect/' + attrs.style +'-jscrollpane.css');
+            FX.loadCSS(FX.CSS_PATH + 'styleSelect/' + attrs.style +'-jscrollpane.css');
         };
-        FX.getCSS(FX.CSS_PATH + 'styleSelect/' + attrs.style +'.css');
+        FX.loadCSS(FX.CSS_PATH + 'styleSelect/' + attrs.style +'.css');
 
         var org_name = $old_select.attr('name');
         var org_tab_index = $old_select.attr('tabindex');
@@ -215,6 +215,6 @@ FX.getFrame('jquery-1.3.2', function($){
         baseZIndex:     undefined,
         scrollWidth:    20
 
-    }, ['detect', 'mousewheel', 'jscrollpane'] );
+    });
 
 });

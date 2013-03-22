@@ -1,5 +1,5 @@
 FX.getFrame('jquery-1.3.2', function($){
-    FX.run('defaultvalue', function(attrs){
+    FX.register('defaultvalue', [], function(attrs){
         var $this = $(this),
             $form;
 

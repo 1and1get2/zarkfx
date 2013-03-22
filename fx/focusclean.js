@@ -29,7 +29,7 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('focusclean', function(attrs){
+    FX.register('focusclean', [], function(attrs){
 
         var $this = $(this);
         var old_value = $this.val();

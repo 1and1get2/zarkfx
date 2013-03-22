@@ -5,7 +5,7 @@ FX.getFrame('jquery-1.3.2', function($){
     }
 
 
-    FX.run('zeroclipboard', function(attrs){
+    FX.register('zeroclipboard', [ ['js', 'zeroclipboard'] ], function(attrs){
         var $this = $(this),
             uuid = FX.getUUID();
 
@@ -41,6 +41,6 @@ FX.getFrame('jquery-1.3.2', function($){
         text: '',
         toggleHtml: undefined
 
-    }, 'zeroclipboard');
+    });
 
 });

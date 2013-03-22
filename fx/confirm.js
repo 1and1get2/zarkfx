@@ -1,6 +1,6 @@
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.run('confirm', function(attrs) {
+    FX.register('confirm', [], function(attrs) {
         var $this = $(this);
 
         if ($this.attr('onclick')){

@@ -1,6 +1,6 @@
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('keydown', function(attrs){
+    FX.register('keydown', [], function(attrs){
 
         var $this = $(this);
         if (attrs.key && attrs.target){

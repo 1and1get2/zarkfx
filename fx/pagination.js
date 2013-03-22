@@ -23,11 +23,11 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.run('pagination', function(attrs){
+    FX.register('pagination', [ ['js', 'url'] ], function(attrs){
 
         var $this = $(this);
         if (attrs.style === 'default'){
-            FX.getCSS(FX.CSS_PATH + 'pagination.css');
+            FX.loadCSS(FX.CSS_PATH + 'pagination.css');
             $this.addClass('zarkfx_pagination_default').html('');
         };
 
@@ -91,6 +91,6 @@ FX.getFrame('jquery-1.3.2', function($){
         para_name   :  'page_num',
         start_from  :  1,
         plusToSpace :  true
-    }, 'url');
+    });
 
 });

@@ -22,7 +22,7 @@ FX.getFrame('jquery-1.3.2', function($){
         }
     };
     
-    FX.run('toggle', function(attrs){
+    FX.register('toggle', [], function(attrs){
 
         var $this = $(this);
         if(attrs.target !== undefined){

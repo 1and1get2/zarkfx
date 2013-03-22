@@ -1,5 +1,5 @@
 from sphinx.directives import Directive, directives, addnodes
-import re, sys
+import cgi
 
 class Directive_ZarkFX(Directive):
     has_content = True
@@ -14,23 +14,14 @@ class Directive_ZarkFX(Directive):
             res.attributes["format"] = "html"
             return [res]
         elif self.options.has_key("demo"):
-            blk = addnodes.nodes.container()
-            blk.attributes["classes"] += ["zarkfx_demo"]
-
-            blk += addnodes.nodes.paragraph(text=u"Result:")
-            res = addnodes.nodes.raw( text=u"\n".join(self.content) )
+            text = cgi.escape( u"\n".join(self.content) )
+            text = '<textarea fx="fxdemo">' + text + '</textarea>'
+            res = addnodes.nodes.raw(text=text)
             res.attributes["format"] = "html"
-            blk += res
-
-            blk += addnodes.nodes.paragraph(text=u"Source code:")
-            src = addnodes.nodes.literal_block( text=u"\n".join(self.content) )
-            blk += src
-
-            return [blk]
+            return [res]
         else:
             return []
 
 def setup(app):
     app.add_directive("zarkfx", Directive_ZarkFX)
-    app.add_stylesheet("zarkfx.css")
     app.add_javascript("zarkfx.js")

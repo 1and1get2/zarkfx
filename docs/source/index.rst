@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-ZARK FX Documentation Contents
+ZARK FX
 ==============================
 
 .. toctree::
@@ -13,7 +13,6 @@ ZARK FX Documentation Contents
     introduction
     target
     write_new_fx
-    documentation_how_to
     fx_list
 
 ..

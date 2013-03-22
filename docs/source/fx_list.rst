@@ -1,4 +1,4 @@
-ZARK FX List
+ZARK FX 列表
 ============
 
 .. toctree::

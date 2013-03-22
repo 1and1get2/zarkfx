@@ -19,13 +19,13 @@
  *
  * 使用文件
  * --------
- * fx="autocomplete[src=../../../file/autocomplete/languages]"
+ * fx="autocomplete[src=../_static/static/txt/autocomplete/languages]"
  *
  * languages文件中每个备选项独占一行
  *
  * .. zarkfx:: :demo:
  *
- *     <input type="text" fx="autocomplete[src=../../../file/autocomplete/languages]" />
+ *     <input type="text" fx="autocomplete[src=../_static/static/txt/autocomplete/languages]" />
  *
  *
  * DOC_END

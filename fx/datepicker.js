@@ -96,6 +96,11 @@
  *
  *     <input type="text" fx="datepicker" />
  *
+ * DOC_END
+ *
+ */
+
+ /*
  *
  * 使用其它格式与动画效果
  * -------------------------
@@ -114,9 +119,7 @@
  *
  *     <input type="text" fx="datepicker[minDate=-1w; maxDate=+1w;]" />
  *
- * DOC_END
- *
- */
+  * */
 
 FX.getFrame('jquery-1.7.2', function($){
 

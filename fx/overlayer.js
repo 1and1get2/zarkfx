@@ -19,7 +19,7 @@ FX.getFrame('jquery-1.3.2', function($){
         };
     };
 
-    FX.register('overlayer', [ ['js', 'detect'] ], function(attrs){
+    FX.register('overlayer', [ 'detect' ], function(attrs){
 
         if (attrs.target === 'screen'){
             var $this = $(this);

@@ -16,7 +16,7 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('hoverfade', [ ['js', 'cycle'] ], function(attrs){
+    FX.register('hoverfade', [ 'cycle' ], function(attrs){
         var $this = $(this);
         var temp_id = FX.getUUID();
         $('<div id="'+temp_id+'" style="display:none"></div>').appendTo('body');

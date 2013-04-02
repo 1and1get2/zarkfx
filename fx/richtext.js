@@ -1,6 +1,6 @@
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('richtext', [ ['js', 'tiny_mce/jquery.tinymce'] ], function(attrs){
+    FX.register('richtext', [ 'tiny_mce/jquery.tinymce' ], function(attrs){
 
         var $this = $(this);
         $this.tinymce({

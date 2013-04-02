@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Pagination
  * ==========
@@ -16,14 +15,13 @@
  *     <div fx="pagination[max=15;displaycount=10;firsttext=第一页;lasttext=末页;style=default]" ></div>
  *
  *
- * DOC_END
  *
  */
 
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('pagination', [ ['js', 'url'] ], function(attrs){
+    FX.register('pagination', [ 'url' ], function(attrs){
 
         var $this = $(this);
         if (attrs.style === 'default'){

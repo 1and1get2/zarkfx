@@ -2,7 +2,7 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('position', [ ['js', 'jqueryui-1.8.14'] ], function(attrs){
+    FX.register('position', [ 'jqueryui-1.8.14' ], function(attrs){
 
         var $this = $(this);                 
         if (attrs.target){

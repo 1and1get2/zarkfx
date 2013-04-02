@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Scroll
  * ======
@@ -59,7 +58,6 @@
  *     <div fx="scroll[style=default]"></div>
  *
  *
- * DOC_END
  *
  */
 
@@ -100,7 +98,7 @@ FX.getFrame('jquery-1.3.2', function($){
         };
     });
 
-    FX.register('scroll', [ ['js', 'detect'] ], function(attrs){
+    FX.register('scroll', [ 'detect' ], function(attrs){
         var $this = $(this);
         var $scroll_obj;
         var fx_name = 'scroll';

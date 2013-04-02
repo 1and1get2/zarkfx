@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Cycle
  * =====
@@ -97,7 +96,6 @@
  *         <img src="http://cloud.github.com/downloads/malsup/cycle/beach3.jpg" width="200" height="200" />
  *     </div>
  *
- * DOC_END
  *
  */
 
@@ -105,7 +103,7 @@
 
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.register('cycle', [ ['js', 'cycle'] ], function(attrs) {
+    FX.register('cycle', ['cycle'], function(attrs) {
 
         if(!attrs["fx_var"]) {
             $(this).cycle(attrs);
@@ -118,7 +116,6 @@ FX.getFrame('jquery-1.3.2', function($) {
         timeout: 0,
         speed:  1000,
         pause:  0 // hover时暂停
-
     });
 
 });

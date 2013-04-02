@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Accordion 手风琴目录
  * ====================
@@ -67,7 +66,6 @@
  *          </ul>
  *      </div>
  *
- * DOC_END
  *
  */
 
@@ -75,7 +73,7 @@ FX.getFrame('jquery-1.3.2', function($){
     var this_url = window.location.href.replace('http://','');
     var this_url_relative = this_url.substr(this_url.indexOf('/'));
 
-    FX.register('accordion', [ ['js', 'jqueryui-1.8.14'] ], function(attrs){
+    FX.register('accordion', [ 'jqueryui-1.8.14' ], function(attrs){
 
         var $this = $(this);                 
         if (attrs.style !== 'none'){

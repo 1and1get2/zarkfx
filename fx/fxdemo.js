@@ -1,5 +1,4 @@
 /*
- * DOC_BEGIN
  *
  * FX Demo
  * =======
@@ -42,38 +41,36 @@
  *
  *    <textarea fx="fxdemo[lazy]">Some HTML here</textarea>
  *
- * DOC_END
  *
  */
 
 FX.getFrame("jquery-1.7.2", function($) {
 
-    FX.register(
-        "fxdemo", [ ["css", FX.CSS_PATH + "fxdemo.css"] ],
-        function(attrs) {
-            $(this).wrap('<div class="zarkfx_demo" />');
-            $(this).before('<div class="label">Source (you can change it to try your ideas):</div>');
-            var result = $('<div class="result" />');
-            $(this).after(result);
-            $(this).after('<div class="label" style="display:none">Result:</div>');
-            var tryit = $('<button class="tryit">Try it!</button>');
-            $(this).after(tryit);
-            $(this).addClass("source");
-            tryit.data("source", $(this));
-            tryit.data("result", result);
-            tryit.click(function(){
-                $( ".label", $(this).parent() ).css("display", "");
-                $(this).data("result").html( $(this).data("source").val() );
-                $('['+FX.FX_NAME+']', $(this).data("result")).each(FX.enqueueFXElem);
-                FX.runQueue();
-            });
-            if(!attrs["lazy"]) {
-                setTimeout(function() {
-                    tryit.trigger("click");
-                }, 10);
-            };
-        }, {
-            lazy: false,
+    FX.register( "fxdemo", [], function(attrs) {
+        FX.loadCSS("fxdemo.css");
+        $(this).wrap('<div class="zarkfx_demo" />');
+        $(this).before('<div class="label">Source (you can change it to try your ideas):</div>');
+        var result = $('<div class="result" />');
+        $(this).after(result);
+        $(this).after('<div class="label" style="display:none">Result:</div>');
+        var tryit = $('<button class="tryit">Try it!</button>');
+        $(this).after(tryit);
+        $(this).addClass("source");
+        tryit.data("source", $(this));
+        tryit.data("result", result);
+        tryit.click(function(){
+            $( ".label", $(this).parent() ).css("display", "");
+            $(this).data("result").html( $(this).data("source").val() );
+            $('['+FX.FX_NAME+']', $(this).data("result")).each(FX.enqueueFXElem);
+            FX.runQueue();
         });
+        if(!attrs["lazy"]) {
+            setTimeout(function() {
+                tryit.trigger("click");
+            }, 10);
+        };
+    }, {
+        lazy: false,
+    });
 
 });

@@ -5,7 +5,7 @@ FX.getFrame('jquery-1.3.2', function($){
     }
 
 
-    FX.register('zeroclipboard', [ ['js', 'zeroclipboard'] ], function(attrs){
+    FX.register('zeroclipboard', [ 'zeroclipboard' ], function(attrs){
         var $this = $(this),
             uuid = FX.getUUID();
 

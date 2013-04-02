@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Stay top
  * ========
@@ -18,7 +17,6 @@
  *     <div fx="staytop" style="background-color:#66AAFF; width:300px;" >我可以是一个搜索框, 或者广告...</div>
  *     <div style="height:600px; width:300px;">这个div的存在只是为了把页面拉长.</div>
  *
- * DOC_END
  *
  */
 

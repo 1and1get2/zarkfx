@@ -1,6 +1,6 @@
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('urlquery', [ ['js', 'url'] ], function(attrs){
+    FX.register('urlquery', [ 'url' ], function(attrs){
         var $this = $(this),
             href;
 

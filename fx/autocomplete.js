@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Auto Complete
  * =============
@@ -28,7 +27,6 @@
  *     <input type="text" fx="autocomplete[src=../_static/static/txt/autocomplete/languages]" />
  *
  *
- * DOC_END
  *
  */
 
@@ -37,7 +35,7 @@ FX.getFrame('jquery-1.3.2', function($){
     FX.loadCSS(FX.CSS_PATH + 'autocomplete.css');
     var source_cache = {};
 
-    FX.register('autocomplete', [ ['js', 'autocomplete'] ], function(attrs){
+    FX.register('autocomplete', [ 'autocomplete' ], function(attrs){
 
         var $this = $(this);
         var source;

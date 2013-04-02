@@ -3,7 +3,7 @@
  * */
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('datetimepicker', [ ['js', 'jqueryui-1.8.14'], ['js', 'datetimepicker/timepicker'] ], function(attrs){
+    FX.register('datetimepicker', [ 'jqueryui-1.8.14', 'datetimepicker/timepicker' ], function(attrs){
     
         if (attrs.style === 'default'){
             FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');

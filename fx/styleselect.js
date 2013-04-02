@@ -15,7 +15,7 @@ FX.getFrame('jquery-1.3.2', function($){
             }
         }
 
-    FX.register('styleselect', [ ['js', 'detect'], ['js', 'mousewheel'], ['js', 'jscrollpane'] ], function(attrs){
+    FX.register('styleselect', [ 'detect', 'mousewheel', 'jscrollpane' ], function(attrs){
     
         var $old_select = $(this);
         if (attrs.jScrollPane){

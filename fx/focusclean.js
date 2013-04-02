@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Focus Clean
  * ===========
@@ -23,7 +22,6 @@
  *
  *     <input type="text" fx="focusclean[color=red]" value="搜索..." style="width:300px" />
  *
- * DOC_END
  *
  */
 

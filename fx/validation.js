@@ -1,5 +1,4 @@
 /*
- * DOC_BEGIN
  *
  * Validation
  * ==========
@@ -55,7 +54,6 @@
  *     <hr />
  *     <p id="out"></p>
  *
- * DOC_END
  *
  */
 

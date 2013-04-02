@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * DD_belatedPNG
  * =============
@@ -24,7 +23,6 @@
  *     <div fx="ddpng" style="background: url(/_static/static/img/ddpng/boxbg2.png) top left no-repeat transparent; width:80px; height:80px;" ></div>
  *
  *
- * DOC_END
  *
  */
 
@@ -32,8 +30,8 @@
 try { document.execCommand("BackgroundImageCache", false, true); }
 catch (err) {};
 
-FX.getFrame('jquery-1.3.2', [ ['js', 'detect'], ['js', 'ddpng'] ], function($){
-    FX.register('ddpng', function(attrs){
+FX.getFrame('jquery-1.3.2', function($){
+    FX.register('ddpng', [ 'detect', 'ddpng' ], function(attrs){
         if(FX.detect.browser === 'IE' && FX.detect.version === 6){
             DD_belatedPNG.fixPng(this);
         };

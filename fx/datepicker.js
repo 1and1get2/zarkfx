@@ -1,6 +1,5 @@
 /*
  *
- * DOC_BEGIN
  *
  * Date picker
  * ===========
@@ -17,13 +16,12 @@
  *
  *     <input type="text" fx="datepicker[style=default]" />
  *
- * DOC_END
  *
  */
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('datepicker', [ ['js', 'jqueryui-1.8.14'] ], function(attrs){
+    FX.register('datepicker', [ 'jqueryui-1.8.14' ], function(attrs){
     
         if (attrs.style === 'default'){
             FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');

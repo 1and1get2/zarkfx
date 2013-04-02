@@ -2,7 +2,7 @@
 
 FX.getFrame('jquery-1.5.1', function($){
 
-    FX.register('lazyload', [ ['js', 'lazyload'] ], function(attrs){
+    FX.register('lazyload', [ 'lazyload' ], function(attrs){
 
         var $this = $(this);
 

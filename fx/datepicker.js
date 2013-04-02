@@ -1,49 +1,147 @@
 /*
  *
+ * DOC_BEGIN
  *
  * Date picker
  * ===========
  *
- * 日期选择
+ * 日期选择器，精确到天。此fx基于
+ * `jQuery Datepicker <http://jqueryui.com/datepicker/>`_.
+ *
+ *
+ * Usage
+ * --------------
+ *
+ * :FX name: datepicker
+ * :Description: 时间选择器
+ *
+ * .. topic:: Arguments
+ *
+ *    .. list-table::
+ *       :widths: 1 1 1 1 5
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - R/O
+ *         - Description
+ *         - Default
+ *         - Values
+ *
+ *       * - style
+ *         - optional
+ *         - 样式
+ *         - smoothness
+ *         - black-tie | blitzer | cupertino | dark-hive | dot-luv | eggplant | excite-bike | flick | hot-sneaks | humanity | le-frog | mint-choc | overcast | pepper-grinder | redmond | smoothness | south-street | start | sunny | swanky-purse | trontastic | ui-darkness | ui-lightness | vader
+ *
+ *       * - dateFormat
+ *         - optional
+ *         - 日期格式
+ *         - yy-mm-dd
+ *         - mm/dd/yy | yy-mm-dd | d M, y | d MM, y | DD, d MM, yy | 'day' d 'of' MM 'in the year' yy
+ *
+ *       * - showAnim
+ *         - optional
+ *         - 动画效果
+ *         - -
+ *         - show | slideDown | fadeIn | blind | bounce | clip | drop | fold | slide
+ *
+ *       * - numberOfMonths
+ *         - optional
+ *         - 弹窗显示月份数
+ *         - -
+ *         - 整数
+ *
+ *       * - changeYear
+ *         - optional
+ *         - 是否可选择年份
+ *         - false
+ *         - false | true
+ *
+ *       * - changeMonth
+ *         - optional
+ *         - 是否可选择月份
+ *         - false
+ *         - false | true
+ *
+ *       * - showButtonPanel
+ *         - optional
+ *         - 是否显示Today与确定按钮
+ *         - false
+ *         - false | true
+ *
+ *       * - yearRange
+ *         - optional
+ *         - 选择年限限制
+ *         - -
+ *         - 
+ *
+ *
+ *       * - minDate
+ *         - optional
+ *         - 最早日期限制
+ *         - -
+ *         - 
+ *
+ *       * - maxDate
+ *         - optional
+ *         - 最晚日期限制
+ *         - -
+ *         - 
  *
  * 默认样式
  * --------
- * fx="datepicker[style=default]" 
- *
- * 点击下面的输入框, 出现日期选择工具.
+ * fx="datepicker"
  *
  * .. zarkfx:: :demo:
  *
- *     <input type="text" fx="datepicker[style=default]" />
+ *     <input type="text" fx="datepicker" />
  *
+ *
+ * 使用其它格式与动画效果
+ * -------------------------
+ * fx="datepicker" 
+ *
+ * .. zarkfx:: :demo:
+ *
+ *     <input type="text" fx="datepicker[dateFormat='day' d 'of' MM 'in the year' yy; showAnim=clip;]" />
+ *
+ *
+ * 仅在两个星期内选择
+ * -------------------------
+ * fx="datepicker" 
+ *
+ * .. zarkfx:: :demo:
+ *
+ *     <input type="text" fx="datepicker[minDate=-1w; maxDate=+1w;]" />
+ *
+ * DOC_END
  *
  */
 
-FX.getFrame('jquery-1.3.2', function($){
+FX.getFrame('jquery-1.7.2', function($){
 
-    FX.register('datepicker', [ 'jqueryui-1.8.14' ], function(attrs){
+    FX.register('datepicker', [ 'jqueryui-1.10.2' ], function(attrs){
     
-        if (attrs.style === 'default'){
-            FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');
-        }else if (attrs.style === 'overcast'){
-            FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-overcast/jquery-ui-1.8.19.custom.css');
-        };
-
-        if (attrs.language === 'chinese'){
-            attrs.monthNamesShort = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-        };
-
         var $this = $(this);
         attrs.defaultDate = $this.val();
         $this.datepicker(attrs);
-        $this.datepicker('option', 'yearRange', '-47:+1');
+
+        if (typeof(attrs.regional) !== 'undefined'){
+            $this.datepicker( "option",
+                $.datepicker.regional[ attrs.regional ] );
+        };
     
     }, {
-
-        style: 'none',
+        style: 'smoothness',
         dateFormat: 'yy-mm-dd',
-        language: 'english'
-
+        showAnim: '',
+        showButtonPanel: false,
+        changeMonth: false,
+        changeYear: false,
+        numberOfMonths: 1,
+        yearRange: '',
+        minDate: '',
+        maxDate: ''
     });
 
 });

@@ -15,7 +15,7 @@ class Directive_ZarkFX(Directive):
             return [res]
         elif self.options.has_key("demo"):
             text = cgi.escape( u"\n".join(self.content) )
-            text = '<textarea fx="fxdemo">' + text + '</textarea>'
+            text = '<textarea fx="fxdemo elastic" autocomplete="off" >' + text + '</textarea>'
             res = addnodes.nodes.raw(text=text)
             res.attributes["format"] = "html"
             return [res]

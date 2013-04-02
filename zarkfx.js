@@ -139,8 +139,13 @@
             };
         };
 
-        FX.loadCSS = function(name) {
-            FX.loadDep("css", name);
+        FX.loadCSS = function(css_url) {
+            FX.loadDep("css", css_url);
+        };
+
+        FX.loadStyle = function(fx_name, style_name) {
+            var css_url = FX.CSS_PATH + fx_name + '/' + style_name + '/' + style_name + '.css';
+            FX.loadDep("css", css_url);
         };
 
         FX.register = function(name, deps, func, defaults) {
@@ -191,6 +196,10 @@
                 // all the deps are loaded
                 var attrs = setDefaults(attrs, FX.loaded_fx[name].defaults);
                 var func = FX.loaded_fx[name].func;
+                // 加载样式
+                if (typeof(attrs.style) !== 'undefined' && attrs.style !== 'none'){
+                    FX.loadStyle(name, attrs.style);
+                };
                 func && func.call(that, attrs);
 
                 // 处理通用全局属性

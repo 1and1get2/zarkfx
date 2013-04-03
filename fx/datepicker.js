@@ -90,7 +90,6 @@
  *
  * 默认样式
  * --------
- * fx="datepicker"
  *
  * .. zarkfx:: :demo:
  *
@@ -144,7 +143,8 @@ FX.getFrame('jquery-1.7.2', function($){
         numberOfMonths: 1,
         yearRange: '',
         minDate: '',
-        maxDate: ''
+        maxDate: '',
+        regional: ''
     });
 
 });

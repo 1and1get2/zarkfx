@@ -8,8 +8,8 @@
  * Usage
  * --------------
  *
- * :FX name: datepicker
- * :Description: 时间选择器
+ * :FX name: scroll
+ * :Description: 点击后滚动页面到顶部(或某个指定的元素)
  *
  * .. topic:: Arguments
  *
@@ -39,7 +39,7 @@
  *         - optional
  *         - 自动隐藏的高度，当页面向下滚动低于此值时滚动按钮自动消失。为-1表示不隐藏。
  *         - -1
- *         - 正整数
+ *         - 整数
  *
  *       * - target
  *         - optional

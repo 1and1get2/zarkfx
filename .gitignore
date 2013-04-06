@@ -5,3 +5,4 @@
 *.swo
 docs/build/
 docs/source/auto_gen/
+test.html

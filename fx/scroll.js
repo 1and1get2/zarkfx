@@ -1,69 +1,62 @@
 /*
  *
+ * DOC_BEGIN
  *
  * Scroll
  * ======
  *
- * 滚动效果
+ * 页面滚动
  *
- * 滚动到顶部
- * ----------
- * fx="scroll[speed=500;alwaysVisiable]"
+ * 使用默认样式滚动到顶部
+ * ------------------------
  *
- * 点击下面的"Scroll"就会滚动到顶部
- *
- * .. zarkfx:: :demo:
- *
- *     <p fx="scroll[speed=500;alwaysVisiable]" style="color:#66AAFF; " >Scroll</p>
- *
- * 瞬间到达顶部
- * ------------
- * fx="scroll[speed=0;alwaysVisiable]"
- *
- * 点击下面的"Go Top"瞬间到达顶部
+ * 尝试点击右下角的滚动箭头回到顶部。
  *
  * .. zarkfx:: :demo:
  *
- *     <p fx="scroll[speed=0;alwaysVisiable]" style="color:#66AAFF; " >Scroll</p>
+ *     <div fx="scroll[speed=500;style=default;]"></div>
  *
- * 滚动到某个标签
- * --------------
- * fx="scroll[speed=500;targetid=destination]"
  *
- * 点击"Scroll to"滚动到id等于destination的标签
+ * 给某个指定的元素添加滚动功能
+ * ---------------------------------
  *
- * .. zarkfx:: :demo:
- *
- *     <p id="destination">come on baby.</p>
- *     <p fx="scroll[speed=500;targetid=destination]" style="color:#66AAFF; " >Scroll to</p>
- *
- * 把滚动按钮放到距离右下角100px的地方
- * -----------------------------------
- * fx="scroll[speed=500;right=100;bottom=100;hide_height=0]"
- *
- * 点击右下角的红色按钮, 滚动到顶部时按钮消失.
+ * 可以尝试使用不同的speed，数值越大滚动越慢，speed等于0时瞬间到达位置。
  *
  * .. zarkfx:: :demo:
  *
- *     <div fx="scroll[speed=500;right=100;bottom=100;hide_height=0]" style="width:30px; height:30px; background-color:red; "></div>
+ *     <a fx="scroll[speed=100;]">快速滚吧</a>
  *
- * 使用默认样式
- * ------------
- * fx="scroll[style=default]"
  *
- * 滚动按钮变成一个向上箭头出现在右下角.
+ * 滚动到某个指定的元素
+ * ---------------------------------
+ *
+ * 使用target属性指定滚动到第一个样例标题的位置。
  *
  * .. zarkfx:: :demo:
  *
- *     <div fx="scroll[style=default]"></div>
+ *     <a fx="scroll[speed=500;target=#id1;]">滚动到4.2.1</a>
  *
  *
+ * 使用right和bottom属性设置滚动按钮的位置
+ * ---------------------------------------
+ *
+ * 可以使用left或right指定水平位置，用top或bottom指定垂直位置，见右下角的文字按钮。
+ * 并使用autoHide让文字自动隐藏。
+ *
+ * .. zarkfx:: :demo:
+ *
+ *     <div fx="scroll[speed=500;right=200;bottom=100;autoHide;]">我是最后一个例子的按钮</div>
+ *
+ *
+ * DOC_END
  *
  */
 
-FX.getFrame('jquery-1.3.2', function($){
+FX.getFrame('jquery-1.7.2', function($){
 
-    if(FX.detect.browser === 'IE' && FX.detect.version === 6){ // ie6 hack
+    var is_ie6 = $.browser.msie && $.browser.version == 6;
+
+    if(is_ie6){ // ie6 hack
         var getScrollTop = function(){
             var scrollPos;
             if (typeof window.pageYOffset != 'undefined') {
@@ -87,10 +80,10 @@ FX.getFrame('jquery-1.3.2', function($){
         if (last_top === null || Math.abs(last_top-this_top) >= 10 || this_top === 0){
             last_top = this_top;
             for(var i in scroll_objs){
-                if (scroll_objs[i].hide_height < this_top){
+                if (scroll_objs[i].hideHeight < this_top){
                     scroll_objs[i].$hide_obj.fadeIn();
                 }else{
-                    if (!scroll_objs[i].alwaysVisiable){
+                    if (scroll_objs[i].autoHide){
                         scroll_objs[i].$hide_obj.fadeOut();
                     };
                 };
@@ -98,34 +91,39 @@ FX.getFrame('jquery-1.3.2', function($){
         };
     });
 
-    FX.register('scroll', [ 'detect' ], function(attrs){
-        var $this = $(this);
-        var $scroll_obj;
-        var fx_name = 'scroll';
+    FX.register('scroll', [], function(attrs){
+        var $this = $(this),
+            $scroll_obj;
+
         if (attrs.style === 'default' ){
             $this.hide();
-            var scroll_to_top_id = FX.getUUID();
-        $('<div id="'+scroll_to_top_id+'" style="position: fixed; bottom: 50px; right: 50px; opacity: 1; cursor: pointer; display: block; width: 48px; height: 48px;"><img src="'+FX.IMG_PATH+fx_name+'/default.png"><div>').appendTo('body');
-            $scroll_obj = $('#'+scroll_to_top_id);
+            $scroll_obj = $('<div class="zarkfx_scroll_style" ><div>').appendTo('body');
         }else{
             $scroll_obj = $this;
         };
 
-        // bind event
-        var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');// opera hack
+        var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body'); // opera hack
+
         $scroll_obj.click(function(){
-            var target_top = (attrs.targetid === undefined) ? 0 : $('#'+attrs.targetid).offset().top ;
+            if (attrs.target === undefined){
+                target_top = 0;
+            }else{
+                target_top = $(attrs.target).offset().top + jQuery(document).scrollTop();
+            };
             $body.animate({scrollTop: target_top}, parseInt(attrs.speed));
             return false;
         });
 
         // add to scroll_objs
-        scroll_objs.push({hide_height: attrs.hide_height, $hide_obj: $scroll_obj, alwaysVisiable: attrs.alwaysVisiable });
+        scroll_objs.push({hideHeight: attrs.hideHeight,
+            $hide_obj: $scroll_obj,
+            autoHide: attrs.autoHide
+        });
 
         // show or hide this obj
         var this_top = $(document).scrollTop();
-        if (attrs.hide_height > this_top){
-            if (!attrs.alwaysVisiable){
+        if (attrs.hideHeight > this_top){
+            if (attrs.autoHide){
                 $scroll_obj.hide();
             };
         }else{
@@ -135,14 +133,14 @@ FX.getFrame('jquery-1.3.2', function($){
         // set position
         if (attrs.top !== undefined || attrs.bottom !== undefined || attrs.left !== undefined || attrs.right !== undefined ){
             // 此处加入IE6判断，IE6使用绝对定位
-            if(FX.detect.browser === 'IE' && FX.detect.version === 6){ // ie6 hack
-                 $scroll_obj.css('position','absolute').appendTo('body');
+            if(is_ie6){
+                $scroll_obj.css('position','absolute').appendTo('body');
             }else{
                 $scroll_obj.css('position','fixed').appendTo('body');
             };
         };
         if (attrs.bottom !== undefined) {
-            if(FX.detect.browser === 'IE' && FX.detect.version === 6){ // ie6 hack
+            if(is_ie6){
               $(window).scroll(function(){
                   var scroll_bottom = $(document).height() + parseInt(attrs.bottom) - $(window).height();
                   $this.css('bottom', scroll_bottom - getScrollTop());
@@ -150,9 +148,9 @@ FX.getFrame('jquery-1.3.2', function($){
             }else{
                 $scroll_obj.css('bottom', attrs.bottom + 'px');
             };
-        }
+        };
         if (attrs.top !== undefined) {
-            if(FX.detect.browser === 'IE' && FX.detect.version === 6){ // ie6 hack
+            if(is_ie6){
               $(window).scroll(function(){
                   var scroll_top = parseInt(attrs.top);
                   $scroll_obj.css('top', scroll_top + getScrollTop());
@@ -160,19 +158,19 @@ FX.getFrame('jquery-1.3.2', function($){
             }else{
                 $scroll_obj.css('top', attrs.top + 'px');
             };
-        }
+        };
         if (attrs.right !== undefined) $scroll_obj.css('right', attrs.right + 'px');
         if (attrs.left !== undefined) $scroll_obj.css('left', attrs.left + 'px');
     
     }, {
+        style:          'none',
         speed:          0,
-        hide_height:    200,
-        alwaysVisiable: false,
+        hideHeight:     100,
+        autoHide:       false,
         top:            undefined,
         bottom:         undefined,
         left:           undefined,
         right:          undefined,
-        targetid:       undefined,
-        style:          'none'
+        target:         undefined
     });
 });

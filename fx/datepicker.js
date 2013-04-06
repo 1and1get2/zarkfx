@@ -72,7 +72,7 @@
  *       * - yearRange
  *         - optional
  *         - 选择年限限制
- *         - -
+ *         - -100:+1
  *         - 
  *
  *
@@ -141,7 +141,7 @@ FX.getFrame('jquery-1.7.2', function($){
         changeMonth: false,
         changeYear: false,
         numberOfMonths: 1,
-        yearRange: '',
+        yearRange: '-100:+1',
         minDate: '',
         maxDate: '',
         regional: ''

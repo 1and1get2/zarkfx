@@ -1,0 +1,11 @@
+.zarkfx_scroll_style {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    opacity: 1;
+    cursor: pointer;
+    display: block;
+    width: 48px;
+    height: 48px;
+    background:url("default.png") top left no-repeat #fff;
+}

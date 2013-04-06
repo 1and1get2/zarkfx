@@ -5,6 +5,73 @@
  * Scroll
  * ======
  *
+ * Usage
+ * --------------
+ *
+ * :FX name: datepicker
+ * :Description: 时间选择器
+ *
+ * .. topic:: Arguments
+ *
+ *    .. list-table::
+ *       :widths: 1 1 4 1 2
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - R/O
+ *         - Description
+ *         - Default
+ *         - Values
+ *
+ *       * - style
+ *         - optional
+ *         - 样式
+ *         - none
+ *         - none | default
+ *
+ *       * - speed
+ *         - optional
+ *         - 滚动速度，为0时瞬间到达顶部
+ *         - 0
+ *         - 整数
+ *
+ *       * - hideHeight
+ *         - optional
+ *         - 自动隐藏的高度，当页面向下滚动低于此值时滚动按钮自动消失。为-1表示不隐藏。
+ *         - -1
+ *         - 正整数
+ *
+ *       * - target
+ *         - optional
+ *         - 滚动到某个目标的位置，默认滚动到页面顶部。
+ *         - -
+ *         - css选择器
+ *
+ *       * - top
+ *         - optional
+ *         - 对当前元素绝对定位的top值，需要结合left或right使用，不能与bottom同时使用。
+ *         - -
+ *         - 整数
+ *
+ *       * - bottom
+ *         - optional
+ *         - 对当前元素绝对定位的bottom值，需要结合left或right使用，不能与top同时使用。
+ *         - -
+ *         - 整数
+ *
+ *       * - left
+ *         - optional
+ *         - 对当前元素绝对定位的left值，需要结合top或bottom使用，不能与right同时使用。
+ *         - -
+ *         - 整数
+ *
+ *       * - right
+ *         - optional
+ *         - 对当前元素绝对定位的right值，需要结合top或bottom使用，不能与left同时使用。
+ *         - -
+ *         - 整数
+ *
+ *
  * 页面滚动
  *
  * 使用默认样式滚动到顶部
@@ -34,18 +101,18 @@
  *
  * .. zarkfx:: :demo:
  *
- *     <a fx="scroll[speed=500;target=#id1;]">滚动到4.2.1</a>
+ *     <a fx="scroll[speed=500;target=#id1;]">滚动到4.2.2</a>
  *
  *
- * 使用right和bottom属性设置滚动按钮的位置
- * ---------------------------------------
+ * 使用right和bottom属性设置滚动按钮的位置，并自动隐藏按钮
+ * ----------------------------------------------------------
  *
  * 可以使用left或right指定水平位置，用top或bottom指定垂直位置，见右下角的文字按钮。
- * 并使用autoHide让文字自动隐藏。
+ * 并使用hideHeight让文字自动隐藏。
  *
  * .. zarkfx:: :demo:
  *
- *     <div fx="scroll[speed=500;right=200;bottom=100;autoHide;]">我是最后一个例子的按钮</div>
+ *     <div fx="scroll[speed=500;right=200;bottom=100;hideHeight=200;]">我是最后一个例子的滚动按钮</div>
  *
  *
  * DOC_END
@@ -83,7 +150,7 @@ FX.getFrame('jquery-1.7.2', function($){
                 if (scroll_objs[i].hideHeight < this_top){
                     scroll_objs[i].$hide_obj.fadeIn();
                 }else{
-                    if (scroll_objs[i].autoHide){
+                    if (scroll_objs[i].hideHeight >= 0){
                         scroll_objs[i].$hide_obj.fadeOut();
                     };
                 };
@@ -116,16 +183,13 @@ FX.getFrame('jquery-1.7.2', function($){
 
         // add to scroll_objs
         scroll_objs.push({hideHeight: attrs.hideHeight,
-            $hide_obj: $scroll_obj,
-            autoHide: attrs.autoHide
+            $hide_obj: $scroll_obj
         });
 
         // show or hide this obj
         var this_top = $(document).scrollTop();
         if (attrs.hideHeight > this_top){
-            if (attrs.autoHide){
-                $scroll_obj.hide();
-            };
+            $scroll_obj.hide();
         }else{
             $scroll_obj.show();
         };
@@ -165,12 +229,11 @@ FX.getFrame('jquery-1.7.2', function($){
     }, {
         style:          'none',
         speed:          0,
-        hideHeight:     100,
-        autoHide:       false,
+        hideHeight:     -1,
+        target:         undefined,
         top:            undefined,
         bottom:         undefined,
         left:           undefined,
-        right:          undefined,
-        target:         undefined
+        right:          undefined
     });
 });

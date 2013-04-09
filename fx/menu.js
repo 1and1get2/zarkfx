@@ -5,21 +5,21 @@
  * Menu
  * ===========
  *
- * 将一个嵌套的ul列表转换成一个具有层级关系的菜单。此fx基于
- * `jQuery Menu <http://jqueryui.com/menu/>`_.
- *
+ * 将嵌套的ul列表转换成具有层级关系的菜单。此fx基于
+ * `jQuery Menu <http://jqueryui.com/menu/>`_,
+ * 由
+ * `ajie <http://github.com/zhaoxingjie>`_
+ * 维护。
  *
  * Usage
  * --------------
  *
  * :FX name: menu
- * :Description: 菜单
- *
- * fx="menu" 
+ * :Description: 将嵌套的ul列表转换成具有层级关系的菜单
  *
  * .. zarkfx:: :demo:
  *
- *     <ul fx="menu">
+ *     <ul fx="menu" style="width:180px;">
  *         <li><a href="#">Aberdeen</a></li>
  *         <li><a href="#">Addyston</a></li>
  *         <li>

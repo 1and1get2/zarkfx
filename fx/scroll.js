@@ -35,9 +35,9 @@
  *         - 0
  *         - 整数
  *
- *       * - hideHeight
+ *       * - scrollTop
  *         - optional
- *         - 自动隐藏的高度，当页面向下滚动低于此值时滚动按钮自动消失。为-1表示不隐藏。
+ *         - 当页面滚动的高度大于此值时滚动按钮自动显示。-1表示一直显示。
  *         - -1
  *         - 整数
  *
@@ -108,11 +108,11 @@
  * ----------------------------------------------------------
  *
  * 可以使用left或right指定水平位置，用top或bottom指定垂直位置，见右下角的文字按钮。
- * 并使用hideHeight让文字自动隐藏。
+ * 并使用scrollTop让文字自动隐藏。
  *
  * .. zarkfx:: :demo:
  *
- *     <div fx="scroll[speed=500;right=200;bottom=100;hideHeight=200;]">我是最后一个例子的滚动按钮</div>
+ *     <div fx="scroll[speed=500;right=200;bottom=100;scrollTop=200;]">我是最后一个例子的滚动按钮</div>
  *
  *
  * DOC_END
@@ -147,10 +147,10 @@ FX.getFrame('jquery-1.7.2', function($){
         if (last_top === null || Math.abs(last_top-this_top) >= 10 || this_top === 0){
             last_top = this_top;
             for(var i in scroll_objs){
-                if (scroll_objs[i].hideHeight < this_top){
+                if (scroll_objs[i].scrollTop < this_top){
                     scroll_objs[i].$hide_obj.fadeIn();
                 }else{
-                    if (scroll_objs[i].hideHeight >= 0){
+                    if (scroll_objs[i].scrollTop >= 0){
                         scroll_objs[i].$hide_obj.fadeOut();
                     };
                 };
@@ -182,13 +182,13 @@ FX.getFrame('jquery-1.7.2', function($){
         });
 
         // add to scroll_objs
-        scroll_objs.push({hideHeight: attrs.hideHeight,
+        scroll_objs.push({scrollTop: attrs.scrollTop,
             $hide_obj: $scroll_obj
         });
 
         // show or hide this obj
         var this_top = $(document).scrollTop();
-        if (attrs.hideHeight > this_top){
+        if (attrs.scrollTop > this_top){
             $scroll_obj.hide();
         }else{
             $scroll_obj.show();
@@ -229,7 +229,7 @@ FX.getFrame('jquery-1.7.2', function($){
     }, {
         style:          'none',
         speed:          0,
-        hideHeight:     -1,
+        scrollTop:      -1,
         target:         undefined,
         top:            undefined,
         bottom:         undefined,

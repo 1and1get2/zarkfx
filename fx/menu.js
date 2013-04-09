@@ -17,9 +17,28 @@
  * :FX name: menu
  * :Description: 将嵌套的ul列表转换成具有层级关系的菜单
  *
+ * .. topic:: Arguments
+ *
+ *    .. list-table::
+ *       :widths: 1 1 1 1 5
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - R/O
+ *         - Description
+ *         - Default
+ *         - Values
+ *
+ *       * - style
+ *         - optional
+ *         - 样式
+ *         - smoothness
+ *         - black-tie | blitzer | cupertino | dark-hive | dot-luv | eggplant | excite-bike | flick | hot-sneaks | humanity | le-frog | mint-choc | overcast | pepper-grinder | redmond | smoothness | south-street | start | sunny | swanky-purse | trontastic | ui-darkness | ui-lightness | vader
+ *
+ *
  * .. zarkfx:: :demo:
  *
- *     <ul fx="menu" style="width:180px;">
+ *     <ul fx="menu[style=sunny]" style="width:180px;">
  *         <li><a href="#">Aberdeen</a></li>
  *         <li><a href="#">Addyston</a></li>
  *         <li>

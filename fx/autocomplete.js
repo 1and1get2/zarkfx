@@ -73,31 +73,26 @@ FX.getFrame('jquery-1.7.2', function($){
 
     FX.register('autocomplete', [ 'jqueryui-1.10.2' ], function(attrs){
     
-        var $this = $(this);
-        var array;
+        var $this = $(this),
+            data_array=[];
 
         if (attrs.src !== undefined){
-            if (array_cache[attrs.src] === undefined){
-                $.ajax({
-                    async:      false,
-                    cache:      true,
-                    dataType:   'text',
-                    type:       'GET',
-                    url:        attrs.src,
-                    success:    function(data){
-                        array = data.split('\n');
-                    }
-                });
-                array_cache[attrs.src] = array;
-            }else{
-                array = array_cache[attrs.src];
-            };
+            $.ajax({
+                async:      false,
+                cache:      true,
+                dataType:   'text',
+                type:       'GET',
+                url:        attrs.src,
+                success:    function(data){
+                    data_array = data.split('\n');
+                }
+            });
         }else if(attrs.data !== undefined){
-            array = attrs.data.split(',');
+            data_array = attrs.data.split(',');
         };
 
         $this.autocomplete({
-            source:array,
+            source:data_array,
             autoFocus: true,
             minLength: attrs.minLength
         });

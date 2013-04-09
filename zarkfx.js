@@ -222,7 +222,7 @@
             // 尝试runFX，删除已完成任务
             for(var i = 0; i < FX.queue.length; i++) {
                 var params = FX.queue[i];
-                if(FX.runFX(params.name, params.attrs, params.that) === "done") {
+                if(FX.runFX(params.name, params.attrs, params.that) !== "waiting") {
                     delete FX.queue[i];
                 };
             };

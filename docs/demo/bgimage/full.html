@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>bgimage</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no "> 
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+        <meta content="telephone=no" name="format-detection" />
+        <meta http-equiv="Cache-Control" content="no-cache"/>
+        <script type="text/javascript" charset="UTF-8" src="/_static/static/js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="/_static/zarkfx.js"></script>
+        <script>
+            $(window).resize(function(){
+                $('body').width($(window).width());
+                $('body').height($(window).height());
+            });
+
+            $(function(){
+                $('body').width($(window).width());
+                $('body').height($(window).height());
+            });
+        </script>
+
+    </head>
+    <body style="padding: 0; margin: 0;">
+        <img src="city.jpg" fx="bgimage[wrapper=body]" />
+    </body>
+</html>

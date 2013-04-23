@@ -77,12 +77,6 @@
  *         - normal
  *         - slow | normal | fast | 任意单位毫秒的正整数
  *
- *       * - selectedClass
- *         - optional
- *         - 被选中的开关元素的class，默认不使用
- *         - -
- *         - 字符串
- *
  *       * - hideThis
  *         - optional
  *         - 是否在触发开关后隐藏自己

@@ -96,7 +96,6 @@
  *
  *
  *
- *
  * div为200x150，图片正好显示
  * -----------------------------------
  *
@@ -169,7 +168,20 @@ FX.getFrame('jquery-1.7.2', function($){
         zIndex: -999999999999
     });
 
-    FX.register('bgimage', [], function(attrs){
+    FX.register('bgimage', [], {
+        wrapper: '',
+        resize: true,
+        zIndex: null,
+        h: 'center',
+        v: 'center',
+        next: '',
+        prev: '',
+        tr: 'fade',
+        speed: 750,
+        autoplay: false,
+        interval: 3000
+
+    }, function(attrs){
         var $this = $(this),
             $wrapper, rate;
 
@@ -279,18 +291,6 @@ FX.getFrame('jquery-1.7.2', function($){
             window.setInterval(function(){ showNext(1);}, attrs.interval);
         };
 
-    }, {
-        wrapper: '',
-        resize: true,
-        zIndex: null,
-        h: 'center',
-        v: 'center',
-        next: '',
-        prev: '',
-        tr: 'fade',
-        speed: 750,
-        autoplay: false,
-        interval: 3000
     });
 
 });

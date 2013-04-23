@@ -103,7 +103,13 @@
 
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.register('cycle', ['cycle'], function(attrs) {
+    FX.register('cycle', ['cycle'], {
+        fx_var: undefined,
+        timeout: 0,
+        speed:  1000,
+        pause:  0 // hover时暂停
+
+    }, function(attrs) {
 
         if(!attrs["fx_var"]) {
             $(this).cycle(attrs);
@@ -111,11 +117,6 @@ FX.getFrame('jquery-1.3.2', function($) {
             eval("$(this).cycle(" + attrs["fx_var"] + ")");
         };
 
-    }, {
-        fx_var: undefined,
-        timeout: 0,
-        speed:  1000,
-        pause:  0 // hover时暂停
     });
 
 });

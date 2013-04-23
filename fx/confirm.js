@@ -1,6 +1,10 @@
 FX.getFrame('jquery-1.3.2', function($) {
 
-    FX.register('confirm', [], function(attrs) {
+    FX.register('confirm', [], {
+        style:      'none',
+        msg:        'Are you sure?'
+
+    }, function(attrs) {
         var $this = $(this);
 
         if ($this.attr('onclick')){
@@ -19,9 +23,6 @@ FX.getFrame('jquery-1.3.2', function($) {
             });
         };
 
-    }, {
-        style:      'none',
-        msg:        'Are you sure?'
     });
 
 });

@@ -1,5 +1,8 @@
 FX.getFrame('jquery-1.3.2', function($){
-    FX.register('appendto', [], function(attrs){
+    FX.register('appendto', [], {
+        target: undefined
+
+    }, function(attrs){
 
         var $this = $(this);
 
@@ -7,8 +10,6 @@ FX.getFrame('jquery-1.3.2', function($){
             $this.appendTo(attrs.target);
         };
 
-    }, {
-        target: undefined
     });
 
 });

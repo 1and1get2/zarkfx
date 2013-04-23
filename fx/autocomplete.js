@@ -71,7 +71,12 @@ FX.getFrame('jquery-1.7.2', function($){
 
     var array_cache = {};
 
-    FX.register('autocomplete', [ 'jqueryui-1.10.2' ], function(attrs){
+    FX.register('autocomplete', [ 'jqueryui-1.10.2' ], {
+        style: 'smoothness',
+        data:  undefined,
+        src: undefined
+
+    }, function(attrs){
     
         var $this = $(this),
             data_array=[];
@@ -97,10 +102,6 @@ FX.getFrame('jquery-1.7.2', function($){
             minLength: attrs.minLength
         });
 
-    }, {
-        style: 'smoothness',
-        data:  undefined,
-        src: undefined
     });
 
 });

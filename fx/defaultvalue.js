@@ -1,5 +1,8 @@
 FX.getFrame('jquery-1.3.2', function($){
-    FX.register('defaultvalue', [], function(attrs){
+    FX.register('defaultvalue', [], {
+        value: undefined
+
+    }, function(attrs){
         var $this = $(this),
             $form;
 
@@ -31,7 +34,5 @@ FX.getFrame('jquery-1.3.2', function($){
             };
         };
 
-    }, {
-        value: undefined
     });
 });

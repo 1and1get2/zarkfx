@@ -157,7 +157,17 @@ FX.getFrame('jquery-1.7.2', function($){
         };
     });
 
-    FX.register('scroll', [], function(attrs){
+    FX.register('scroll', [], {
+        style:          'none',
+        speed:          0,
+        scrollTop:      -1,
+        target:         undefined,
+        top:            undefined,
+        bottom:         undefined,
+        left:           undefined,
+        right:          undefined
+
+    }, function(attrs){
         var $this = $(this),
             $scroll_obj;
 
@@ -225,14 +235,5 @@ FX.getFrame('jquery-1.7.2', function($){
         if (attrs.right !== undefined) $scroll_obj.css('right', attrs.right + 'px');
         if (attrs.left !== undefined) $scroll_obj.css('left', attrs.left + 'px');
     
-    }, {
-        style:          'none',
-        speed:          0,
-        scrollTop:      -1,
-        target:         undefined,
-        top:            undefined,
-        bottom:         undefined,
-        left:           undefined,
-        right:          undefined
     });
 });

@@ -73,7 +73,13 @@ FX.getFrame('jquery-1.3.2', function($){
     var this_url = window.location.href.replace('http://','');
     var this_url_relative = this_url.substr(this_url.indexOf('/'));
 
-    FX.register('accordion', [ 'jqueryui-1.8.14' ], function(attrs){
+    FX.register('accordion', [ 'jqueryui-1.8.14' ], {            
+        speed       : 200,
+        right_img   : FX.IMG_PATH + 'accordion/right.png',
+        down_img    : FX.IMG_PATH + 'accordion/down.png',
+        style       : 'none'
+
+    }, function(attrs){
 
         var $this = $(this);                 
         if (attrs.style !== 'none'){
@@ -164,11 +170,6 @@ FX.getFrame('jquery-1.3.2', function($){
             }
         });
 
-    }, {            
-        speed       : 200,
-        right_img   : FX.IMG_PATH + 'accordion/right.png',
-        down_img    : FX.IMG_PATH + 'accordion/down.png',
-        style       : 'none'
     });
 });
 

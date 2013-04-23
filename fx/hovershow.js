@@ -10,7 +10,7 @@
  * */
 
 FX.getFrame('jquery-1.3.2', function($){
-    FX.register('hovershow', [], function(attrs){
+    FX.register('hovershow', [], {}, function(attrs){
 
         var $this = $(this);
         if(attrs.showid !== undefined){

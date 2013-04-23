@@ -31,7 +31,10 @@ FX.getFrame('jquery-1.3.2', function($){
         return scrollPos;
     };
 
-    FX.register('browsercenter', [ 'detect' ], function(attrs){
+    FX.register('browsercenter', [ 'detect' ], {
+        withResize: true
+
+    }, function(attrs){
         var $this = $(this);
         if(attrs.v !== undefined) attrs.vertical   = attrs.v;
         if(attrs.h !== undefined) attrs.horizontal = attrs.h;
@@ -67,9 +70,6 @@ FX.getFrame('jquery-1.3.2', function($){
             $(window).resize(fixPosition);
         };
             
-    }, {
-        withResize: true
-
     });
 
 });

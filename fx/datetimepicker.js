@@ -3,7 +3,11 @@
  * */
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('datetimepicker', [ 'jqueryui-1.8.14', 'datetimepicker/timepicker' ], function(attrs){
+    FX.register('datetimepicker', [ 'jqueryui-1.8.14', 'datetimepicker/timepicker' ], {
+        language: 'english',
+        dateFormat: 'mm/dd/yy'
+
+    }, function(attrs){
     
         if (attrs.style === 'default'){
             FX.loadCSS(FX.CSS_PATH + 'jqueryui/jqueryui-eggplant/jquery-ui-1.8.16.custom.css');
@@ -20,11 +24,6 @@ FX.getFrame('jquery-1.3.2', function($){
         attrs.defaultDate = $this.val();
         $this.datetimepicker(attrs)
     
-    }, {
-        language: 'english',
-        dateFormat: 'mm/dd/yy'
-
-
     });
 
 });

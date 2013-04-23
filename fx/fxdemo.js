@@ -46,7 +46,11 @@
 
 FX.getFrame("jquery-1.7.2", function($) {
 
-    FX.register( "fxdemo", [], function(attrs) {
+    FX.register( "fxdemo", [], {
+        style: 'default',
+        lazy: false,
+
+    }, function(attrs) {
         $(this).wrap('<div class="zarkfx_demo" />');
         $(this).before('<div class="label">Source (you can change it to try your ideas):</div>');
         var result = $('<div class="result" />');
@@ -68,9 +72,6 @@ FX.getFrame("jquery-1.7.2", function($) {
                 tryit.trigger("click");
             }, 10);
         };
-    }, {
-        style: 'default',
-        lazy: false,
     });
 
 });

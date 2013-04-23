@@ -65,13 +65,14 @@
 
 FX.getFrame('jquery-1.7.2', function($){
 
-    FX.register('menu', [ 'jqueryui-1.10.2' ], function(attrs){
+    FX.register('menu', [ 'jqueryui-1.10.2' ], {
+        style: 'smoothness'
+
+    }, function(attrs){
     
         var $this = $(this);
         $this.menu(attrs);
 
-    }, {
-        style: 'smoothness'
     });
 
 });

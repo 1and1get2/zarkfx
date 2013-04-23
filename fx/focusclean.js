@@ -27,7 +27,12 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('focusclean', [], function(attrs){
+    FX.register('focusclean', [], {
+        color:  '#666666',
+        onPassword: false,
+        notResume: false
+
+    }, function(attrs){
 
         var $this = $(this);
         var old_value = $this.val();
@@ -67,10 +72,6 @@ FX.getFrame('jquery-1.3.2', function($){
         $this.css('color', attrs.color);
     
 
-    }, {
-        color:  '#666666',
-        onPassword: false,
-        notResume: false
     });
 
 });

@@ -4,7 +4,10 @@
  * */
 
 FX.getFrame('jquery-1.3.2', function($){
-    FX.register('clickshow', [], function(attrs){
+    FX.register('clickshow', [], {
+        toggleHtml: undefined
+
+    }, function(attrs){
 
         var $this = $(this);
         if(attrs.showid !== undefined){
@@ -36,8 +39,6 @@ FX.getFrame('jquery-1.3.2', function($){
             $.data(this, 'old_value', $this.html());
         };
 
-    }, {
-        toggleHtml: undefined
     });
 });
 

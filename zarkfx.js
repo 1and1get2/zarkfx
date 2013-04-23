@@ -148,11 +148,11 @@
             FX.loadDep("css", css_url);
         };
 
-        FX.register = function(name, deps, func, defaults) {
+        FX.register = function(name, deps, defaults, func) {
             FX.loaded_fx[name] = {
                 deps:       deps,
-                func:       func,
                 defaults:   defaults,
+                func:       func
             };
         };
 
@@ -229,9 +229,9 @@
             // 找到没有运行的(依赖还在加载中)，10ms后再运行
             var remain = [];
             for(var i = 0; i < FX.queue.length; i++) {
-                if(typeof(FX.queue[i]) !== 'undefined') {
+                if(typeof(FX.queue[i]) !== 'undefined'){
                     remain.push(FX.queue[i]);
-                }
+                };
             };
             FX.queue = remain;
 
@@ -410,7 +410,7 @@
                     FX.enqueue({
                         name:   name,
                         attrs:  attrs,
-                        that:   this,
+                        that:   this
                     });
                 };
             };

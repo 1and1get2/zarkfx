@@ -74,7 +74,18 @@ FX.getFrame('jquery-1.3.2', function($){
 
     };
 
-    FX.register('choosebox', [], function(attrs){
+    FX.register('choosebox', [], {
+        boxid:      undefined,
+        choice:     'a',
+        cancel:     undefined,
+        action:     'replace',  // options: replace append
+        escclose:   true,
+        trigger:    undefined,
+        delimiter:  '; ',
+        triggerChange: true,
+        filter:     undefined
+
+    }, function(attrs){
         var $this = $(this);
         var $switch;
 
@@ -92,16 +103,6 @@ FX.getFrame('jquery-1.3.2', function($){
             //console.warn('Zark Fx choosebox: miss boxid, ignore.');
         };
 
-    }, {
-        boxid:      undefined,
-        choice:     'a',
-        cancel:     undefined,
-        action:     'replace',  // options: replace append
-        escclose:   true,
-        trigger:    undefined,
-        delimiter:  '; ',
-        triggerChange: true,
-        filter:     undefined
     });
 
 });

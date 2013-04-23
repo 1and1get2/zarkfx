@@ -122,18 +122,7 @@
 
 FX.getFrame('jquery-1.7.2', function($){
 
-    FX.register('datepicker', [ 'jqueryui-1.10.2' ], function(attrs){
-    
-        var $this = $(this);
-        attrs.defaultDate = $this.val();
-        $this.datepicker(attrs);
-
-        if (typeof(attrs.regional) !== 'undefined'){
-            $this.datepicker( "option",
-                $.datepicker.regional[ attrs.regional ] );
-        };
-    
-    }, {
+    FX.register('datepicker', [ 'jqueryui-1.10.2' ], {
         style: 'smoothness',
         dateFormat: 'yy-mm-dd',
         showAnim: '',
@@ -145,6 +134,18 @@ FX.getFrame('jquery-1.7.2', function($){
         minDate: '',
         maxDate: '',
         regional: ''
+
+    }, function(attrs){
+    
+        var $this = $(this);
+        attrs.defaultDate = $this.val();
+        $this.datepicker(attrs);
+
+        if (typeof(attrs.regional) !== 'undefined'){
+            $this.datepicker( "option",
+                $.datepicker.regional[ attrs.regional ] );
+        };
+    
     });
 
 });

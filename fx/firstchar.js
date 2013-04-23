@@ -7,7 +7,10 @@
 
 FX.getFrame('jquery-1.3.2', function($){
 
-    FX.register('firstchar', [], function(attrs){
+    FX.register('firstchar', [], {
+        class: undefined
+
+    }, function(attrs){
 
         var $this = $(this);
         if (attrs.class){
@@ -15,8 +18,6 @@ FX.getFrame('jquery-1.3.2', function($){
             $this.html('<span class="'+attrs.class+'">'+content[0]+'</span>'+content.substr(1));
         };
     
-    }, {
-        class: undefined
     });
 });
 

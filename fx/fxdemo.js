@@ -61,13 +61,20 @@ FX.getFrame("jquery-1.7.2", function($) {
         $(this).addClass("source");
         tryit.data("source", $(this));
         tryit.data("result", result);
+        tryit.data("children", null);
         tryit.click(function(){
-            $( ".label", $(this).parent() ).css("display", "");
-            $(this).data("result").html( $(this).data("source").val() );
+            // delete old fx
+            if ($(this).data("children")){
+                $(this).data("children").remove();
+            };
+            var children = $($(this).data("source").val());
+            $(this).data("children", children);
+            children.appendTo($(this).data("result"));
             $('['+FX.FX_NAME+']', $(this).data("result")).each(FX.enqueueFXElem);
             FX.runQueue();
         });
-        if(!attrs["lazy"]) {
+
+        if(!attrs.lazy) {
             setTimeout(function() {
                 tryit.trigger("click");
             }, 10);

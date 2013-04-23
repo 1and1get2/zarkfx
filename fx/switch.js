@@ -35,7 +35,7 @@
  *
  *       * - target
  *         - require
- *         - 此switch对于显示的元素
+ *         - 此switch对应显示的元素
  *         - -
  *         - css选择器
  *

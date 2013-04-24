@@ -3,7 +3,7 @@
  * DOC_BEGIN
  *
  * Autocomplete
- * ===========
+ * ==============================
  *
  * 文本框的自动填充。此fx基于
  * `jQuery Autocomplete <http://jqueryui.com/autocomplete/>`_,

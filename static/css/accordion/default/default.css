@@ -1,0 +1,6 @@
+.zarkfx_accordion_default > div {
+    overflow: hidden;
+}
+.zarkfx_accordion_default > div a {
+    display: block;
+}

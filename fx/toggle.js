@@ -26,7 +26,7 @@
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 4 1 2
+ *       :widths: 1 1 3 1 3
  *       :header-rows: 1
  *
  *       * - Param
@@ -209,7 +209,7 @@ FX.getFrame('jquery-1.7.2', function($){
         }; // End switchFunc
 
         if (attrs.on === 'hover') {
-            $this.bind('mouseover', switchFunc).bind('mouseout', switchFunc);
+            $this.hover(switchFunc, switchFunc);
         }else{
             $this.bind(attrs.on, switchFunc);
         };

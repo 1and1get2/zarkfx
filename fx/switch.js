@@ -24,7 +24,7 @@
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 4 1 2
+ *       :widths: 1 1 3 1 3
  *       :header-rows: 1
  *
  *       * - Param

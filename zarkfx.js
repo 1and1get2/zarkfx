@@ -148,6 +148,31 @@
             FX.loadDep("css", css_url);
         };
 
+        // 加载一些js，然后执行cb。用于fx对js的按需加载
+        FX.readyJs = function(deps, cb){
+            var ready = function(){
+                var ret = true;
+                for(var i in deps){
+                    var state = FX.loadDep('js', deps[i]);
+                    if (state === 'loading'){
+                        ret = false;
+                    }else if (state === 'failed'){
+                        alert('fx load js error:', deps[i])
+                        ret = false;
+                    };
+                };
+                return ret;
+            };
+
+            if ( ready() ) {
+                cb && cb();
+            } else {
+                window.setTimeout(function(){
+                    FX.readyJs(deps, cb);
+                }, 10);
+            };
+        };
+
         FX.register = function(name, deps, defaults, func) {
             FX.loaded_fx[name] = {
                 deps:       deps,
@@ -156,27 +181,31 @@
             };
         };
 
-        // 运行某个fx一次(仅对一个html元素)
-        FX.runFX = function(name, attrs, that) {
-            var setDefaults = function(attrs, defaults) {
-                for(var k in defaults) {
-                    if(typeof(attrs[k]) === 'undefined'){
-                        attrs[k] = defaults[k];
-                    } else {
-                        if(typeof(defaults[k]) === "number") {
-                            if (attrs[k].indexOf(".") === -1){
-                                attrs[k] = parseInt(attrs[k]);
-                            } else {
-                                attrs[k] = parseFloat(attrs[k]);
-                            };
-                        } else if(typeof(defaults[k]) === "boolean") {
-                            attrs[k] = (attrs[k] === "true" || attrs[k] === true);
+        FX.setDefaults = function(attrs, defaults) {
+            for(var k in defaults) {
+                if(typeof(attrs[k]) === 'undefined'){
+                    attrs[k] = defaults[k];
+                } else {
+                    if(typeof(defaults[k]) === "number") {
+                        if (attrs[k].indexOf(".") === -1){
+                            attrs[k] = parseInt(attrs[k]);
+                        } else {
+                            attrs[k] = parseFloat(attrs[k]);
+                        };
+                    } else if(typeof(defaults[k]) === "boolean") {
+                        if (attrs[k] === "true") {
+                            attrs[k] = true;
+                        }else if (attrs[k] === "false") {
+                            attrs[k] = false;
                         };
                     };
                 };
-                return attrs;
             };
+            return attrs;
+        };
 
+        // 运行某个fx一次(仅对一个html元素)
+        FX.runFX = function(name, attrs, that) {
             var res = FX.loadDep("fx", name);
             if(res === "loading") {
                 return "waiting";
@@ -194,7 +223,7 @@
                 };
 
                 // all the deps are loaded
-                var attrs = setDefaults(attrs, FX.loaded_fx[name].defaults);
+                var attrs = FX.setDefaults(attrs, FX.loaded_fx[name].defaults);
                 var func = FX.loaded_fx[name].func;
                 // 加载样式
                 if (typeof(attrs.style) !== 'undefined' && attrs.style !== 'none'){

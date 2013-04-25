@@ -18,7 +18,7 @@
  * 此fx由Sparker5团队原创开发。注意，不完美兼容低级浏览器。
  *
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: accordion
@@ -71,7 +71,7 @@
  * 使用默认样式
  * ------------
  *
- *  默认使用了autoExpande=prefix，自动展开当前选中项
+ * 默认使用了autoExpande=prefix，自动展开当前选中项
  *
  * .. zarkfx:: :demo:
  *

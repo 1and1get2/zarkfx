@@ -9,7 +9,7 @@
  * `jQuery Datepicker <http://jqueryui.com/datepicker/>`_.
  *
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: datepicker

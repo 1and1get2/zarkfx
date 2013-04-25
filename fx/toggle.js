@@ -17,7 +17,7 @@
  * 本fx由Sparker5团队原创开发。
  *
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: toggle

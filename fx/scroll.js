@@ -5,7 +5,7 @@
  * Scroll
  * ======
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: scroll

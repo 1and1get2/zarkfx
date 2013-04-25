@@ -15,7 +15,7 @@
  * 然后给这个div一个固定的高、宽即可
  *
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: switch

@@ -12,7 +12,7 @@
  * 维护。
  *
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: autocomplete

@@ -11,7 +11,7 @@
  * `ajie <http://github.com/zhaoxingjie>`_
  * 维护。
  *
- * Usage
+ * Options
  * --------------
  *
  * :FX name: menu

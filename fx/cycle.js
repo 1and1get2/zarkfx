@@ -22,6 +22,9 @@
  *
  * :FX name: cycle
  * :Description: 多张图片或多个div轮播
+ * :slide: 以下说明中,slide表示被轮播的图片或者div。
+ * :模版字符串: cycle中有许多参数的类型是"模版字符串"，表示在显示时字符串中用"{{}}"包裹的参数会被替换为具体的值。比如默认的captionTemplate='{{slideNum}} / {{slideCount}}'显示了当前显示了第几个slide，以及一共有多少个slide。
+ * 可以使用的参数有：currSlide nextSlide slideNum slideCount busy paused 以及slide的其它属性，比如alt title等。
  *
  * .. topic:: Arguments
  *
@@ -35,23 +38,299 @@
  *         - Default
  *         - Values
  *
- *       * - fx
- *         - required
- *         - fade|shuffle|others
+ *       * - allowWrap
+ *         - optional
+ *         - 是否允许展示到最后一张图片时自动跳转到第一张。仅在timeout=0时起作用。
+ *         - true
+ *         - true | false
+ *
+ *       * - autoHeight
+ *         - optional
+ *         - 
+ *         - 0
+ *         - 
+ *
+ *       * - caption
+ *         - optional
+ *         - 显示图片描述的元素，与caption-template参数一起使用
+ *         - '> .cycle-caption'
+ *         - jquery selector
+ *
+ *       * - captionTemplate
+ *         - optional
+ *         - 图片的描述文案模版。
+ *         - '{{slideNum}} / {{slideCount}}'
+ *         - 字符串模版
+ *
+ *       * - delay
+ *         - optional
+ *         -  网页打开后第一张图片开始轮播前的延迟时间，单位毫秒
+ *         - 0
+ *         - 
+ *
+ *       * - easing
+ *         - optional
+ *         -  动画时间函数。见 http://jqueryui.com/resources/demos/effect/easing.html
+ *         - null
+ *         - 
+ *
+ *       * - easeOut
+ *         - optional
+ *         -  配合easing使用
+ *         - null
+ *         - 
+ *
+ *       * - tr
+ *         - optional
+ *         -  动画效果。 见
  *         - fade
- *         - Cycle method, see :ref:`cycle-example1`
+ *         - none | fade | fadeout | scrollHorz | scrollVert | carousel | shuffle | tileSlide | tileBlind
+ *
+ *       * - loader
+ *         - optional
+ *         -  为false表示按照img元素的默认顺序轮播，为true则不遵守默认顺序优先展示加载好的图片，为wait表示等待所有图片加载完毕才开始展示
+ *         - false
+ *         - true | false
+ *
+ *       * - log
+ *         - optional
+ *         -  是否在console中打印log
+ *         - false
+ *         - true | false
+ *
+ *       * - loop
+ *         - optional
+ *         -  循环播放次数，0表示无限次
+ *         - 0
+ *         - 
+ *
+ *       * - manualSpeed
+ *         - optional
+ *         -  由人点击触发切换图片时的切换速度
+ *         - undefined
+ *         - 
+ *
+ *       * - manualTrump
+ *         - optional
+ *         -   由人点击切换按钮时是否可以中断默认的播放
+ *         - true
+ *         - true | false
+ *
+ *       * - next
+ *         - optional
+ *         -  下一张图片的触发器
+ *         - '> .cycle-next'
+ *         - 
+ *
+ *       * - prev
+ *         - optional
+ *         - / 上一张图片的触发器
+ *         - '> .cycle-prev'
+ *         - 
+ *
+ *       * - nextEvent
+ *         - optional
+ *         -  触发下一张图片的事件
+ *         - 'click.cycle'
+ *         - 
+ *
+ *       * - prevEvent
+ *         - optional
+ *         -  触发上一张图片的事件
+ *         - 'click.cycle'
+ *         - 
+ *
+ *       * - overlay
+ *         - optional
+ *         -  指定覆盖在图片上面的描述层
+ *         - '> .cycle-overlay'
+ *         - 
+ *
+ *       * - overlayTemplate
+ *         - optional
+ *         -  描述层的显示模版
+ *         - '<div>{{title}}</div><div>{{desc}}</div>'
+ *         - 
+ *
+ *       * - pager
+ *         - optional
+ *         -  指定图片选择的小按钮或缩略图
+ *         - '> .cycle-pager'
+ *         - 
+ *
+ *       * - pagerEvent
+ *         - optional
+ *         -  触发pager的事件
+ *         - 'click.cycle'
+ *         - 
+ *
+ *       * - pagerTemplate
+ *         - optional
+ *         -  pager按钮的模版
+ *         - '<span>&bull;</span>'
+ *         - 
+ *
+ *       * - pagerActiveClass
+ *         - optional
+ *         -   当前选中的pager的class
+ *         - 'cycle-pager-active'
+ *         - 
+ *
+ *       * - pauseOnHover
+ *         - optional
+ *         -  鼠标hover时是否暂停轮播
+ *         - false
+ *         - true | false
+ *
+ *       * - paused
+ *         - optional
+ *         -   为true表示页面加载后不自动开始轮播
+ *         - false
+ *         - true | false
+ *
+ *       * - progressive
+ *         - optional
+ *         -  延迟加载的图片数据
+ *         - undefined
+ *         - 
+ *
+ *       * - random
+ *         - optional
+ *         -  随机播放
+ *         - false
+ *         - true | false
+ *
+ *       * - reverse
+ *         - optional
+ *         -  反序播放
+ *         - false
+ *         - true | false
+ *
+ *       * - slideActiveClass
+ *         - optional
+ *         -  当前显示的轮播图片(或div)的class
+ *         - 'cycle-slide-active'
+ *         - 
+ *
+ *       * - slideClass
+ *         - optional
+ *         -   添加给每个slide的固定class
+ *         - 'cycle-slide'
+ *         - 
+ *
+ *       * - slides
+ *         - optional
+ *         -  指定轮播的对象
+ *         - '> img'
+ *         - 
+ *
+ *       * - speed
+ *         - optional
+ *         -  图片切换的时间
+ *         - 500
+ *         - 
+ *
+ *       * - startingSlide
+ *         - optional
+ *         -   从第几个slide开始轮播
+ *         - 0
+ *         - 
+ *
+ *       * - swipe
+ *         - optional
+ *         -  ?
+ *         - false
+ *         - true | false
+ *
+ *       * - sync
+ *         - optional
+ *         -   下一张图片的显示和上一张图片的消失是否同时进行
+ *         - true
+ *         - true | false
  *
  *       * - timeout
  *         - optional
- *         - non-negative integer
+ *         -  轮播间隔时间。为0时默认不轮播
  *         - 4000
- *         - Cycle interval
+ *         - 
  *
- *       * - blabla
+ *       * - hideNonActive
  *         - optional
- *         - blabla
+ *         -  hide掉非活动的slide
+ *         - true
+ *         - true | false
+ *
+ *       * - pause
+ *         - optional
  *         -
- *         - blabla
+ *         - undefined
+ *         - 
+ *
+ *       * - resume
+ *         - optional
+ *         -
+ *         - undefined
+ *         - 
+ *
+ *       * - stop
+ *         - optional
+ *         -
+ *         - undefined
+ *         - 
+ *
+ *       * - carouselFluid
+ *         - optional
+ *         -  当为true且使用了carouselVisible时，将自动调整图片的尺寸适应div的宽度与高度
+ *         - false
+ *         - true | false
+ *
+ *       * - carouselOffset
+ *         - optional
+ *         -  图片偏移，比如你想让左右图片仅显示一半？设置偏移量为图片宽度的一半即可
+ *         - 0
+ *         - 
+ *
+ *       * - carouselSlideDimension
+ *         - optional
+ *         - 
+ *         - undefined
+ *         - 
+ *
+ *       * - carouselVertical
+ *         - optional
+ *         -
+ *         - false
+ *         - true | false
+ *
+ *       * - carouselVisible
+ *         - optional
+ *         -
+ *         - undefined
+ *         - 
+ *
+ *       * - throttleSpeed
+ *         - optional
+ *         -
+ *         - undefined
+ *         - 
+ *
+ *       * - tileCount
+ *         - optional
+ *         -
+ *         - 7
+ *         - 
+ *
+ *       * - tileDelay
+ *         - optional
+ *         -
+ *         - 100
+ *         - 
+ *
+ *       * - tileVertical
+ *         - optional
+ *         - 
+ *         - true
+ *         - true | false
  *
  * .. _cycle-example1:
  *
@@ -310,56 +589,55 @@ FX.getFrame('jquery-1.7.2', function($) {
 
     FX.register('cycle', ['cycle2/cycle2'], {
         options: undefined,
-        allowWrap: true, // 是否允许展示到最后一张图片时自动跳转到第一张。仅在timeout=0时起作用。
-        autoHeight: 0, 
-        caption: '> .cycle-caption', // 指定图片描述的元素，与caption-template参数一起使用
-        captionTemplate: '{{slideNum}} / {{slideCount}}', //图片的描述文案，见
-        delay: 0, // 网页打开后第一张图片开始轮播前的延迟时间，单位毫秒
-        easing: null, // 动画时间函数。见 http://jqueryui.com/resources/demos/effect/easing.html
-        easeOut: null, // 配合easing使用
-        tr: 'fade', // 动画效果。 见
-        loader: false, // 为false表示按照img元素的默认顺序轮播，为true则不遵守默认顺序优先展示加载好的图片，为wait表示等待所有图片加载完毕才开始展示
-        log: false, // 是否在console中打印log
-        loop: 0, // 循环播放次数，0表示无限次
-        manualSpeed: undefined, // 由人点击触发切换图片时的切换速度
-        manualTrump: true,  // 由人点击切换按钮时是否可以中断默认的播放
-        next: '> .cycle-next', // 下一张图片的触发器
-        prev: '> .cycle-prev',// 上一张图片的触发器
-        nextEvent: 'click.cycle', // 触发下一张图片的事件
-        prevEvent: 'click.cycle', // 触发上一张图片的事件
-        overlay: '> .cycle-overlay', // 指定覆盖在图片上面的描述层
-        overlayTemplate: '<div>{{title}}</div><div>{{desc}}</div>', // 描述层的显示模版
-        pager: '> .cycle-pager', // 指定图片选择的小按钮或缩略图
-        pagerEvent: 'click.cycle', // 触发pager的事件
-        pagerTemplate: '<span>&bull;</span>', // pager按钮的模版
-        pagerActiveClass: 'cycle-pager-active',  // 当前选中的pager的class
-        pauseOnHover: false, // 鼠标hover时是否暂停轮播
-        paused: false,  // 为true表示页面加载后不自动开始轮播
-        progressive: undefined, // 延迟加载的图片数据
-        random: false, // 随机播放
-        reverse: false, // 反序播放
-        slideActiveClass: 'cycle-slide-active', // 当前显示的轮播图片(或div)的class
-        slideClass: 'cycle-slide',  // 添加给每个slide的固定class
-        slides: '> img', // 指定轮播的对象
-        speed: 500, // 图片切换的时间
-        startingSlide: 0,  // 从第几个slide开始轮播
-        swipe: false, // ?
-        sync: true,  // 下一张图片的显示和上一张图片的消失是否同时进行
-        timeout: 4000, // 轮播间隔时间。为0时默认不轮播
-        hideNonActive: true, // hide掉非活动的slide
+        allowWrap: true,
+        autoHeight: 0,
+        caption: '> .cycle-caption',
+        captionTemplate: '{{slideNum}} / {{slideCount}}',
+        delay: 0,
+        easing: null,
+        easeOut: null,
+        tr: 'fade',
+        loader: false,
+        log: false,
+        loop: 0,
+        manualSpeed: undefined,
+        manualTrump: true,
+        next: '> .cycle-next',
+        prev: '> .cycle-prev',
+        nextEvent: 'click.cycle',
+        prevEvent: 'click.cycle',
+        overlay: '> .cycle-overlay',
+        overlayTemplate: '<div>{{title}}</div><div>{{desc}}</div>',
+        pager: '> .cycle-pager',
+        pagerEvent: 'click.cycle',
+        pagerTemplate: '<span>&bull;</span>',
+        pagerActiveClass: 'cycle-pager-active',
+        pauseOnHover: false,
+        paused: false,
+        progressive: undefined,
+        random: false,
+        reverse: false,
+        slideActiveClass: 'cycle-slide-active',
+        slideClass: 'cycle-slide',
+        slides: '> img',
+        speed: 500,
+        startingSlide: 0,
+        swipe: false,
+        sync: true,
+        timeout: 4000,
+        hideNonActive: true,
         pause: undefined,
         resume: undefined,
         stop: undefined,
-        carouselFluid: false, // 当为true且使用了carouselVisible时，将自动调整图片的尺寸适应div的宽度与高度
-        carouselOffset: 0, // 图片偏移，比如你想让左右图片仅显示一半？设置偏移量为图片宽度的一半即可
-        carouselSlideDimension: undefined, //
+        carouselFluid: false,
+        carouselOffset: 0,
+        carouselSlideDimension: undefined,
         carouselVertical: false,
         carouselVisible: undefined,
         throttleSpeed: undefined,
         tileCount: 7,
         tileDelay: 100,
-        tileVertical: true,
-
+        tileVertical: true
 
     }, function(attrs) {
         var $this = $(this);
@@ -375,19 +653,18 @@ FX.getFrame('jquery-1.7.2', function($) {
         }else if (attrs["tr"] === 'shuffle'){
             deps.push('cycle2/shuffle');
 
+        }else if (attrs["tr"] === 'scrollVert'){
+            deps.push('cycle2/scrollVert');
+
         }else if (attrs["tr"] === 'tileSlide' || attrs["tr"] === 'tileBlind'){
             deps.push('cycle2/tile');
-        };
 
-        if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
+        }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
             deps.push('cycle2/iefade');
         };
+        // 原cycle2.js使用的对应变量名为fx
+        attrs["fx"] = attrs["tr"];
 
-        // 删除tr，原cycle2.js使用的对应变量名为fx
-        if (attrs["tr"]){
-            attrs["fx"] = attrs["tr"];
-            delete attrs["tr"];
-        };
 
         FX.readyJs(deps, function(){
             if(!attrs["options"]) {

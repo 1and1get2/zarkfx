@@ -48,7 +48,7 @@ FX.getFrame("jquery-1.7.2", function($) {
 
     FX.register( "fxdemo", [], {
         style: 'default',
-        lazy: false,
+        lazy: false
 
     }, function(attrs) {
         $(this).wrap('<div class="zarkfx_demo" />');

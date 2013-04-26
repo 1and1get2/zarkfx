@@ -66,6 +66,12 @@
  *         - click
  *         - click | hover | dblclick
  *
+ *       * - appendSpan
+ *         - optional
+ *         - 是否自动创建span标签以适应样式需要。使用某些style值时是必须要的
+ *         - true
+ *         - true | false
+ *
  *
  *
  * 点击查看样例

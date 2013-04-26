@@ -15,6 +15,7 @@
  * 因为原cycle2.js程序支持非常丰富的参数，且有一些参数值是function变量，
  * 有时无法以“fx=***”这种html属性的方式调用cycle的高级功能。
  * 对于这种情况你可以自己在js文件中定义好options，然后传给fx。
+ * 见: :ref:`cycle-example6`
  * 
  *
  * Options
@@ -23,314 +24,319 @@
  * :FX name: cycle
  * :Description: 多张图片或多个div轮播
  * :slide: 以下说明中,slide表示被轮播的图片或者div。
- * :模版字符串: cycle中有许多参数的类型是"模版字符串"，表示在显示时字符串中用"{{}}"包裹的参数会被替换为具体的值。比如默认的captionTemplate='{{slideNum}} / {{slideCount}}'显示了当前显示了第几个slide，以及一共有多少个slide。
- * 可以使用的参数有：currSlide nextSlide slideNum slideCount busy paused 以及slide的其它属性，比如alt title等。
+ * :模版字符串: cycle中有许多参数的类型是"模版字符串"，表示在显示时字符串中用"{{}}"包裹的参数会被替换为具体的值。比如默认的captionTemplate='{{slideNum}} / {{slideCount}}'显示了当前显示了第几个slide，以及一共有多少个slide。模版中可以使用的参数有：currSlide nextSlide slideNum slideCount busy paused 以及slide的其它属性，比如alt title等。
+ * :其它: 以下所有参数都是可选的。
  *
- * .. topic:: Arguments
+ * .. topic:: Common Options
  *
  *    .. list-table::
- *       :widths: 1 1 3 1 3
+ *       :widths: 1 3 2 2
  *       :header-rows: 1
  *
  *       * - Param
- *         - R/O
  *         - Description
  *         - Default
  *         - Values
  *
  *       * - allowWrap
- *         - optional
  *         - 是否允许展示到最后一张图片时自动跳转到第一张。仅在timeout=0时起作用。
  *         - true
  *         - true | false
  *
  *       * - autoHeight
- *         - optional
  *         - 
  *         - 0
  *         - 
  *
  *       * - caption
- *         - optional
- *         - 显示图片描述的元素，与caption-template参数一起使用
+ *         - 显示图片描述的元素，与caption-template参数一起使用。
  *         - '> .cycle-caption'
  *         - jquery selector
  *
  *       * - captionTemplate
- *         - optional
- *         - 图片的描述文案模版。
+ *         - 图片的描述文案模版。见: :ref:`cycle-example4`
  *         - '{{slideNum}} / {{slideCount}}'
  *         - 字符串模版
  *
  *       * - delay
- *         - optional
- *         -  网页打开后第一张图片开始轮播前的延迟时间，单位毫秒
+ *         - 网页打开后第一张图片开始轮播前的延迟时间，单位毫秒
  *         - 0
- *         - 
+ *         - 正整数
  *
  *       * - easing
- *         - optional
- *         -  动画时间函数。见 http://jqueryui.com/resources/demos/effect/easing.html
+ *         - 动画时间函数。见 `easing <http://jqueryui.com/resources/demos/effect/easing.html>`_ 
  *         - null
- *         - 
+ *         - easing函数名
  *
  *       * - easeOut
- *         - optional
- *         -  配合easing使用
+ *         - 配合easing使用
  *         - null
- *         - 
+ *         - easing函数名
  *
  *       * - tr
- *         - optional
- *         -  动画效果。 见
+ *         - 动画效果。常用的有fade和scrollHorz
  *         - fade
  *         - none | fade | fadeout | scrollHorz | scrollVert | carousel | shuffle | tileSlide | tileBlind
  *
  *       * - loader
- *         - optional
- *         -  为false表示按照img元素的默认顺序轮播，为true则不遵守默认顺序优先展示加载好的图片，为wait表示等待所有图片加载完毕才开始展示
+ *         - false表示按照img元素的默认顺序轮播，为true则不遵守默认顺序优先展示已加载的图片，为wait表示等待所有图片加载完毕才开始轮播
  *         - false
- *         - true | false
+ *         - true | false | wait
  *
  *       * - log
- *         - optional
- *         -  是否在console中打印log
+ *         - 是否在console中打印log
  *         - false
  *         - true | false
  *
  *       * - loop
- *         - optional
- *         -  循环播放次数，0表示无限次
+ *         - 循环播放次数，0表示无限次
  *         - 0
- *         - 
+ *         - 正整数
  *
  *       * - manualSpeed
- *         - optional
- *         -  由人点击触发切换图片时的切换速度
+ *         - 由人点击触发切换slide时的切换速度
  *         - undefined
- *         - 
+ *         - 正整数
  *
  *       * - manualTrump
- *         - optional
- *         -   由人点击切换按钮时是否可以中断默认的播放
+ *         - 由人点击按钮时是否可以中断默认的切换动画
  *         - true
  *         - true | false
  *
  *       * - next
- *         - optional
- *         -  下一张图片的触发器
- *         - '> .cycle-next'
- *         - 
+ *         - 切换下一张图片的触发器
+ *         - > .cycle-next
+ *         - jquery selector
  *
  *       * - prev
- *         - optional
- *         - / 上一张图片的触发器
- *         - '> .cycle-prev'
- *         - 
+ *         - 切换上一张图片的触发器
+ *         - > .cycle-prev
+ *         - jquery selector
  *
  *       * - nextEvent
- *         - optional
- *         -  触发下一张图片的事件
- *         - 'click.cycle'
- *         - 
+ *         - 触发下一张图片的事件
+ *         - click
+ *         - click | hover | mouserover | dblclick
  *
  *       * - prevEvent
- *         - optional
- *         -  触发上一张图片的事件
- *         - 'click.cycle'
- *         - 
+ *         - 触发上一张图片的事件
+ *         - click
+ *         - click | hover | mouserover | dblclick
  *
  *       * - overlay
- *         - optional
- *         -  指定覆盖在图片上面的描述层
- *         - '> .cycle-overlay'
- *         - 
+ *         - 指定覆盖在图片上面的描述层
+ *         - > .cycle-overlay
+ *         - jquery selector
  *
  *       * - overlayTemplate
- *         - optional
- *         -  描述层的显示模版
- *         - '<div>{{title}}</div><div>{{desc}}</div>'
- *         - 
+ *         - 描述层的显示模版。类似captionTemplate
+ *         - <div>{{title}}</div><div>{{desc}}</div>
+ *         - 字符串模版
  *
  *       * - pager
- *         - optional
- *         -  指定图片选择的小按钮或缩略图
- *         - '> .cycle-pager'
- *         - 
+ *         - 包含图片缩略图的div。会自动使用pagerTemplate创建小按钮，见: :ref:`cycle-example6`
+ *         - > .cycle-pager
+ *         - jquery selector
  *
  *       * - pagerEvent
- *         - optional
- *         -  触发pager的事件
- *         - 'click.cycle'
- *         - 
+ *         - 触发pager按钮的事件
+ *         - click
+ *         - click | hover | mouserover | dblclick
  *
  *       * - pagerTemplate
- *         - optional
- *         -  pager按钮的模版
- *         - '<span>&bull;</span>'
- *         - 
+ *         - pager按钮的模版
+ *         - <span>&bull;</span>
+ *         - 字符串模版
  *
  *       * - pagerActiveClass
- *         - optional
- *         -   当前选中的pager的class
- *         - 'cycle-pager-active'
- *         - 
+ *         - 当前选中pager按钮添加的class。你想让当前slide的缩略图有突出的样式?
+ *         - cycle-pager-active
+ *         - class string
  *
  *       * - pauseOnHover
- *         - optional
- *         -  鼠标hover时是否暂停轮播
+ *         - 鼠标hover时是否暂停轮播
  *         - false
  *         - true | false
  *
  *       * - paused
- *         - optional
- *         -   为true表示页面加载后不自动开始轮播
+ *         - 为true表示页面加载后不自动开始轮播
  *         - false
  *         - true | false
  *
  *       * - progressive
- *         - optional
- *         -  延迟加载的图片数据
+ *         - 延迟加载的图片数据。见: :ref:`cycle-example15`
  *         - undefined
- *         - 
+ *         - jquery selector
  *
  *       * - random
- *         - optional
- *         -  随机播放
+ *         - 是否随机播放
  *         - false
  *         - true | false
  *
  *       * - reverse
- *         - optional
- *         -  反序播放
+ *         - 是否反序播放
  *         - false
  *         - true | false
  *
  *       * - slideActiveClass
- *         - optional
- *         -  当前显示的轮播图片(或div)的class
- *         - 'cycle-slide-active'
- *         - 
+ *         - 当前显示的slide的class
+ *         - cycle-slide-active
+ *         - class string
  *
  *       * - slideClass
- *         - optional
- *         -   添加给每个slide的固定class
- *         - 'cycle-slide'
- *         - 
+ *         - 添加给每个slide的固定class
+ *         - cycle-slide
+ *         - class string
  *
  *       * - slides
- *         - optional
- *         -  指定轮播的对象
+ *         - 指定轮播的对象。如果slide是div而不是img的话，可以改为"> div"
  *         - '> img'
- *         - 
+ *         - jquery selector
  *
  *       * - speed
- *         - optional
- *         -  图片切换的时间
+ *         - 图片切换的时间。到位毫秒，数值越少速度越快
  *         - 500
- *         - 
+ *         - 正整数
  *
  *       * - startingSlide
- *         - optional
- *         -   从第几个slide开始轮播
+ *         - 从第几个slide开始轮播
  *         - 0
- *         - 
+ *         - 正整数
  *
  *       * - swipe
- *         - optional
- *         -  ?
+ *         - 是否在触摸设备上支持手指滑动
  *         - false
  *         - true | false
  *
  *       * - sync
- *         - optional
- *         -   下一张图片的显示和上一张图片的消失是否同时进行
+ *         - 下一张图片的显示和上一张图片的消失是否同时进行
  *         - true
  *         - true | false
  *
  *       * - timeout
- *         - optional
- *         -  轮播间隔时间。为0时默认不轮播
+ *         - 轮播间隔时间，为0时默认不轮播
  *         - 4000
- *         - 
+ *         - 正整数
  *
  *       * - hideNonActive
- *         - optional
- *         -  hide掉非活动的slide
+ *         - 隐藏非活动的slide
  *         - true
  *         - true | false
  *
  *       * - pause
- *         - optional
- *         -
+ *         - 暂停轮播的按钮。见 :ref:`cycle-example3`
  *         - undefined
- *         - 
+ *         - jquery selector
  *
  *       * - resume
- *         - optional
- *         -
+ *         - 恢复暂停的按钮
  *         - undefined
- *         - 
+ *         - jquery selector
  *
  *       * - stop
- *         - optional
- *         -
+ *         - 停止轮播的按钮
  *         - undefined
- *         - 
+ *         - jquery selector
+ *
+ * .. topic:: Carousel Options
+ *
+ *    .. list-table::
+ *       :widths: 1 4 1 2
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - Description
+ *         - Default
+ *         - Values
  *
  *       * - carouselFluid
- *         - optional
- *         -  当为true且使用了carouselVisible时，将自动调整图片的尺寸适应div的宽度与高度
+ *         - 当为true且使用了carouselVisible时，将自动调整图片的尺寸适应div的宽度与高度
  *         - false
  *         - true | false
  *
  *       * - carouselOffset
- *         - optional
- *         -  图片偏移，比如你想让左右图片仅显示一半？设置偏移量为图片宽度的一半即可
+ *         - 图片偏移，比如你想让左右图片仅显示一半？设置偏移量为图片宽度的一半即可，见 :ref:`cycle-example7`
  *         - 0
- *         - 
+ *         - 正整数
  *
  *       * - carouselSlideDimension
- *         - optional
  *         - 
  *         - undefined
  *         - 
  *
  *       * - carouselVertical
- *         - optional
- *         -
+ *         - 是否垂直滚动
  *         - false
  *         - true | false
  *
  *       * - carouselVisible
- *         - optional
- *         -
+ *         - 显示的图片数量。默认根据图片尺寸自动计算
  *         - undefined
- *         - 
+ *         - 正整数
  *
  *       * - throttleSpeed
- *         - optional
  *         -
  *         - undefined
  *         - 
  *
- *       * - tileCount
- *         - optional
+ *
+ *  :tip: 以上参数仅在fx=carousel时有效
+ *
+ * .. topic:: Shuffle Options
+ *
+ *    .. list-table::
+ *       :widths: 1 4 1 2
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - Description
+ *         - Default
+ *         - Values
+ *
+ *       * - shuffleLeft
  *         -
- *         - 7
+ *         - 0
+ *         - 整数
+ *
+ *       * - shuffleRight
+ *         -
+ *         - 0
+ *         - 整数
+ *
+ *       * - shuffleTop
  *         - 
+ *         - 15
+ *         - 整数
+ *
+ *  :tip: 以上参数仅在fx=shuffle时有效
+ *
+ * .. topic:: Tile Options
+ *
+ *    .. list-table::
+ *       :widths: 1 4 1 2
+ *       :header-rows: 1
+ *
+ *       * - Param
+ *         - Description
+ *         - Default
+ *         - Values
+ *
+ *       * - tileCount
+ *         - 翻转图片时分割块数
+ *         - 7
+ *         - 正整数
  *
  *       * - tileDelay
- *         - optional
  *         -
  *         - 100
- *         - 
+ *         - 正整数
  *
  *       * - tileVertical
- *         - optional
- *         - 
+ *         - 是否垂直翻转
  *         - true
  *         - true | false
+ *
+ *  :tip: 以上参数仅在fx=tileSlide或fx=tileBlind时有效
  *
  * .. _cycle-example1:
  *
@@ -356,6 +362,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  *
+ * .. _cycle-example2:
+ *
  * 水平滚动
  * -------------
  *
@@ -369,6 +377,8 @@
  *          <img src="http://malsup.github.com/images/p3.jpg">
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
+ *
+ * .. _cycle-example3:
  *
  * 使用控制按钮
  * -------------
@@ -391,6 +401,8 @@
  *      </div>
  *
  *
+ * .. _cycle-example4:
+ *
  * 显示图片信息
  * --------------------
  *
@@ -407,6 +419,8 @@
  *      </div>
  *      <div id="cap1"></div>
  *
+ * .. _cycle-example5:
+ *
  * 一直滚
  * --------------------
  *
@@ -420,6 +434,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  *
+ *
+ * .. _cycle-example6:
  *
  * 给每张图片创建缩略图
  * -------------------------
@@ -446,6 +462,8 @@
  *      </div>
  *      <div id="pager3"></div>
  *
+ * .. _cycle-example7:
+ *
  * 同时显示多张图片
  * -------------------------
  * 
@@ -471,6 +489,8 @@
  *          <img src="http://malsup.github.com/images/beach2.jpg">
  *      </div>
  *
+ * .. _cycle-example8:
+ *
  * 垂直显示多张图片
  * -------------------------
  *
@@ -495,6 +515,8 @@
  *      </div>
  *
  *
+ * .. _cycle-example9:
+ *
  * Shuffle 效果
  * -------------------------
  *
@@ -510,6 +532,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  * 
+ * .. _cycle-example10:
+ *
  * Shuffle 向右抽取
  * -------------------------
  *
@@ -524,6 +548,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  * 
+ * .. _cycle-example11:
+ *
  * Shuffle + Reverse
  * -------------------------
  *
@@ -538,6 +564,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  * 
+ * .. _cycle-example12:
+ *
  * Tile Slide 效果
  * -------------------------
  *
@@ -552,6 +580,8 @@
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
  * 
+ * .. _cycle-example13:
+ *
  * Tile Blind 效果
  * -------------------------
  *
@@ -567,6 +597,8 @@
  *      </div>
  * 
  *
+ * .. _cycle-example14:
+ *
  * Tile Blind 水平翻转
  * -------------------------
  *
@@ -581,6 +613,33 @@
  *          <img src="http://malsup.github.com/images/p3.jpg">
  *          <img src="http://malsup.github.com/images/p4.jpg">
  *      </div>
+ *
+ * .. _cycle-example15:
+ *
+ * 按需加载，节约带宽
+ * -------------------------
+ *
+ * 使用progressive参数指定图片数据，cycle会按需加载图片，节约带宽。
+ *
+ * .. zarkfx:: :demo:
+ *
+ *   <script id="more_images" type="text/cycle">
+ *   [
+ *       "<img src='http://malsup.github.com/images/beach2.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach3.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach4.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach5.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach6.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach7.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach8.jpg'>",
+ *       "<img src='http://malsup.github.com/images/beach9.jpg'>"
+ *   ]
+ *   </script>
+ *
+ *      <div fx="cycle[tr=scrollHorz; timeout=0; next=#n3; progressive=#more_images; ]">
+ *          <img src="http://malsup.github.com/images/beach1.jpg">
+ *      </div>
+ *      <a href="javascript:void(0);" id="n3" >next</a>
  *
  * DOC_END
  */

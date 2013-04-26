@@ -2,10 +2,10 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
-.zarkfx_accordion {
+.zarkfx_accordion_zarkpy {
     width:200px;
 }
-.zarkfx_accordion .zarkfx_accordion_bar {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_bar {
     padding:0.5em 2em 0.5em 1em;
     display:block; 
     text-decoration:none; 
@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color:#f6f6f6;
     position:relative;
 }
-.zarkfx_accordion .zarkfx_accordion_bar .zarkfx_tri {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_bar .zarkfx_accordion_tri {
     display:none;
     width:20px;
     height:100%;
@@ -25,22 +25,23 @@ h1, h2, h3, h4, h5, h6 {
     background-position:center right;
     background-repeat:no-repeat;
 }
-.zarkfx_accordion .zarkfx_accordion_bar:hover {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_folded_hover,
+.zarkfx_accordion_zarkpy .zarkfx_accordion_expanded_hover {
     cursor:pointer;
 }
-.zarkfx_accordion .zarkfx_accordion_bar.zarkfx_folded:hover .zarkfx_tri {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_bar.zarkfx_accordion_folded_hover .zarkfx_accordion_tri {
     display:block;
 }
-.zarkfx_accordion .zarkfx_accordion_bar:last-of-type {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_bar:last-of-type {
     border-bottom:0;
 }
-.zarkfx_accordion .zarkfx_accordion_box {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box {
     overflow:hidden;
     background:#585858;
     position:relative;
     top:-1px;
 }
-.zarkfx_accordion .zarkfx_accordion_box a {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_a {
     padding:0.1em 1.6em 0.1em 1.2em;
     margin:0 0.5em;
     border-radius:16px;
@@ -50,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height:1.6em; 
     position:relative;
 }
-.zarkfx_accordion .zarkfx_accordion_box a .zarkfx_tri {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_a .zarkfx_accordion_tri {
     display:none;
     width:7px;
     height:100%;
@@ -61,21 +62,20 @@ h1, h2, h3, h4, h5, h6 {
     background-position:center right;
     background-repeat:no-repeat;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:first-child {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_a:first-child {
     margin-top:0.5em;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:last-child {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_a:last-child {
     margin-bottom:0.5em;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:hover {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_hover {
     color:#fff; 
     cursor:pointer;  
     background-color:#444;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:hover .zarkfx_tri {
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_hover .zarkfx_accordion_tri {
     display:block;
 }
-
-
-
-
+.zarkfx_accordion_zarkpy .zarkfx_accordion_box .zarkfx_accordion_selected .zarkfx_accordion_tri {
+    display:block;
+}

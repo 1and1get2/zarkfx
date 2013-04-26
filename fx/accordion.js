@@ -130,7 +130,8 @@ FX.getFrame('jquery-1.7.2', function($){
         autoExpande : 'prefix', // off prefix contain equal
         title       : 'h1, h2, h3, h4, h5, h6',
         speed       : 150,
-        on          : 'click'
+        on          : 'click',
+        appendSpan  : true
 
     }, function(attrs){
         var $this = $(this);
@@ -149,16 +150,16 @@ FX.getFrame('jquery-1.7.2', function($){
                     next_div.height(0).animate({
                         height: height
                     }, attrs.speed, 'linear', function(){
-                        $this.addClass('zarkfx_expanded').removeClass('zarkfx_folded');
+                        $this.addClass('zarkfx_accordion_expanded').removeClass('zarkfx_accordion_folded');
                     });
                 };
             };
             var fold = function(){
-                if (attrs.on !== 'hover' || next_div.find('.zarkfx_selected').length === 0){
+                if (attrs.on !== 'hover' || next_div.find('.zarkfx_accordion_selected').length === 0){
                     next_div.stop().animate({
                         height: 0
                     }, attrs.speed, 'linear', function(){
-                        $this.addClass('zarkfx_folded').removeClass('zarkfx_expanded');
+                        $this.addClass('zarkfx_accordion_folded').removeClass('zarkfx_accordion_expanded');
                     });
                 };
             };
@@ -175,37 +176,60 @@ FX.getFrame('jquery-1.7.2', function($){
             };
         });
 
+        // 给各个元素添加默认class
         $('> ' + attrs.title, $this).hover(
             function(){
                 if ($(this).next('div').height() === 0){
-                    $(this).addClass('zarkfx_folded_hover');
+                    $(this).addClass('zarkfx_accordion_folded_hover');
                 }else{
-                    $(this).addClass('zarkfx_expanded_hover');
+                    $(this).addClass('zarkfx_accordion_expanded_hover');
                 };
             },
             function(){
-                $(this).removeClass('zarkfx_folded_hover');
-                $(this).removeClass('zarkfx_expanded_hover');
+                $(this).removeClass('zarkfx_accordion_folded_hover');
+                $(this).removeClass('zarkfx_accordion_expanded_hover');
             }
         );
-
-        $('> div a', $this).hover(
+        $('> div > *', $this).hover(
             function(){
-                $(this).addClass('zarkfx_hover');
+                $(this).addClass('zarkfx_accordion_hover');
             }, 
             function(){
-                $(this).removeClass('zarkfx_hover');
+                $(this).removeClass('zarkfx_accordion_hover');
             }
         );
-
-        // 找到当前选中的a
-        $('> div a', $this).each(function(){
+        $('> div > *', $this).each(function(){
+            $(this).addClass('zarkfx_accordion_a');
             //如果此项默认被选中（即为当前页面）
+            var title = $(this).closest('div').prev();
             if ( isSelected(attrs.autoExpande, $(this).attr('href')) ){
-                $(this).addClass('zarkfx_selected');
-                $(this).closest(attrs.title).addClass('zarkfx_selected');
+                $(this).addClass('zarkfx_accordion_selected');
+                $(this).closest(attrs.title).addClass('zarkfx_accordion_selected');
                 $(this).closest('div').height('100%');
+                if ( !title.hasClass('zarkfx_accordion_expanded') ){
+                    title.addClass('zarkfx_accordion_expanded');
+                };
+            }else{
+                if ( !title.hasClass('zarkfx_accordion_folded') ){
+                    title.addClass('zarkfx_accordion_folded');
+                };
             };
+        });
+        // 添加span元素
+        $('> ' + attrs.title, $this).each(function(){
+            if (attrs.appendSpan){
+                $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
+            }
+            $(this).addClass('zarkfx_accordion_bar');
+        });
+        $('> div > *', $this).each(function(){
+            if (attrs.appendSpan){
+                $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
+            }
+        });
+
+        $('> div', $this).each(function(){
+            $(this).addClass('zarkfx_accordion_box');
         });
 
     });

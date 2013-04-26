@@ -2,19 +2,19 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
-.zarkfx_accordion {
+.zarkfx_accordion_default {
     width:200px;
     border:1px solid #ddd;
     border-radius:2px;
     box-shadow:0 1px 1px #eee;
 }
-.zarkfx_accordion .zarkfx_accordion_bar {
+.zarkfx_accordion_default .zarkfx_accordion_bar {
     display:block;
     padding:0.8em 2em 0.8em 1em;
     border-top:1px solid #ddd;
     position:relative;
 }
-.zarkfx_accordion .zarkfx_accordion_bar .zarkfx_tri {
+.zarkfx_accordion_default .zarkfx_accordion_bar .zarkfx_accordion_tri {
     display:none;
     width:7px;
     height:100%;
@@ -25,21 +25,22 @@ h1, h2, h3, h4, h5, h6 {
     background-position:center right;
     background-repeat:no-repeat;
 }
-.zarkfx_accordion .zarkfx_accordion_bar:hover {
+.zarkfx_accordion_default .zarkfx_accordion_folded_hover,
+.zarkfx_accordion_default .zarkfx_accordion_expanded_hover {
     opacity:0.6;
     cursor:pointer;
 }
-.zarkfx_accordion .zarkfx_accordion_bar.zarkfx_folded:hover .zarkfx_tri {
+.zarkfx_accordion_default .zarkfx_accordion_bar.zarkfx_accordion_folded_hover .zarkfx_accordion_tri {
     display:block;
 }
-.zarkfx_accordion .zarkfx_accordion_bar:first-child {
+.zarkfx_accordion_default .zarkfx_accordion_bar:first-child {
     border-top:0;
 }
-.zarkfx_accordion .zarkfx_accordion_box {
+.zarkfx_accordion_default .zarkfx_accordion_box {
     overflow:hidden;
     background-color:#f6f6f6;
 }
-.zarkfx_accordion .zarkfx_accordion_box a {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_a {
     display:block;
     padding:0.8em 2em 0.8em 1em;
     border-bottom:1px dashed #ccc;
@@ -48,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration:none;
     position:relative;
 }
-.zarkfx_accordion .zarkfx_accordion_box a .zarkfx_tri {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_a .zarkfx_accordion_tri {
     display:none;
     width:7px;
     height:100%;
@@ -59,14 +60,18 @@ h1, h2, h3, h4, h5, h6 {
     background-position:center right;
     background-repeat:no-repeat;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:first-child {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_a:first-child {
     border-top:1px solid #ccc;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:last-child {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_a:last-child {
     border-bottom:0;
 }
-.zarkfx_accordion .zarkfx_accordion_box a:hover {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_hover,
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_selected{
 }
-.zarkfx_accordion .zarkfx_accordion_box a:hover .zarkfx_tri {
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_hover .zarkfx_accordion_tri {
+    display:block;
+}
+.zarkfx_accordion_default .zarkfx_accordion_box .zarkfx_accordion_selected .zarkfx_accordion_tri {
     display:block;
 }

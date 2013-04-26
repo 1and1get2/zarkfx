@@ -4,7 +4,7 @@
  * Cycle
  * ======
  *
- * 此fx基于
+ * 此fx由Sparker5团队基于
  * `jQuery Cycle2 Plugin <http://jquery.malsup.com/cycle2/>`_.
  * 开发。
  * 感谢原作者蛋疼的精神。
@@ -24,7 +24,7 @@
  * :FX name: cycle
  * :Description: 多张图片或多个div轮播
  * :slide: 以下说明中,slide表示被轮播的图片或者div。
- * :模版字符串: cycle中有许多参数的类型是"模版字符串"，表示在显示时字符串中用"{{}}"包裹的参数会被替换为具体的值。比如默认的captionTemplate='{{slideNum}} / {{slideCount}}'显示了当前显示了第几个slide，以及一共有多少个slide。模版中可以使用的参数有：currSlide nextSlide slideNum slideCount busy paused 以及slide的其它属性，比如alt title等。
+ * :模版字符串: cycle中有许多参数的类型是"模版字符串"，表示在显示时字符串中用"{{}}"包裹的参数会被替换为具体的值。比如默认的captionTemplate='{{slideNum}} / {{slideCount}}'显示了当前第几个slide，以及一共有多少个slide。模版中可以使用的参数有：currSlide nextSlide slideNum slideCount busy paused 以及slide的其它属性，比如alt title等。
  * :其它: 以下所有参数都是可选的。
  *
  * .. topic:: Common Options
@@ -50,12 +50,12 @@
  *
  *       * - caption
  *         - 显示图片描述的元素，与caption-template参数一起使用。
- *         - '> .cycle-caption'
+ *         - > .cycle-caption
  *         - jquery selector
  *
  *       * - captionTemplate
  *         - 图片的描述文案模版。见: :ref:`cycle-example4`
- *         - '{{slideNum}} / {{slideCount}}'
+ *         - {{slideNum}} / {{slideCount}}
  *         - 字符串模版
  *
  *       * - delay
@@ -696,7 +696,11 @@ FX.getFrame('jquery-1.7.2', function($) {
         throttleSpeed: undefined,
         tileCount: 7,
         tileDelay: 100,
-        tileVertical: true
+        tileVertical: true,
+        captionPlugin: undefined,
+        youtube: false,
+        centerHorz: false,
+        centerVert: false
 
     }, function(attrs) {
         var $this = $(this);
@@ -721,9 +725,25 @@ FX.getFrame('jquery-1.7.2', function($) {
         }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
             deps.push('cycle2/iefade');
         };
+
+        if (attrs["swipe"]){
+            deps.push('cycle2/swipe');
+        };
+
+        if (attrs.captionPlugin === 'caption2'){
+            deps.push('cycle2/caption2');
+        };
+
+        if (attrs.youtube){
+            deps.push('cycle2/video');
+        };
+
+        if (attrs.centerHorz || attrs.centerVert){
+            deps.push('cycle2/center');
+        };
+
         // 原cycle2.js使用的对应变量名为fx
         attrs["fx"] = attrs["tr"];
-
 
         FX.readyJs(deps, function(){
             if(!attrs["options"]) {

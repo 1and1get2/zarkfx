@@ -68,28 +68,16 @@
  *
  *
  *
- * 使用默认样式
+ * 点击查看样例
  * ------------
  *
- * 默认使用了autoExpande=prefix，自动展开当前选中项
+ * 因为当前页面的css会影响到accordion的样式，所以需要点击下面的按钮打开演示页面查看
+ *
+ * 新页面中的三个样例分别使用了 default tui zarkpy 样式
  *
  * .. zarkfx:: :demo:
  *
- *      <div fx="accordion" >
- *          <h3>chapter 1</h3>
- *          <div>
- *              <a href="/accordion.html">part 1.1</a>
- *              <a href="#">part 1.2</a>
- *              <a href="#">part 1.3</a>
- *          </div>
- *          <h3>chapter 2</h3>
- *          <div>
- *              <a href="#">part 2.1</a>
- *              <a href="#">part 2.2</a>
- *              <a href="#">part 2.3</a>
- *          </div>
- *      </div>
- *
+ *     <a href="/_static/demo/accordion/demo.html" target="_blank" >查看样例</a>
  *
  * DOC_END
  *
@@ -138,6 +126,7 @@ FX.getFrame('jquery-1.7.2', function($){
         if (attrs.style !== 'none' && attrs.style !== ''){
             $(this).addClass('zarkfx_accordion_' + attrs.style);
         };
+        $(this).addClass('zarkfx_accordion');
         $('div', $this).height(0);
 
         // 给每个title绑定click事件

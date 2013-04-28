@@ -89,143 +89,141 @@
  *
  */
 
-FX.getFrame('jquery-1.7.2', function($){
-    var curr_href = window.location.href,
-        curr_path = window.location.pathname,
-        curr_host = window.location.host,
-        curr_search = window.location.search,
-        protocol  = window.location.protocol;
-    curr_href = encodeURI(curr_href);
-    curr_path = encodeURI(curr_path);
-    curr_search = encodeURI(curr_search);
-    var curr_relative = curr_path.substr(curr_path.lastIndexOf('/') + 1) +  curr_search;
+;(function(){
+var curr_href = window.location.href,
+    curr_path = window.location.pathname,
+    curr_host = window.location.host,
+    curr_search = window.location.search,
+    protocol  = window.location.protocol;
 
-    var isSelected = function(autoExpande, this_url){
-        var ret = false;
-        this_url = encodeURI(this_url);
+curr_href = encodeURI(curr_href);
+curr_path = encodeURI(curr_path);
+curr_search = encodeURI(curr_search);
 
-        if (autoExpande === 'equal'){
-            ret = (curr_href === this_url) || (protocol + '//' + curr_host + this_url === curr_href) || (curr_relative === this_url)
+var curr_relative = curr_path.substr(curr_path.lastIndexOf('/') + 1) +  curr_search;
 
-        }else if (autoExpande === 'prefix'){
-            ret = (curr_href.indexOf(this_url) === 0) || ((curr_path + curr_search).indexOf(this_url) === 0) || (curr_relative.indexOf(this_url) === 0)
+var isSelected = function(autoExpande, this_url){
+    var ret = false;
+    this_url = encodeURI(this_url);
 
-        }else if (autoExpande === 'contain'){
-            ret = curr_href.indexOf(this_url) !== -1
+    if (autoExpande === 'equal'){
+        ret = (curr_href === this_url) || (protocol + '//' + curr_host + this_url === curr_href) || (curr_relative === this_url)
 
-        }else if (autoExpande === 'off'){
-            // pass
-        };
-        return ret;
+    }else if (autoExpande === 'prefix'){
+        ret = (curr_href.indexOf(this_url) === 0) || ((curr_path + curr_search).indexOf(this_url) === 0) || (curr_relative.indexOf(this_url) === 0)
+
+    }else if (autoExpande === 'contain'){
+        ret = curr_href.indexOf(this_url) !== -1
+
+    }else if (autoExpande === 'off'){
+        // pass
     };
+    return ret;
+};
 
-    FX.register('accordion', [], {
-        style       : 'default',
-        autoExpande : 'prefix', // off prefix contain equal
-        title       : 'h1, h2, h3, h4, h5, h6',
-        speed       : 150,
-        on          : 'click',
-        appendSpan  : true
+FX.register('accordion', [], {
+    style       : 'default',
+    autoExpande : 'prefix', // off prefix contain equal
+    title       : 'h1, h2, h3, h4, h5, h6',
+    speed       : 150,
+    on          : 'click',
+    appendSpan  : true
 
-    }, function(attrs){
+}, function(attrs){
+    var $this = $(this);
+    $('div', $this).height(0);
+
+    // 给每个title绑定click事件
+    $('> ' + attrs.title, $this).each(function(){
         var $this = $(this);
-        if (attrs.style !== 'none' && attrs.style !== ''){
-            $(this).addClass('zarkfx_accordion_' + attrs.style);
-        };
-        $(this).addClass('zarkfx_accordion');
-        $('div', $this).height(0);
-
-        // 给每个title绑定click事件
-        $('> ' + attrs.title, $this).each(function(){
-            var $this = $(this);
-            var next_div = $(this).next('div');
-            var expande = function(){
-                if (next_div.height() !== next_div.stop().height('100%').height()){
-                    height = next_div.height('100%').height();
-                    next_div.height(0).animate({
-                        height: height
-                    }, attrs.speed, 'linear', function(){
-                        $this.addClass('zarkfx_accordion_expanded').removeClass('zarkfx_accordion_folded');
-                    });
-                };
-            };
-            var fold = function(){
-                if (attrs.on !== 'hover' || next_div.find('.zarkfx_accordion_selected').length === 0){
-                    next_div.stop().animate({
-                        height: 0
-                    }, attrs.speed, 'linear', function(){
-                        $this.addClass('zarkfx_accordion_folded').removeClass('zarkfx_accordion_expanded');
-                    });
-                };
-            };
-            if (attrs.on === 'hover'){
-                $this.hover(expande, fold);
-            }else{
-                $this.bind(attrs.on, function(){
-                    if (next_div.height() === 0){
-                        expande();
-                    }else{
-                        fold();
-                    };
+        var next_div = $(this).next('div');
+        var expande = function(){
+            if (next_div.height() !== next_div.stop().height('100%').height()){
+                height = next_div.height('100%').height();
+                next_div.height(0).animate({
+                    height: height
+                }, attrs.speed, 'linear', function(){
+                    $this.addClass('zarkfx_accordion_expanded').removeClass('zarkfx_accordion_folded');
                 });
             };
-        });
-
-        // 给各个元素添加默认class
-        $('> ' + attrs.title, $this).hover(
-            function(){
-                if ($(this).next('div').height() === 0){
-                    $(this).addClass('zarkfx_accordion_folded_hover');
-                }else{
-                    $(this).addClass('zarkfx_accordion_expanded_hover');
-                };
-            },
-            function(){
-                $(this).removeClass('zarkfx_accordion_folded_hover');
-                $(this).removeClass('zarkfx_accordion_expanded_hover');
-            }
-        );
-        $('> div > *', $this).hover(
-            function(){
-                $(this).addClass('zarkfx_accordion_hover');
-            }, 
-            function(){
-                $(this).removeClass('zarkfx_accordion_hover');
-            }
-        );
-        $('> div > *', $this).each(function(){
-            $(this).addClass('zarkfx_accordion_a');
-            //如果此项默认被选中（即为当前页面）
-            var title = $(this).closest('div').prev();
-            if ( isSelected(attrs.autoExpande, $(this).attr('href')) ){
-                $(this).addClass('zarkfx_accordion_selected');
-                $(this).closest(attrs.title).addClass('zarkfx_accordion_selected');
-                $(this).closest('div').height('100%');
-                if ( !title.hasClass('zarkfx_accordion_expanded') ){
-                    title.addClass('zarkfx_accordion_expanded');
-                };
-            }else{
-                if ( !title.hasClass('zarkfx_accordion_folded') ){
-                    title.addClass('zarkfx_accordion_folded');
-                };
+        };
+        var fold = function(){
+            if (attrs.on !== 'hover' || next_div.find('.zarkfx_accordion_selected').length === 0){
+                next_div.stop().animate({
+                    height: 0
+                }, attrs.speed, 'linear', function(){
+                    $this.addClass('zarkfx_accordion_folded').removeClass('zarkfx_accordion_expanded');
+                });
             };
-        });
-        // 添加span元素
-        $('> ' + attrs.title, $this).each(function(){
-            if (attrs.appendSpan){
-                $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
-            }
-            $(this).addClass('zarkfx_accordion_bar');
-        });
-        $('> div > *', $this).each(function(){
-            if (attrs.appendSpan){
-                $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
-            }
-        });
-
-        $('> div', $this).each(function(){
-            $(this).addClass('zarkfx_accordion_box');
-        });
-
+        };
+        if (attrs.on === 'hover'){
+            $this.hover(expande, fold);
+        }else{
+            $this.bind(attrs.on, function(){
+                if (next_div.height() === 0){
+                    expande();
+                }else{
+                    fold();
+                };
+            });
+        };
     });
+
+    // 给各个元素添加默认class
+    $('> ' + attrs.title, $this).hover(
+        function(){
+            if ($(this).next('div').height() === 0){
+                $(this).addClass('zarkfx_accordion_folded_hover');
+            }else{
+                $(this).addClass('zarkfx_accordion_expanded_hover');
+            };
+        },
+        function(){
+            $(this).removeClass('zarkfx_accordion_folded_hover');
+            $(this).removeClass('zarkfx_accordion_expanded_hover');
+        }
+    );
+    $('> div > *', $this).hover(
+        function(){
+            $(this).addClass('zarkfx_accordion_hover');
+        }, 
+        function(){
+            $(this).removeClass('zarkfx_accordion_hover');
+        }
+    );
+    $('> div > *', $this).each(function(){
+        $(this).addClass('zarkfx_accordion_a');
+        //如果此项默认被选中（即为当前页面）
+        var title = $(this).closest('div').prev();
+        if ( isSelected(attrs.autoExpande, $(this).attr('href')) ){
+            $(this).addClass('zarkfx_accordion_selected');
+            $(this).closest(attrs.title).addClass('zarkfx_accordion_selected');
+            $(this).closest('div').height('100%');
+            if ( !title.hasClass('zarkfx_accordion_expanded') ){
+                title.addClass('zarkfx_accordion_expanded');
+            };
+        }else{
+            if ( !title.hasClass('zarkfx_accordion_folded') ){
+                title.addClass('zarkfx_accordion_folded');
+            };
+        };
+    });
+    // 添加span元素
+    $('> ' + attrs.title, $this).each(function(){
+        if (attrs.appendSpan){
+            $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
+        }
+        $(this).addClass('zarkfx_accordion_bar');
+    });
+    $('> div > *', $this).each(function(){
+        if (attrs.appendSpan){
+            $('<span class="zarkfx_accordion_tri"></span>').appendTo($(this));
+        }
+    });
+
+    $('> div', $this).each(function(){
+        $(this).addClass('zarkfx_accordion_box');
+    });
+
 });
+})();

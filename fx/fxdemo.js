@@ -1,84 +1,115 @@
 /*
+ * DOC_BEGIN
  *
  * FX Demo
  * =======
  *
+ * 你想在开发中调试zarkfx? 你想在你的网页中输入fx代码然后立刻查看效果？
+ *
+ * 给你的textarea添加一个fxdemo即可。
+ * zarkfx的官方文档页面就使用了fxdemo，所以你可以在一边查看文档时一边修改代码并尝试。
+ *
+ * Options
+ * ---------
+ *
  * :FX name: fxdemo
- * :Description: This FX is used to show ZARKFX demos, and allows interaction.
+ * :Description: 用于前端调试fx
  *
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 1 1 5
+ *       :widths: 1 1 4 1 2
  *       :header-rows: 1
  *
  *       * - Param
  *         - R/O
- *         - Values
- *         - Default
  *         - Description
+ *         - Default
+ *         - Values
  *
  *       * - lazy
  *         - optional
- *         - true|false
- *         - true
- *         - If set to false, the initial result will not show
- *           until "Try it!" is clicked.
+ *         - 如果为true，则textarea中的代码不会立刻执行，需要点击try按钮
+ *         - false
+ *         - true | false
  *
- * Examples:
- * ---------
+ *       * - style
+ *         - optional
+ *         - 调试样式，暂不支持其它值
+ *         - default
+ *         - default
  *
- * Without lazy option:
+ * 使用fxdemo执行textarea中的代码
+ * -------------------------------
+ *
+ * 下面这个textarea标签的源代码为：
+ *
+ *    <textarea fx="fxdemo">
+ *      <input type="text" value="我原本是没有生命的" fx="focusclean" />
+ *    </textarea>
+ *
+ * 因为我们给textarea标签添加了fxdemo，所以textarea中的文本被执行了，生成了一个input标签
  *
  * .. zarkfx:: :script:
  *
- *    <textarea fx="fxdemo">Some HTML here</textarea>
+ *    <textarea fx="fxdemo">
+ *      <input type="text" value="我原本是没有生命的" fx="focusclean" />
+ *    </textarea>
  *
  *
- * With lazy option:
+ * 当用户点击try按钮后再执行代码
+ * -------------------------------
+ *
+ * 下面这个textarea标签的源代码为：
+ *
+ *    <textarea fx="fxdemo[lazy]">
+ *      <input type="text" value="我是用上面textarea中的代码生成的" fx="focusclean" />
+ *    </textarea>
+ *
+ * 因为使用了lazy参数，所以textarea中的代码不会立刻没执行，点击try按钮试试
  *
  * .. zarkfx:: :script:
  *
- *    <textarea fx="fxdemo[lazy]">Some HTML here</textarea>
+ *    <textarea fx="fxdemo[lazy]">
+ *      <input type="text" value="我原本是不存在的" fx="focusclean" />
+ *    </textarea>
  *
  *
+ * DOC_END
  */
 
-FX.getFrame("jquery-1.7.2", function($) {
 
-    FX.register( "fxdemo", [], {
-        style: 'default',
-        lazy: false
+;(function(){
+FX.register( "fxdemo", [], {
+    style   : 'default',
+    lazy    : false
 
-    }, function(attrs) {
-        $(this).wrap('<div class="zarkfx_demo" />');
-        $(this).before('<div class="label">Source (you can change it to try your ideas):</div>');
-        var result = $('<div class="result" />');
-        $(this).after(result);
-        $(this).after('<div class="label" style="display:none">Result:</div>');
-        var tryit = $('<button class="tryit">Try it!</button>');
-        $(this).after(tryit);
-        $(this).addClass("source");
-        tryit.data("source", $(this));
-        tryit.data("result", result);
-        tryit.data("children", null);
-        tryit.click(function(){
-            // delete old fx
-            if ($(this).data("children")){
-                $(this).data("children").remove();
-            };
-            var children = $($(this).data("source").val());
-            $(this).data("children", children);
-            children.appendTo($(this).data("result"));
-            $('['+FX.FX_NAME+']', $(this).data("result")).each(FX.enqueueFXElem);
-            FX.runQueue();
-        });
-
-        if(!attrs.lazy) {
-            setTimeout(function() {
-                tryit.trigger("click");
-            }, 10);
+}, function(attrs) {
+    $(this).wrap('<div class="zarkfx_demo" />');
+    var result = $('<div class="result" />');
+    $(this).after(result);
+    var tryit = $('<button class="zarkfx_fxdemo_tryit">Try it!</button>');
+    $(this).after(tryit);
+    $(this).after('<br/>');
+    tryit.data("source", $(this));
+    tryit.data("result", result);
+    tryit.data("children", result.find('> *'));
+    tryit.click(function(){
+        // delete old fx
+        if ($(this).data("children")){
+            $(this).data("children").remove();
         };
+        var children = $($(this).data("source").val());
+        $(this).data("children", children);
+        children.appendTo($(this).data("result"));
+        $('['+FX.FX_NAME+']', $(this).data("result")).each(FX.enqueueFXElem);
+        FX.runQueue();
     });
 
+    if(!attrs.lazy) {
+        setTimeout(function() {
+            tryit.trigger("click");
+        }, 10);
+    };
 });
+})();

@@ -11,7 +11,6 @@
 *	@licence						MIT License - http://www.opensource.org/licenses/mit-license.php
 */
 
-FX.getFrame('jquery-1.3.2', function(jQuery){
 
     (function($){ 
         jQuery.fn.extend({  
@@ -162,4 +161,4 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
             } 
         }); 
     })(jQuery);
-});
+

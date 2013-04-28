@@ -4,7 +4,6 @@
  * Copyright (c) 2012 M. Alsup; Dual licensed: MIT/GPL
  * Requires: jQuery v1.7 or later
  */
-FX.getFrame('jquery-1.7.2', function(jQuery){
 ;(function($) {
 "use strict";
 
@@ -1489,4 +1488,4 @@ $.extend($.fn.cycle.API, {
 });    
 
 })(jQuery);
-});
+

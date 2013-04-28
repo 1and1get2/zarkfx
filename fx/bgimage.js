@@ -153,144 +153,144 @@
  *
  */
 
-FX.getFrame('jquery-1.7.2', function($){
 
-    // 创建一个absolute的div，用于包裹img，超出的部分overflow
-    var $body_wrapper = $("<div></div>").appendTo('body').css({
-        margin: 0,
-        padding: 0,
-        position: "absolute",
-        overflow: "hidden",
-        width: "100%",
-        height: "100%",
-        top: 0,
-        left: 0,
-        zIndex: -999999999999
-    });
+;(function(){
 
-    FX.register('bgimage', [], {
-        wrapper: '',
-        resize: true,
-        zIndex: null,
-        h: 'center',
-        v: 'center',
-        next: '',
-        prev: '',
-        tr: 'fade',
-        speed: 750,
-        autoplay: false,
-        interval: 3000
+// 创建一个absolute的div，用于包裹img，超出的部分overflow
+var $body_wrapper = $("<div></div>").appendTo('body').css({
+    margin: 0,
+    padding: 0,
+    position: "absolute",
+    overflow: "hidden",
+    width: "100%",
+    height: "100%",
+    top: 0,
+    left: 0,
+    zIndex: -999999999999
+});
 
-    }, function(attrs){
-        var $this = $(this),
-            $wrapper, rate;
+FX.register('bgimage', [], {
+    wrapper: '',
+    resize: true,
+    zIndex: null,
+    h: 'center',
+    v: 'center',
+    next: '',
+    prev: '',
+    tr: 'fade',
+    speed: 750,
+    autoplay: false,
+    interval: 3000
 
-        if (attrs.wrapper === '' && $this.closest('div').length){
-            $wrapper = $this.closest('div');
-        }else if (attrs.wrapper === 'body' || attrs.wrapper === ''){
-            $wrapper = $body_wrapper;
-            $('body').css('position', 'relative').css('float', 'left');
-        }else{
-            $wrapper = $(attrs.wrapper);
-        };
+}, function(attrs){
+    var $this = $(this),
+        $wrapper, rate;
 
-        if ($wrapper !== $body_wrapper){
-            $wrapper.css("position", "relative").css("overflow", "hidden");
-        }
+    if (attrs.wrapper === '' && $this.closest('div').length){
+        $wrapper = $this.closest('div');
+    }else if (attrs.wrapper === 'body' || attrs.wrapper === ''){
+        $wrapper = $body_wrapper;
+        $('body').css('position', 'relative').css('float', 'left');
+    }else{
+        $wrapper = $(attrs.wrapper);
+    };
 
-        var fix = function(){
-            if ($this.width()>0 && $this.height()>0){
-                // =======计算图片的width与height==========
-                var width = $this.width(),
-                    height = $this.height(),
-                    rate = width / height, // 图片的宽高比
-                    wrapper_width = $wrapper.width(),
-                    wrapper_height = $wrapper.height(),
-                    wrapper_rate = wrapper_width / wrapper_height;
+    if ($wrapper !== $body_wrapper){
+        $wrapper.css("position", "relative").css("overflow", "hidden");
+    }
 
-                // 如果wrapper_rate>rate，表示浏览器的宽度相对(高度)要大
-                // 则让图片宽度与浏览器宽度相同
-                if (wrapper_rate >= rate){
-                    width = wrapper_width;
-                    height = width / rate;
-                    if (height < wrapper_height){
-                        height = wrapper_height;
-                        width = height * rate;
-                    };
-                // 否者浏览器的高度相对要大
-                // 让图片的高度与浏览器的相同
-                }else{
+    var fix = function(){
+        if ($this.width()>0 && $this.height()>0){
+            // =======计算图片的width与height==========
+            var width = $this.width(),
+                height = $this.height(),
+                rate = width / height, // 图片的宽高比
+                wrapper_width = $wrapper.width(),
+                wrapper_height = $wrapper.height(),
+                wrapper_rate = wrapper_width / wrapper_height;
+
+            // 如果wrapper_rate>rate，表示浏览器的宽度相对(高度)要大
+            // 则让图片宽度与浏览器宽度相同
+            if (wrapper_rate >= rate){
+                width = wrapper_width;
+                height = width / rate;
+                if (height < wrapper_height){
                     height = wrapper_height;
                     width = height * rate;
-                    if (width < wrapper_width){
-                        width = wrapper_width;
-                        height = width / rate;
-                    };
                 };
-
-                $this.width(width);
-                $this.height(height);
-
-                // =======根据h和v计算图片的top与left==========
-                $this.css("position", "absolute");
-
-                if (attrs.h === "left"){
-                    $this.css("left", 0);
-                }else if (attrs.h === "right"){
-                    $this.css("right", 0);
-                }else if (attrs.h === "center"){
-                    $this.css("left", -(width-wrapper_width)/2);
+            // 否者浏览器的高度相对要大
+            // 让图片的高度与浏览器的相同
+            }else{
+                height = wrapper_height;
+                width = height * rate;
+                if (width < wrapper_width){
+                    width = wrapper_width;
+                    height = width / rate;
                 };
-
-                if (attrs.v === "top"){
-                    $this.css("top", 0);
-                }else if (attrs.v === "bottom"){
-                    $this.css("bottom", 0);
-                }else if (attrs.v === "center"){
-                    $this.css("top", -(height-wrapper_height)/2);
-                };
-
             };
+
+            $this.width(width);
+            $this.height(height);
+
+            // =======根据h和v计算图片的top与left==========
+            $this.css("position", "absolute");
+
+            if (attrs.h === "left"){
+                $this.css("left", 0);
+            }else if (attrs.h === "right"){
+                $this.css("right", 0);
+            }else if (attrs.h === "center"){
+                $this.css("left", -(width-wrapper_width)/2);
+            };
+
+            if (attrs.v === "top"){
+                $this.css("top", 0);
+            }else if (attrs.v === "bottom"){
+                $this.css("bottom", 0);
+            }else if (attrs.v === "center"){
+                $this.css("top", -(height-wrapper_height)/2);
+            };
+
         };
-    
-        fix(); // 有可能已经load完了
-        $this.load(fix);
+    };
 
-        // 把当前图片放到$wrapper中
-        $this.appendTo($wrapper);
-    
-        window.setInterval(fix, 100);
+    fix(); // 有可能已经load完了
+    $this.load(fix);
 
-        if (attrs.zIndex){
-            $this.css('z-index', attrs.zIndex);
-        };
+    // 把当前图片放到$wrapper中
+    $this.appendTo($wrapper);
 
-        // 隐藏本组内第一张以外的图片
-        $wrapper.find('img:not(:first-child)').hide();
+    window.setInterval(fix, 100);
 
-        // 处理next和prev按钮的事件
-        if (typeof($.data($wrapper[0], 'zarkfx_bgimage_curr_index')) === 'undefined'){
-            $.data($wrapper[0], 'zarkfx_bgimage_curr_index', 0);
-        };
-        var showNext = function(n){
-            var curr_index = $.data($wrapper[0], 'zarkfx_bgimage_curr_index'),
-                next_index = (curr_index + n + $wrapper.children().length) % $wrapper.children().length;
-            $wrapper.children(':eq(' + curr_index + ')').fadeOut(attrs.speed);
-            $wrapper.children(':eq(' + next_index + ')').fadeIn(attrs.spped);
-            $.data($wrapper[0], 'zarkfx_bgimage_curr_index', next_index);
-        };
-        if (attrs.next){
-            $(attrs.next).click(function(){ showNext(1); return false;});
-        }
-        if (attrs.prev){
-            $(attrs.prev).click(function(){ showNext(-1); return false;});
-        }
+    if (attrs.zIndex){
+        $this.css('z-index', attrs.zIndex);
+    };
 
-        // 绑定自动切换事件
-        if (attrs.autoplay){
-            window.setInterval(function(){ showNext(1);}, attrs.interval);
-        };
+    // 隐藏本组内第一张以外的图片
+    $wrapper.find('img:not(:first-child)').hide();
 
-    });
+    // 处理next和prev按钮的事件
+    if (typeof($.data($wrapper[0], 'zarkfx_bgimage_curr_index')) === 'undefined'){
+        $.data($wrapper[0], 'zarkfx_bgimage_curr_index', 0);
+    };
+    var showNext = function(n){
+        var curr_index = $.data($wrapper[0], 'zarkfx_bgimage_curr_index'),
+            next_index = (curr_index + n + $wrapper.children().length) % $wrapper.children().length;
+        $wrapper.children(':eq(' + curr_index + ')').fadeOut(attrs.speed);
+        $wrapper.children(':eq(' + next_index + ')').fadeIn(attrs.spped);
+        $.data($wrapper[0], 'zarkfx_bgimage_curr_index', next_index);
+    };
+    if (attrs.next){
+        $(attrs.next).click(function(){ showNext(1); return false;});
+    }
+    if (attrs.prev){
+        $(attrs.prev).click(function(){ showNext(-1); return false;});
+    }
+
+    // 绑定自动切换事件
+    if (attrs.autoplay){
+        window.setInterval(function(){ showNext(1);}, attrs.interval);
+    };
 
 });
+})();

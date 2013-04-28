@@ -5,7 +5,6 @@
 *
 * Requires: jQuery 1.2.6+
 */
-FX.getFrame('jquery-1.7.2', function($){
 ;( function( $, window ){
   var get_win_size = function (){
     if( window.innerWidth != undefined ){
@@ -70,4 +69,4 @@ FX.getFrame('jquery-1.7.2', function($){
     });
   };
 })( jQuery, window );
-});
+

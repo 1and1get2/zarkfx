@@ -4,6 +4,8 @@
  * Center
  * ======
  *
+ * 你想让某个元素在屏幕中央居中显示？或者是让某个div内的元素居中显示？使用center即可轻松实现，本fx基于 `jQuery Center Plugin<https://github.com/dreamerslab/jquery.center>`_ 开发
+ *
  * Options
  * --------------
  *
@@ -75,33 +77,32 @@
  *
  * */
 
-FX.getFrame('jquery-1.7.2', function($){
 
-    FX.register('center', ['center'], {
-        target          : 'window',
-        top             : false,
-        topPercentage   : 0.5,
-        resize          : true,
-        scroll          : true
+;(function(){
+FX.register('center', ['center'], {
+    target          : 'window',
+    top             : false,
+    topPercentage   : 0.5,
+    resize          : true,
+    scroll          : true
 
-    }, function(attrs){
-        var $this = $(this);
-        attrs.against = attrs.target;
-        $this.css('position', 'absolute');
-        if (attrs.target === 'parent') {
-            $this.closest('div').css('position', 'relative');
-        } else if (attrs.target !== 'window') {
-            $(attrs.target).css('position', 'relative');
-        };
-        if (attrs.top !== false) {
-            attrs.top = parseInt(attrs.top);
-        }
-        $this.center(attrs);
-        if (attrs.target === 'window' && attrs.scroll) {
-            $(window).scroll(function(){
-                $this.center(attrs);
-            });
-        };
-    });
-
+}, function(attrs){
+    var $this = $(this);
+    attrs.against = attrs.target;
+    $this.css('position', 'absolute');
+    if (attrs.target === 'parent') {
+        $this.closest('div').css('position', 'relative');
+    } else if (attrs.target !== 'window') {
+        $(attrs.target).css('position', 'relative');
+    };
+    if (attrs.top !== false) {
+        attrs.top = parseInt(attrs.top);
+    }
+    $this.center(attrs);
+    if (attrs.target === 'window' && attrs.scroll) {
+        $(window).scroll(function(){
+            $this.center(attrs);
+        });
+    };
 });
+})();

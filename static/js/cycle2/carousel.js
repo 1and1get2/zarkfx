@@ -1,5 +1,4 @@
 /*! carousel transition plugin for Cycle2;  version: 20130411 */
-FX.getFrame('jquery-1.7.2', function(jQuery){
 (function($) {
 "use strict";
 
@@ -267,4 +266,4 @@ $.fn.cycle.transitions.carousel = {
 };
 
 })(jQuery);
-});
+

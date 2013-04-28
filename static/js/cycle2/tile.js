@@ -1,5 +1,4 @@
 /*! tile transition plugin for Cycle2;  version: 20121120 */
-FX.getFrame('jquery-1.7.2', function(jQuery){
 (function ($) {
 "use strict";
 
@@ -130,4 +129,4 @@ $.fn.cycle.transitions.tileBlind = {
 };
 
 })(jQuery);
-});
+

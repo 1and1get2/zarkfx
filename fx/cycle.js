@@ -644,131 +644,130 @@
  * DOC_END
  */
 
-FX.getFrame('jquery-1.7.2', function($) {
 
-    FX.register('cycle', ['cycle2/cycle2'], {
-        options: undefined,
-        allowWrap: true,
-        autoHeight: 0,
-        caption: '> .cycle-caption',
-        captionTemplate: '{{slideNum}} / {{slideCount}}',
-        delay: 0,
-        easing: null,
-        easeOut: null,
-        tr: 'fade',
-        loader: false,
-        log: false,
-        loop: 0,
-        manualSpeed: undefined,
-        manualTrump: true,
-        next: '> .cycle-next',
-        prev: '> .cycle-prev',
-        nextEvent: 'click.cycle',
-        prevEvent: 'click.cycle',
-        overlay: '> .cycle-overlay',
-        overlayTemplate: '<div>{{title}}</div><div>{{desc}}</div>',
-        pager: '> .cycle-pager',
-        pagerEvent: 'click.cycle',
-        pagerTemplate: '<span>&bull;</span>',
-        pagerActiveClass: 'cycle-pager-active',
-        pauseOnHover: false,
-        paused: false,
-        progressive: undefined,
-        random: false,
-        reverse: false,
-        slideActiveClass: 'cycle-slide-active',
-        slideClass: 'cycle-slide',
-        slides: '> img',
-        speed: 500,
-        startingSlide: 0,
-        swipe: false,
-        sync: true,
-        timeout: 4000,
-        hideNonActive: true,
-        pause: undefined,
-        resume: undefined,
-        stop: undefined,
-        carouselFluid: false,
-        carouselOffset: 0,
-        carouselSlideDimension: undefined,
-        carouselVertical: false,
-        carouselVisible: undefined,
-        throttleSpeed: undefined,
-        tileCount: 7,
-        tileDelay: 100,
-        tileVertical: true,
-        captionPlugin: undefined,
-        youtube: false,
-        centerHorz: false,
-        centerVert: false
+;(function(){
+FX.register('cycle', ['cycle2/cycle2'], {
+    options: undefined,
+    allowWrap: true,
+    autoHeight: 0,
+    caption: '> .cycle-caption',
+    captionTemplate: '{{slideNum}} / {{slideCount}}',
+    delay: 0,
+    easing: null,
+    easeOut: null,
+    tr: 'fade',
+    loader: false,
+    log: false,
+    loop: 0,
+    manualSpeed: undefined,
+    manualTrump: true,
+    next: '> .cycle-next',
+    prev: '> .cycle-prev',
+    nextEvent: 'click.cycle',
+    prevEvent: 'click.cycle',
+    overlay: '> .cycle-overlay',
+    overlayTemplate: '<div>{{title}}</div><div>{{desc}}</div>',
+    pager: '> .cycle-pager',
+    pagerEvent: 'click.cycle',
+    pagerTemplate: '<span>&bull;</span>',
+    pagerActiveClass: 'cycle-pager-active',
+    pauseOnHover: false,
+    paused: false,
+    progressive: undefined,
+    random: false,
+    reverse: false,
+    slideActiveClass: 'cycle-slide-active',
+    slideClass: 'cycle-slide',
+    slides: '> img',
+    speed: 500,
+    startingSlide: 0,
+    swipe: false,
+    sync: true,
+    timeout: 4000,
+    hideNonActive: true,
+    pause: undefined,
+    resume: undefined,
+    stop: undefined,
+    carouselFluid: false,
+    carouselOffset: 0,
+    carouselSlideDimension: undefined,
+    carouselVertical: false,
+    carouselVisible: undefined,
+    throttleSpeed: undefined,
+    tileCount: 7,
+    tileDelay: 100,
+    tileVertical: true,
+    captionPlugin: undefined,
+    youtube: false,
+    centerHorz: false,
+    centerVert: false
 
-    }, function(attrs) {
-        var $this = $(this);
+}, function(attrs) {
+    var $this = $(this);
 
-        // 检查依赖js库
-        var deps = [];
-        if (attrs["easing"]){
-            deps.push('easing');
+    // 检查依赖js库
+    var deps = [];
+    if (attrs["easing"]){
+        deps.push('easing');
+    };
+    if (attrs["tr"] === 'carousel'){
+        deps.push('cycle2/carousel');
+
+    }else if (attrs["tr"] === 'shuffle'){
+        deps.push('cycle2/shuffle');
+
+    }else if (attrs["tr"] === 'scrollVert'){
+        deps.push('cycle2/scrollVert');
+
+    }else if (attrs["tr"] === 'tileSlide' || attrs["tr"] === 'tileBlind'){
+        deps.push('cycle2/tile');
+
+    }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
+        deps.push('cycle2/iefade');
+    };
+
+    if (attrs["swipe"]){
+        deps.push('cycle2/swipe');
+    };
+
+    if (attrs.captionPlugin === 'caption2'){
+        deps.push('cycle2/caption2');
+    };
+
+    if (attrs.youtube){
+        deps.push('cycle2/video');
+    };
+
+    if (attrs.centerHorz || attrs.centerVert){
+        deps.push('cycle2/center');
+    };
+
+    // 原cycle2.js使用的对应变量名为fx
+    attrs["fx"] = attrs["tr"];
+
+    FX.readyJs(deps, function(){
+        if(!attrs["options"]) {
+            $this.cycle(attrs);
+        } else {
+            eval("$this.cycle(" + attrs["options"] + ")");
         };
-        if (attrs["tr"] === 'carousel'){
-            deps.push('cycle2/carousel');
-
-        }else if (attrs["tr"] === 'shuffle'){
-            deps.push('cycle2/shuffle');
-
-        }else if (attrs["tr"] === 'scrollVert'){
-            deps.push('cycle2/scrollVert');
-
-        }else if (attrs["tr"] === 'tileSlide' || attrs["tr"] === 'tileBlind'){
-            deps.push('cycle2/tile');
-
-        }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
-            deps.push('cycle2/iefade');
-        };
-
-        if (attrs["swipe"]){
-            deps.push('cycle2/swipe');
-        };
-
-        if (attrs.captionPlugin === 'caption2'){
-            deps.push('cycle2/caption2');
-        };
-
-        if (attrs.youtube){
-            deps.push('cycle2/video');
-        };
-
-        if (attrs.centerHorz || attrs.centerVert){
-            deps.push('cycle2/center');
-        };
-
-        // 原cycle2.js使用的对应变量名为fx
-        attrs["fx"] = attrs["tr"];
-
-        FX.readyJs(deps, function(){
-            if(!attrs["options"]) {
-                $this.cycle(attrs);
-            } else {
-                eval("$this.cycle(" + attrs["options"] + ")");
-            };
-            // 绑定事件
-            if (attrs.pause){
-                $(attrs.pause).click(function(){
-                    $this.cycle('pause');
-                });
-            }
-            if (attrs.resume){
-                $(attrs.resume).click(function(){
-                    $this.cycle('resume');
-                });
-            }
-            if (attrs.stop){
-                $(attrs.stop).click(function(){
-                    $this.cycle('stop');
-                });
-            }
-        });
-
+        // 绑定事件
+        if (attrs.pause){
+            $(attrs.pause).click(function(){
+                $this.cycle('pause');
+            });
+        }
+        if (attrs.resume){
+            $(attrs.resume).click(function(){
+                $this.cycle('resume');
+            });
+        }
+        if (attrs.stop){
+            $(attrs.stop).click(function(){
+                $this.cycle('stop');
+            });
+        }
     });
 
 });
+})();

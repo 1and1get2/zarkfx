@@ -53,7 +53,6 @@
 //							 elements and dynamically sized elements.
 // 1.x - (2006-12-31 - 2010-07-31) Initial version, hosted at googlecode, deprecated
 
-FX.getFrame('jquery-1.3.2', function(jQuery){
 
     (function($,window,undefined){
 
@@ -1433,4 +1432,4 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
         };
 
     })(jQuery,this);
-});
+

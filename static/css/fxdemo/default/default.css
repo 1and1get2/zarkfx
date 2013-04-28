@@ -1,4 +1,3 @@
-.zarkfx_demo {margin: 8px;}
-.zarkfx_demo .label {font-weight: bold;}
-.zarkfx_demo .source {width: 80%; height: 50px;}
-.zarkfx_demo .tryit {display: block; margin-bottom: 8px;}
+.zarkfx_fxdemo_default {margin: 8px; width: 80%; height: 50px;}
+.zarkfx_fxdemo_default .zarkfx_fxdemo_label {font-weight: bold;}
+.zarkfx_fxdemo_default .zarkfx_fxdemo_tryit {display: block; margin-bottom: 8px;}

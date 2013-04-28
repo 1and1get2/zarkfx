@@ -18,7 +18,6 @@
 * .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
 */
 
-FX.getFrame('jquery-1.3.2', function(jQuery){
     (function($) {
 
     // Prevent "Uncaught RangeError: Maximum call stack size exceeded"
@@ -1325,4 +1324,4 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
     $.timepicker.version = "1.0.0";
 
     })(jQuery);
-});
+

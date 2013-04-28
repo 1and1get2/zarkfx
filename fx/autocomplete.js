@@ -47,6 +47,8 @@
  * 直接输入备选项
  * -------------------------
  *
+ *  在输入框中键入字母a试一下
+ *
  * .. zarkfx:: :demo:
  *
  *     <input type="text" fx="autocomplete[data=php,java,javascript,ruby,pyton]" />
@@ -57,51 +59,50 @@
  *
  * 服务器端返回数据或者文件中的每个备选项独占一行，
  * 测试文件地址：
- * `languages.txt </_static/static/txt/autocomplete/languages.txt>`_
+ * `languages.txt </_static/demo/autocomplete/languages.txt>`_
  *
  * .. zarkfx:: :demo:
  *
- *     <input type="text" fx="autocomplete[src=/_static/static/txt/autocomplete/languages.txt; minLength=1]" />
+ *     <input type="text" fx="autocomplete[src=/_static/demo/autocomplete/languages.txt; minLength=1]" />
  *
  * DOC_END
  *
  */
 
-FX.getFrame('jquery-1.7.2', function($){
 
-    var array_cache = {};
+;(function(){
+var array_cache = {};
 
-    FX.register('autocomplete', [ 'jqueryui-1.10.2' ], {
-        style: 'smoothness',
-        data:  undefined,
-        src: undefined
+FX.register('autocomplete', [ 'jqueryui-1.10.2' ], {
+    style   : 'smoothness',
+    data    : undefined,
+    src     : undefined
 
-    }, function(attrs){
-    
-        var $this = $(this),
-            data_array=[];
+}, function(attrs){
 
-        if (attrs.src !== undefined){
-            $.ajax({
-                async:      false,
-                cache:      true,
-                dataType:   'text',
-                type:       'GET',
-                url:        attrs.src,
-                success:    function(data){
-                    data_array = data.split('\n');
-                }
-            });
-        }else if(attrs.data !== undefined){
-            data_array = attrs.data.split(',');
-        };
+    var $this = $(this),
+        data_array=[];
 
-        $this.autocomplete({
-            source:data_array,
-            autoFocus: true,
-            minLength: attrs.minLength
+    if (attrs.src !== undefined){
+        $.ajax({
+            async:      false,
+            cache:      true,
+            dataType:   'text',
+            type:       'GET',
+            url:        attrs.src,
+            success:    function(data){
+                data_array = data.split('\n');
+            }
         });
+    }else if(attrs.data !== undefined){
+        data_array = attrs.data.split(',');
+    };
 
+    $this.autocomplete({
+        source:data_array,
+        autoFocus: true,
+        minLength: attrs.minLength
     });
 
 });
+})();

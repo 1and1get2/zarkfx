@@ -126,19 +126,6 @@
             };
         }; // End loadDep
 
-        FX.getFrame = function(name, cb) {
-            var res = FX.loadDep("frame", name);
-            if(res === "loading") {
-                setTimeout(function() {
-                    FX.getFrame(name, cb)
-                }, 10);
-            } else if(res === "failed") {
-                return "failed";
-            } else {
-                cb && cb(res);
-            };
-        };
-
         FX.loadCSS = function(css_url) {
             FX.loadDep("css", css_url);
         };
@@ -228,7 +215,9 @@
                 // 加载样式
                 if (typeof(attrs.style) !== 'undefined' && attrs.style !== 'none'){
                     FX.loadStyle(name, attrs.style);
+                    $(that).addClass('zarkfx_' + name + '_' + attrs.style);
                 };
+                $(that).addClass('zarkfx_' + name);
                 func && func.call(that, attrs);
 
                 // 处理通用全局属性

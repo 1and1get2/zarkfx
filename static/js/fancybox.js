@@ -14,7 +14,6 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *   http://www.gnu.org/licenses/gpl.html
  */
-FX.getFrame('jquery-1.3.2', function(jQuery){
 
 ;(function($) {
 	var tmp, loading, overlay, wrap, outer, content, close, title, nav_left, nav_right,
@@ -1155,4 +1154,4 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
 	});
 
 })(jQuery);
-});
+

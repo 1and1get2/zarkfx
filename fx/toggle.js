@@ -129,94 +129,94 @@
  *
  * */
 
-FX.getFrame('jquery-1.7.2', function($){
-    FX.register('toggle', [], {
-        target:         '',
-        on:             'click',
-        hide:           '',
-        show:           '',
-        toggleHtml:     '',
-        tr:             '',
-        speed:          'normal',
-        hideThis:       false,
-        hideWay:        'display'
+;(function(){
+FX.register('toggle', [], {
+    target:         '',
+    on:             'click',
+    hide:           '',
+    show:           '',
+    toggleHtml:     '',
+    tr:             '',
+    speed:          'normal',
+    hideThis:       false,
+    hideWay:        'display'
 
-    }, function(attrs){
+}, function(attrs){
 
-        var show = function($obj){
-            if (attrs.hideWay === 'display'){
-                if (attrs.tr === 'fade'){
-                    $obj.fadeIn(attrs.speed);
-                }else{
-                    $obj.show();
-                };
-            }else if(attrs.hideWay === 'visibility'){
-                if (attrs.tr === 'fade'){
-                    $obj.stop().animate({
-                        visibility: 'visible'
-                    });
-                }else{
-                    $obj.css('visibility', 'visible');
-                };
-            }
-        };
-        var hide = function($obj){
-            if (attrs.hideWay === 'display'){
-                if (attrs.tr === 'fade'){
-                    $obj.fadeOut(attrs.speed);
-                }else{
-                    $obj.hide();
-                };
-            }else if(attrs.hideWay === 'visibility'){
-                if (attrs.tr === 'fade'){
-                    $obj.stop().animate({
-                        visibility: 'hidden'
-                    });
-                }else{
-                    $obj.css('visibility', 'hidden');
-                };
-            }
-        };
-        var isHide = function($obj){
-            if (attrs.hideWay === 'display'){
-                return $obj.css('display') === 'none';
-            }else if(attrs.hideWay === 'visibility'){
-                return $obj.css('visibility') === 'hidden';
-            }
-        };
-    
-        var $this = $(this);
-        var switchFunc = function(){
-            // 改变target的显示或隐藏效果
-            $(attrs.target).each(function(){
-                if ( isHide($(this)) ){
-                    show($(this));
-                }else{
-                    hide($(this));
-                };
-            });
-            
-            if (attrs.hide) { hide($(attrs.hide)); };
-            if (attrs.show) { show($(attrs.show)); };
-            if (attrs.hideThis) { hide($this); };
-            if (attrs.toggleHtml) {
-                if($this.html() === $.data(this, 'old_value')){
-                    $this.html(attrs.toggleHtml);
-                }else{
-                    $this.html($.data(this, 'old_value'));
-                };
+    var show = function($obj){
+        if (attrs.hideWay === 'display'){
+            if (attrs.tr === 'fade'){
+                $obj.fadeIn(attrs.speed);
+            }else{
+                $obj.show();
             };
-        }; // End switchFunc
+        }else if(attrs.hideWay === 'visibility'){
+            if (attrs.tr === 'fade'){
+                $obj.stop().animate({
+                    visibility: 'visible'
+                });
+            }else{
+                $obj.css('visibility', 'visible');
+            };
+        }
+    };
+    var hide = function($obj){
+        if (attrs.hideWay === 'display'){
+            if (attrs.tr === 'fade'){
+                $obj.fadeOut(attrs.speed);
+            }else{
+                $obj.hide();
+            };
+        }else if(attrs.hideWay === 'visibility'){
+            if (attrs.tr === 'fade'){
+                $obj.stop().animate({
+                    visibility: 'hidden'
+                });
+            }else{
+                $obj.css('visibility', 'hidden');
+            };
+        }
+    };
+    var isHide = function($obj){
+        if (attrs.hideWay === 'display'){
+            return $obj.css('display') === 'none';
+        }else if(attrs.hideWay === 'visibility'){
+            return $obj.css('visibility') === 'hidden';
+        }
+    };
 
-        if (attrs.on === 'hover') {
-            $this.hover(switchFunc, switchFunc);
-        }else{
-            $this.bind(attrs.on, switchFunc);
-        };
-
+    var $this = $(this);
+    var switchFunc = function(){
+        // 改变target的显示或隐藏效果
+        $(attrs.target).each(function(){
+            if ( isHide($(this)) ){
+                show($(this));
+            }else{
+                hide($(this));
+            };
+        });
+        
+        if (attrs.hide) { hide($(attrs.hide)); };
+        if (attrs.show) { show($(attrs.show)); };
+        if (attrs.hideThis) { hide($this); };
         if (attrs.toggleHtml) {
-            $.data(this, 'old_value', $this.html());
+            if($this.html() === $.data(this, 'old_value')){
+                $this.html(attrs.toggleHtml);
+            }else{
+                $this.html($.data(this, 'old_value'));
+            };
         };
+    }; // End switchFunc
 
-    });
+    if (attrs.on === 'hover') {
+        $this.hover(switchFunc, switchFunc);
+    }else{
+        $this.bind(attrs.on, switchFunc);
+    };
+
+    if (attrs.toggleHtml) {
+        $.data(this, 'old_value', $this.html());
+    };
+
 });
+})();

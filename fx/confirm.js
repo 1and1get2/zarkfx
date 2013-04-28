@@ -50,29 +50,30 @@
  *
  */
 
-FX.getFrame('jquery-1.7.2', function($) {
 
-    FX.register('confirm', [], {
-        msg:        'Are you sure?'
+;(function(){
+FX.register('confirm', [], {
+    msg:        'Are you sure?'
 
-    }, function(attrs){
-        var $this = $(this);
+}, function(attrs){
+    var $this = $(this);
 
-        if ($this.attr('onclick')){
-            var old_click = $this.attr('onclick');
-            $this.removeAttr('onclick').click(function(){
-                if ( confirm(attrs.msg) ){
-                    old_click && old_click.call(this);
-                    return true;
-                }else{
-                    return false;
-                };
-            });
-        }else{
-            $this.click(function(){
-                return confirm(attrs.msg);
-            });
-        };
+    if ($this.attr('onclick')){
+        var old_click = $this.attr('onclick');
+        $this.removeAttr('onclick').click(function(){
+            if ( confirm(attrs.msg) ){
+                old_click && old_click.call(this);
+                return true;
+            }else{
+                return false;
+            };
+        });
+    }else{
+        $this.click(function(){
+            return confirm(attrs.msg);
+        });
+    };
 
-    });
 });
+
+})();

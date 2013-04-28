@@ -1,5 +1,4 @@
 /*! caption2 plugin for Cycle2;  version: 20130306 */
-FX.getFrame('jquery-1.7.2', function($){
 (function($) {
 "use strict";
 
@@ -66,4 +65,4 @@ function init( e, opts, slideOpts, currSlide, isAfter ) {
 }
 
 })(jQuery);
-});
+

@@ -1,5 +1,4 @@
 /*! swipe plugin for Cycle2;  version: 20121120 */
-FX.getFrame('jquery-1.7.2', function($){
 (function($) {
 "use strict";
 
@@ -69,4 +68,4 @@ $.event.special.swipeleft = $.event.special.swipeleft || {
 $.event.special.swiperight = $.event.special.swiperight || $.event.special.swipeleft;
 
 })(jQuery);
-});
+

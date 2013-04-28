@@ -16,7 +16,6 @@
 // query - the entire querystring if it exists, eg. item=value&item2=value2
 // fragment (also available as anchor) - the entire string after the # symbol
 
-FX.getFrame('jquery-1.3.2', function(jQuery){
     (function($, undefined) {
         
         var tag2attr = {
@@ -196,4 +195,4 @@ FX.getFrame('jquery-1.3.2', function(jQuery){
         };
         
     })(jQuery);
-});
+

@@ -1,5 +1,4 @@
 /*! youtube plugin for Cycle2;  version: 20121120 */
-FX.getFrame('jquery-1.7.2', function($){
 (function($) {
 "use strict";
 
@@ -65,4 +64,4 @@ function pause() {
 }
 
 })(jQuery);
-});
+

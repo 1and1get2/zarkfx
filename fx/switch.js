@@ -114,83 +114,82 @@
  *
  * */
 
-FX.getFrame('jquery-1.7.2', function($){
-    var switch_groups = {};
+;(function(){
+var switch_groups = {};
 
-    FX.register('switch', [], {
-        target:         undefined,
-        on:             'click',
-        group:          'default_group',
-        tr:             '',
-        speed:          'normal',
-        selectedClass:  '',
-        autoHidden:     true,
-        anchor:         true
+FX.register('switch', [], {
+    target:         undefined,
+    on:             'click',
+    group:          'default_group',
+    tr:             '',
+    speed:          'normal',
+    selectedClass:  '',
+    autoHidden:     true,
+    anchor:         true
 
-    }, function(attrs){
-        var $this = $(this);
-        var group = attrs.group;
+}, function(attrs){
+    var $this = $(this);
+    var group = attrs.group;
 
-        // 显示某组中的一个switch指定的元素
-        var showSwitch = function(){
-            // 先隐藏此组的所有元素
-            for(var i in switch_groups[group]){
-                var $a = switch_groups[group][i];
-                var target = FX.parseFX($a.attr(FX.FX_NAME))['switch'][0].target;
-                if (typeof(target) !== 'undefined'){
-                    $(target).hide();
-                };
-                if (attrs.selectedClass){
-                    $a.removeClass(attrs.selectedClass);
-                };
-            };
-            // 显示当前switch指定的元素
-            if (typeof(attrs.target) !== 'undefined'){
-                if (attrs.tr === 'fade'){
-                    $(attrs.target).fadeIn(attrs.speed);
-                }else{
-                    $(attrs.target).show();
-                };
+    // 显示某组中的一个switch指定的元素
+    var showSwitch = function(){
+        // 先隐藏此组的所有元素
+        for(var i in switch_groups[group]){
+            var $a = switch_groups[group][i];
+            var target = FX.parseFX($a.attr(FX.FX_NAME))['switch'][0].target;
+            if (typeof(target) !== 'undefined'){
+                $(target).hide();
             };
             if (attrs.selectedClass){
-                $this.addClass(attrs.selectedClass);
-            };
-            // 去掉a标签点击后的虚线
-            if (attrs.blurA && $this.attr('nodeName') === 'A') {
-                $this.blur();
+                $a.removeClass(attrs.selectedClass);
             };
         };
-
-        $this.bind(attrs.on, showSwitch);
-        
-        // 把当前switch加入组
-        if(typeof(switch_groups[group]) === 'undefined'){
-            switch_groups[group] = [];
+        // 显示当前switch指定的元素
+        if (typeof(attrs.target) !== 'undefined'){
+            if (attrs.tr === 'fade'){
+                $(attrs.target).fadeIn(attrs.speed);
+            }else{
+                $(attrs.target).show();
+            };
         };
-        switch_groups[group].push($this);
+        if (attrs.selectedClass){
+            $this.addClass(attrs.selectedClass);
+        };
+        // 去掉a标签点击后的虚线
+        if (attrs.blurA && $this.attr('nodeName') === 'A') {
+            $this.blur();
+        };
+    };
 
-        // 判断当前switch是否默认显示
-        var show_this = false;
-        if (attrs.autoHidden && switch_groups[group].length == 1){
+    $this.bind(attrs.on, showSwitch);
+    
+    // 把当前switch加入组
+    if(typeof(switch_groups[group]) === 'undefined'){
+        switch_groups[group] = [];
+    };
+    switch_groups[group].push($this);
+
+    // 判断当前switch是否默认显示
+    var show_this = false;
+    if (attrs.autoHidden && switch_groups[group].length == 1){
+        show_this = true;
+    };
+
+    var href = window.location.href;
+    if (attrs.anchor && href.indexOf('#!') !== -1){
+        var show_id = href.substr(href.indexOf('#!') + 2);
+        if ( show_id.length > 0 && attrs.target === '#' + show_id){
             show_this = true;
         };
+    };
 
-        var href = window.location.href;
-        if (attrs.anchor && href.indexOf('#!') !== -1){
-            var show_id = href.substr(href.indexOf('#!') + 2);
-            if ( show_id.length > 0 && attrs.target === '#' + show_id){
-                show_this = true;
-            };
+    if (show_this){
+        showSwitch();
+    }else if(attrs.autoHidden){
+        if (typeof(attrs.target) !== 'undefined'){
+            $(attrs.target).hide();
         };
-
-        if (show_this){
-            showSwitch();
-        }else if(attrs.autoHidden){
-            if (typeof(attrs.target) !== 'undefined'){
-                $(attrs.target).hide();
-            };
-        };
-
-    });
+    };
 
 });
+})();

@@ -20,47 +20,46 @@
  *
  */
 
-FX.getFrame('jquery-1.3.2', function($){
-
-    var getElementLeft = function(element){
-        var actualLeft = element.offsetLeft;
-        var current = element.offsetParent;
-        while (current !== null){
-            actualLeft += current.offsetLeft;
-            current = current.offsetParent;
-        }
-        return actualLeft;
+;(function(){
+var getElementLeft = function(element){
+    var actualLeft = element.offsetLeft;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
     }
-    var getElementTop = function(element){
-        var actualTop = element.offsetTop;
-        var current = element.offsetParent;
-        while (current !== null){
-            actualTop += current.offsetTop;
-            current = current.offsetParent;
-        }
-        return actualTop;
-    };
+    return actualLeft;
+}
+var getElementTop = function(element){
+    var actualTop = element.offsetTop;
+    var current = element.offsetParent;
+    while (current !== null){
+        actualTop += current.offsetTop;
+        current = current.offsetParent;
+    }
+    return actualTop;
+};
 
-    FX.register('staytop', [], function(attrs){
+FX.register('staytop', [], {}, function(attrs){
 
-        var $this = $(this);
-        var old_position = getElementTop(this);
-        var old_width = $this.width();
-        var window_width = $(window).width();
-        var fixed_left = getElementLeft(this);
-        $(window).scroll(function(){
-            var scrollTop = $(document).scrollTop();
-            if (scrollTop > old_position){
-                if(attrs.fullwidth !== undefined){
-                    $this.css('top',0).css('width',window_width).css('left','0px').css('position','fixed');
-                }else{
-                    $this.css('top',0).css('left',fixed_left).css('position','fixed');
-                }
+    var $this = $(this);
+    var old_position = getElementTop(this);
+    var old_width = $this.width();
+    var window_width = $(window).width();
+    var fixed_left = getElementLeft(this);
+    $(window).scroll(function(){
+        var scrollTop = $(document).scrollTop();
+        if (scrollTop > old_position){
+            if(attrs.fullwidth !== undefined){
+                $this.css('top',0).css('width',window_width).css('left','0px').css('position','fixed');
             }else{
-                $this.css('position','static').css('top','').css('left','').css('width',old_width);
-            };
-        });
-        $(window).scroll();
-
+                $this.css('top',0).css('left',fixed_left).css('position','fixed');
+            }
+        }else{
+            $this.css('position','static').css('top','').css('left','').css('width',old_width);
+        };
     });
+    $(window).scroll();
+
 });
+})();

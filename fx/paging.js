@@ -17,118 +17,100 @@
  * --------------
  *
  * :FX name: paging
- * :Description: 分页器
+ * :Description: 分页器，所有参数均为可选的
  *
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 4 1 2
+ *       :widths: 1 5 1 2
  *       :header-rows: 1
  *
  *       * - Param
- *         - R/O
  *         - Description
  *         - Default
  *         - Values
  *
  *       * - style
- *         - optional
  *         - 分页器的样式，默认不使用任何样式
  *         - none
  *         - 
  *
  *       * - pageCount
- *         - optional
  *         - 每页显示的项数(比如商品数)
  *         - 10
  *         - 正整数
  *
  *       * - totalCount
- *         - optional
  *         - 一共有多少项，fx使用totalCount和pageCount计算最后一页的页码数
  *         - 100
  *         - 正整数
  *
  *       * - displayPages
- *         - optional
  *         - 最多显示多少个页码
  *         - 10
  *         - 正整数
  *
  *       * - currPage
- *         - optional
  *         - 当前为第几页，若不指定则等于url中pageNumPara参数值，或等于firstPage
  *         - -
  *         - 正整数
  *
  *       * - pageNumPara
- *         - optional
  *         - url中表示页码的参数名，此值主要用于你的后台程序
  *         - page_num
  *         - 字符串
  *
  *       * - firstText
- *         - optional
  *         - 第一页按钮的文字
  *         - first
  *         - 字符串
  *
  *       * - lastText
- *         - optional
  *         - 最后一页按钮的文字
  *         - 'last'
  *         - 字符串
  *
  *       * - currPageClass
- *         - optional
  *         - 当前页码的class
  *         - zarkfx_paging_selected
  *         - 字符串
  *
  *       * - firstPage
- *         - optional
  *         - 从1还是0开始计算第一页?
  *         - 1
  *         - 0 | 1
  *
  *       * - plusToSpace
- *         - optional
  *         - 是否把href中的“+”符号改为空格
  *         - true
  *         - true | false
  *
  *       * - showFirst
- *         - optional
  *         - 是否显示第一页按钮
  *         - true
  *         - true | false
  *
  *       * - showLast
- *         - optional
  *         - 是否显示最后一页按钮
  *         - true
  *         - true | false
  *
  *       * - prev
- *         - optional
  *         - 上一页按钮，prev应该是一个a标签
  *         - undefined
  *         - jquery selector
  *
  *       * - next
- *         - optional
  *         - 下一页按钮，next应该是一个a标签
  *         - undefined
  *         - jquery selector
  *
  *       * - autoHidePrev
- *         - optional
  *         - 当没有上一页时，是否隐藏prev指定的元素
  *         - true
  *         - true | false
  *
  *       * - autoHideNext
- *         - optional
  *         - 当没有下一页时，是否隐藏next指定的元素
  *         - true
  *         - true | false
@@ -147,7 +129,7 @@
  *          }
  *      </style>
  *
- *      <div fx="paging[totalCount=300; pageCount=20; displayPages=8; currPage=5; ]" ></div>
+ *      <div fx="paging[totalCount=300; pageCount=20; displayPages=8; currPage=9; ]" ></div>
  *
  * 自定义下一页按钮
  * -------------------------

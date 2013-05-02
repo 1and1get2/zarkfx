@@ -46,6 +46,16 @@
  *     <a fx="confirm[msg=你确定删除?]" >删除</a>
  *
  *
+ * 给button添加提示
+ * ----------------
+ *
+ * 点击取消时onclick事件不被执行
+ *
+ * .. zarkfx:: :demo:
+ *
+ *     <input fx="confirm[msg=你确定删除?]" type="button" value="删除" onclick="alert('删除成功')" />
+ *
+ *
  * DOC_END
  *
  */
@@ -58,9 +68,13 @@ FX.register('confirm', [], {
 }, function(attrs){
     var $this = $(this);
 
-    if ($this.attr('onclick')){
-        var old_click = $this.attr('onclick');
-        $this.removeAttr('onclick').click(function(){
+    if (typeof($this.attr('onclick')) !== 'undefined'){
+        var onclick = $this.attr('onclick');
+        $this.removeAttr('onclick');
+        var old_click = function(){
+            eval(onclick);
+        };
+        $this.click(function(){
             if ( confirm(attrs.msg) ){
                 old_click && old_click.call(this);
                 return true;

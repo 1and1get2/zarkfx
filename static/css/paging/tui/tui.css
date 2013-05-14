@@ -1,0 +1,30 @@
+
+.zarkfx_paging ul {
+    display:inline-block;
+    height:35px;
+}
+.zarkfx_paging ul li {
+    height:100%;
+    display:inline-block;
+    list-style-type:none;
+}
+.zarkfx_paging ul li a {
+    display:block;
+    padding:0 0.8em;
+    height:100%;
+    line-height:35px;
+    color:#999;
+    font-weight:bold;
+}
+.zarkfx_paging ul li:hover a {
+    color:#29A800;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected {
+    background-color:#eee;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a {
+    color:#29A800;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a:hover {
+    color:#29A800;
+}

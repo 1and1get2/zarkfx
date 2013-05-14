@@ -722,7 +722,7 @@ FX.register('cycle', ['cycle2/cycle2'], {
     }else if (attrs["tr"] === 'tileSlide' || attrs["tr"] === 'tileBlind'){
         deps.push('cycle2/tile');
 
-    }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
+    }else if (attrs["tr"] === 'fade' && (navigator.userAgent.indexOf('MSIE 6') !== -1 || navigator.userAgent.indexOf('MSIE 7') !== -1) ){
         deps.push('cycle2/iefade');
     };
 

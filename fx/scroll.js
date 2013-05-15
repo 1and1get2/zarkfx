@@ -183,7 +183,7 @@ FX.register('scroll', [], {
         if (attrs.target === undefined){
             target_top = 0;
         }else{
-            target_top = $(attrs.target).offset().top + jQuery(document).scrollTop();
+            target_top = $(attrs.target).offset().top;
         };
         $body.animate({scrollTop: target_top}, parseInt(attrs.speed));
         return false;

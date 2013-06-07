@@ -26,7 +26,7 @@
  *
  *       * - tip
  *         - optional
- *         - 用于指定目标容易，如果为空则对原容器内容进行替换。
+ *         - 用于指定目标容器，如果为空则对原容器内容进行替换。
  *         - ""
  *         - jquery selector
  *
@@ -105,6 +105,7 @@
 
 ;(function(){
 FX.register( "markdown", ["markdown"], {
+    style       : "default",
     tip         : "",
     realtime    : false,
     minInterval : 2000,
@@ -126,7 +127,11 @@ FX.register( "markdown", ["markdown"], {
         if( (tgt.tagName === "INPUT") || (tgt.tagName === "TEXTAREA") ) {
             field_tgt = "value";
         };
+        if ( attrs.style !== "none" ) {
+            $(tgt).addClass("zarkfx_markdown_default");
+        };
     };
+
 
     var process = function() {
         tgt[field_tgt] = markdown.toHTML(src[field_src]);

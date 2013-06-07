@@ -1,0 +1,265 @@
+.zarkfx_markdown_default {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.zarkfx_markdown_default > *:first-child {
+    margin-top: 0 !important;
+}
+.zarkfx_markdown_default > *:last-child {
+    margin-bottom: 0 !important;
+}
+.zarkfx_markdown_default a.absent {
+    color: #CC0000;
+}
+.zarkfx_markdown_default a.anchor {
+    bottom: 0;
+    cursor: pointer;
+    display: block;
+    left: 0;
+    margin-left: -30px;
+    padding-left: 30px;
+    position: absolute;
+    top: 0;
+}
+.zarkfx_markdown_default h1, .zarkfx_markdown_default h2, .zarkfx_markdown_default h3, .zarkfx_markdown_default h4, .zarkfx_markdown_default h5, .zarkfx_markdown_default h6 {
+    cursor: text;
+    font-weight: bold;
+    margin: 20px 0 10px;
+    padding: 0;
+    position: relative;
+}
+.zarkfx_markdown_default h1 .mini-icon-link, .zarkfx_markdown_default h2 .mini-icon-link, .zarkfx_markdown_default h3 .mini-icon-link, .zarkfx_markdown_default h4 .mini-icon-link, .zarkfx_markdown_default h5 .mini-icon-link, .zarkfx_markdown_default h6 .mini-icon-link {
+    color: #000000;
+    display: none;
+}
+.zarkfx_markdown_default h1:hover a.anchor, .zarkfx_markdown_default h2:hover a.anchor, .zarkfx_markdown_default h3:hover a.anchor, .zarkfx_markdown_default h4:hover a.anchor, .zarkfx_markdown_default h5:hover a.anchor, .zarkfx_markdown_default h6:hover a.anchor {
+    line-height: 1;
+    margin-left: -22px;
+    padding-left: 0;
+    text-decoration: none;
+    top: 15%;
+}
+.zarkfx_markdown_default h1:hover a.anchor .mini-icon-link, .zarkfx_markdown_default h2:hover a.anchor .mini-icon-link, .zarkfx_markdown_default h3:hover a.anchor .mini-icon-link, .zarkfx_markdown_default h4:hover a.anchor .mini-icon-link, .zarkfx_markdown_default h5:hover a.anchor .mini-icon-link, .zarkfx_markdown_default h6:hover a.anchor .mini-icon-link {
+    display: inline-block;
+}
+.zarkfx_markdown_default h1 tt, .zarkfx_markdown_default h1 code, .zarkfx_markdown_default h2 tt, .zarkfx_markdown_default h2 code, .zarkfx_markdown_default h3 tt, .zarkfx_markdown_default h3 code, .zarkfx_markdown_default h4 tt, .zarkfx_markdown_default h4 code, .zarkfx_markdown_default h5 tt, .zarkfx_markdown_default h5 code, .zarkfx_markdown_default h6 tt, .zarkfx_markdown_default h6 code {
+    font-size: inherit;
+}
+.zarkfx_markdown_default h1 {
+    color: #000000;
+    font-size: 28px;
+}
+.zarkfx_markdown_default h2 {
+    border-bottom: 1px solid #CCCCCC;
+    color: #000000;
+    font-size: 24px;
+}
+.zarkfx_markdown_default h3 {
+    font-size: 18px;
+}
+.zarkfx_markdown_default h4 {
+    font-size: 16px;
+}
+.zarkfx_markdown_default h5 {
+    font-size: 14px;
+}
+.zarkfx_markdown_default h6 {
+    color: #777777;
+    font-size: 14px;
+}
+.zarkfx_markdown_default p, .zarkfx_markdown_default blockquote, .zarkfx_markdown_default ul, .zarkfx_markdown_default ol, .zarkfx_markdown_default dl, .zarkfx_markdown_default table, .zarkfx_markdown_default pre {
+    margin: 15px 0;
+}
+.zarkfx_markdown_default hr {
+    background: url("https://a248.e.akamai.net/assets.github.com/assets/primer/markdown/dirty-shade-350cca8f57223ebd53603021b2e670f4f319f1b7.png") repeat-x scroll 0 0 transparent;
+    border: 0 none;
+    color: #CCCCCC;
+    height: 4px;
+    padding: 0;
+}
+.zarkfx_markdown_default > h2:first-child, .zarkfx_markdown_default > h1:first-child, .zarkfx_markdown_default > h1:first-child + h2, .zarkfx_markdown_default > h3:first-child, .zarkfx_markdown_default > h4:first-child, .zarkfx_markdown_default > h5:first-child, .zarkfx_markdown_default > h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+.zarkfx_markdown_default a:first-child h1, .zarkfx_markdown_default a:first-child h2, .zarkfx_markdown_default a:first-child h3, .zarkfx_markdown_default a:first-child h4, .zarkfx_markdown_default a:first-child h5, .zarkfx_markdown_default a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+}
+.zarkfx_markdown_default h1 + p, .zarkfx_markdown_default h2 + p, .zarkfx_markdown_default h3 + p, .zarkfx_markdown_default h4 + p, .zarkfx_markdown_default h5 + p, .zarkfx_markdown_default h6 + p {
+    margin-top: 0;
+}
+.zarkfx_markdown_default li p.first {
+    display: inline-block;
+}
+.zarkfx_markdown_default ul, .zarkfx_markdown_default ol {
+    padding-left: 30px;
+}
+.zarkfx_markdown_default ul.no-list, .zarkfx_markdown_default ol.no-list {
+    list-style-type: none;
+    padding: 0;
+}
+.zarkfx_markdown_default ul li > *:first-child, .zarkfx_markdown_default ol li > *:first-child {
+    margin-top: 0;
+}
+.zarkfx_markdown_default ul ul, .zarkfx_markdown_default ul ol, .zarkfx_markdown_default ol ol, .zarkfx_markdown_default ol ul {
+    margin-bottom: 0;
+}
+.zarkfx_markdown_default dl {
+    padding: 0;
+}
+.zarkfx_markdown_default dl dt {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    margin: 15px 0 5px;
+    padding: 0;
+}
+.zarkfx_markdown_default dl dt:first-child {
+    padding: 0;
+}
+.zarkfx_markdown_default dl dt > *:first-child {
+    margin-top: 0;
+}
+.zarkfx_markdown_default dl dt > *:last-child {
+    margin-bottom: 0;
+}
+.zarkfx_markdown_default dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+}
+.zarkfx_markdown_default dl dd > *:first-child {
+    margin-top: 0;
+}
+.zarkfx_markdown_default dl dd > *:last-child {
+    margin-bottom: 0;
+}
+.zarkfx_markdown_default blockquote {
+    border-left: 4px solid #DDDDDD;
+    color: #777777;
+    padding: 0 15px;
+}
+.zarkfx_markdown_default blockquote > *:first-child {
+    margin-top: 0;
+}
+.zarkfx_markdown_default blockquote > *:last-child {
+    margin-bottom: 0;
+}
+.zarkfx_markdown_default table th {
+    font-weight: bold;
+}
+.zarkfx_markdown_default table th, .zarkfx_markdown_default table td {
+    border: 1px solid #CCCCCC;
+    padding: 6px 13px;
+}
+.zarkfx_markdown_default table tr {
+    background-color: #FFFFFF;
+    border-top: 1px solid #CCCCCC;
+}
+.zarkfx_markdown_default table tr:nth-child(2n) {
+    background-color: #F8F8F8;
+}
+.zarkfx_markdown_default img {
+    max-width: 100%;
+}
+.zarkfx_markdown_default span.frame {
+    display: block;
+    overflow: hidden;
+}
+.zarkfx_markdown_default span.frame > span {
+    border: 1px solid #DDDDDD;
+    display: block;
+    float: left;
+    margin: 13px 0 0;
+    overflow: hidden;
+    padding: 7px;
+    width: auto;
+}
+.zarkfx_markdown_default span.frame span img {
+    display: block;
+    float: left;
+}
+.zarkfx_markdown_default span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0;
+}
+.zarkfx_markdown_default span.align-center {
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+.zarkfx_markdown_default span.align-center > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: center;
+}
+.zarkfx_markdown_default span.align-center span img {
+    margin: 0 auto;
+    text-align: center;
+}
+.zarkfx_markdown_default span.align-right {
+    clear: both;
+    display: block;
+    overflow: hidden;
+}
+.zarkfx_markdown_default span.align-right > span {
+    display: block;
+    margin: 13px 0 0;
+    overflow: hidden;
+    text-align: right;
+}
+.zarkfx_markdown_default span.align-right span img {
+    margin: 0;
+    text-align: right;
+}
+.zarkfx_markdown_default span.float-left {
+    display: block;
+    float: left;
+    margin-right: 13px;
+    overflow: hidden;
+}
+.zarkfx_markdown_default span.float-left span {
+    margin: 13px 0 0;
+}
+.zarkfx_markdown_default span.float-right {
+    display: block;
+    float: right;
+    margin-left: 13px;
+    overflow: hidden;
+}
+.zarkfx_markdown_default span.float-right > span {
+    display: block;
+    margin: 13px auto 0;
+    overflow: hidden;
+    text-align: right;
+}
+.zarkfx_markdown_default code, .zarkfx_markdown_default tt {
+    background-color: #F8F8F8;
+    border: 1px solid #EAEAEA;
+    border-radius: 3px 3px 3px 3px;
+    margin: 0 2px;
+    padding: 0 5px;
+    white-space: nowrap;
+}
+.zarkfx_markdown_default pre > code {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+}
+.zarkfx_markdown_default .highlight pre, .zarkfx_markdown_default pre {
+    background-color: #F8F8F8;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 10px;
+}
+.zarkfx_markdown_default pre code, .zarkfx_markdown_default pre tt {
+    background-color: transparent;
+    border: medium none;
+}

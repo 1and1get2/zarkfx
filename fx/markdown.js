@@ -132,9 +132,12 @@ FX.register( "markdown", ["markdown"], {
         };
     };
 
-
     var process = function() {
-        tgt[field_tgt] = markdown.toHTML(src[field_src]);
+        if( field_src === "innerHTML" ) {
+            tgt[field_tgt] = markdown.toHTML($(src).text());
+        }else{
+            tgt[field_tgt] = markdown.toHTML($(src).val());
+        };
     };
 
     process();

@@ -160,7 +160,7 @@
  *
  * <div id="w1" style="position: relative;" style="width: 300px; height: 300px;" > </div>
  *
- * <img src="/_static/demo/imgareaselect/flower2.jpg" fx="imgareaselect[preview=#preview;valueElement=value; wrapper=#w1;]"/>
+ * <img src="/_static/demo/imgareaselect/flower2.jpg" fx="imgareaselect[preview=#preview;#valueElement=value; wrapper=#w1;]"/>
  *
  * <div id="preview" style="width:100px; height:100px;"></div>
  *
@@ -261,7 +261,7 @@ FX.register('imgareaselect', [ 'imgareaselect' ], {
     };
 
     if(attrs.valueElement){
-        var $value = $('#'+attrs.valueElement);
+        var $value = $(attrs.valueElement);
         change_functions.push(function(img, selection){
             $value.val(selection.x1 + " " + selection.y1 + " " + selection.width + " " + selection.height);
         });

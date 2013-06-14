@@ -106,7 +106,7 @@ FX.register( "fxdemo", [], {
         FX.runQueue();
     });
 
-    if(!attrs.lazy) {
+    if(!attrs["lazy"]) {
         setTimeout(function() {
             tryit.trigger("click");
         }, 10);

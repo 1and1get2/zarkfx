@@ -116,19 +116,19 @@ FX.register('share', [], {
         var content = '', title = '', link = '', pic = '';
 
         if (attrs.content_selector && $(attrs.content_selector).length > 0){
-            content = $(attrs.content_selector).text();
+            content = $(attrs.content_selector).text() || $(attrs.content_selector).val();
         }
         if (attrs.title_selector && $(attrs.title_selector).length > 0){
-            title = $(attrs.title_selector).text();
+            title = $(attrs.title_selector).text() || $(attrs.title_selector).val();
         }
         if (attrs.link_selector && $(attrs.link_selector).length > 0){
-            var link = $(attrs.link_selector).attr('href');
+            var link = $(attrs.link_selector).attr('href') || $(attrs.title_selector).text() || $(attrs.pic_selector).val();
             link = toHTTP(link);
         }else{
             link = window.location.href;
         }
         if (attrs.pic_selector && $(attrs.pic_selector).length > 0){
-            var pic = $(attrs.pic_selector).attr('src') || $(attrs.pic_selector).val();
+            var pic = $(attrs.pic_selector).attr('src') || $(attrs.title_selector).text() || $(attrs.pic_selector).val();
             pic = toHTTP(pic);
         }
 

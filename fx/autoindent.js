@@ -1,7 +1,7 @@
 /*
  * DOC_BEGIN
  *
- * Smart Indent
+ * Auto Indent
  * =============
  *
  * 给textarea增加自动缩进以及tab替换为空格功能
@@ -10,7 +10,7 @@
  * Options
  * --------------
  *
- * :FX name: smartindent
+ * :FX name: autoindent
  * :Description: 实现类似vim的自动缩进, 以及用空格代替tab
  *
  * .. topic:: Arguments
@@ -25,7 +25,7 @@
  *         - Default
  *         - Values
  *
- *       * - smartindent
+ *       * - autoindent
  *         - option
  *         - 是否使用自动缩进
  *         - true
@@ -49,14 +49,14 @@
  *
  * .. zarkfx:: :demo:
  *
- *     <textarea fx="smartindent elastic">  按下回车和tab键测试一下吧  哈哈</textarea>
+ *     <textarea fx="autoindent elastic">  按下回车和tab键测试一下吧  哈哈</textarea>
  *
  * DOC_END
  * */
 
 ;(function(){
-FX.register('smartindent', [], {
-    smartindent:    true,
+FX.register('autoindent', [], {
+    autoindent:    true,
     expandtab:      true,
     tabstop:        4
 
@@ -76,7 +76,7 @@ FX.register('smartindent', [], {
             var right = $(this).val().substr(this.selectionStart);
 
             // 按下enter, 自动缩进
-            if ( event.keyCode === 13 && attrs.smartindent ) {
+            if ( event.keyCode === 13 && attrs.autoindent ) {
                 // 得到最后一行前面的空格
                 var lines = left.split('\n');
                 var last_line = lines[lines.length - 1];

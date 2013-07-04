@@ -91,7 +91,8 @@ FX.register('autoindent', [], {
             };
 
             // 按下tab替换为空格
-            if ( event.keyCode === 9 && attrs.expandtab && attrs.tabstop > 0 ) {
+            if ( event.keyCode === 9 && attrs.expandtab && attrs.tabstop > 0 
+                    && !event.ctrlKey && !event.altKey && !event.shiftKey ) {
                 for (var i = 0; i < attrs.tabstop; i++) {
                     left += ' '
                 };
@@ -99,6 +100,7 @@ FX.register('autoindent', [], {
                 this.selectionStart = this.selectionEnd = left.length;
                 return false;
             };
+
         });
     };
 });

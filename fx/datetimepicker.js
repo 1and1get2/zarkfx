@@ -32,9 +32,9 @@ FX.register('datetimepicker', [ 'jqueryui-1.10.2', 'datetimepicker/timepicker' ]
     changeYear: false,
     numberOfMonths: 1,
     yearRange: '-100:+1',
-    minDate: '',
-    maxDate: '',
-    regional: ''
+    minDate: undefined,
+    maxDate: undefined,
+    regional: undefined
 
 }, function(attrs){
 

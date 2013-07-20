@@ -2,6 +2,9 @@
     font-size: 14px;
     line-height: 1.6;
 }
+.zarkfx_markdown_anshunus code {
+    font-family:monospace; 
+}
 .zarkfx_markdown_anshunus > *:first-child {
     margin-top: 0 !important;
 }

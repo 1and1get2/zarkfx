@@ -30,6 +30,12 @@
  *         - false
  *         - true | false
  *
+ *       * - marginTop
+ *         - optional
+ *         - 停留时, 距离顶部的像素距离
+ *         - 0
+ *         - 整数
+ *
  * 停留在最上面
  * --------------
  *
@@ -68,7 +74,11 @@ var getElementTop = function(element){
     return actual_top;
 };
 
-FX.register('staytop', [], {}, function(attrs){
+FX.register('staytop', [], {
+    fullWidth: false,
+    marginTop: 0
+
+}, function(attrs){
 
     var $this = $(this),
         old_position = getElementTop(this),
@@ -76,8 +86,8 @@ FX.register('staytop', [], {}, function(attrs){
         old_left = getElementLeft(this);
     
     $(window).scroll(function(){
-        if ($(document).scrollTop() > old_position){
-            $this.css('top',0).css('position','fixed');
+        if ($(document).scrollTop() > (old_position - attrs.marginTop)){
+            $this.css('top', attrs.marginTop).css('position','fixed');
             if(attrs.fullWidth){
                 $this.css('width', $(window).width()).css('left', 0);
             }else{

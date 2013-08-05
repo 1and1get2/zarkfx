@@ -91,6 +91,11 @@
 .zarkfx_markdown_anshunus h1 + p, .zarkfx_markdown_anshunus h2 + p, .zarkfx_markdown_anshunus h3 + p, .zarkfx_markdown_anshunus h4 + p, .zarkfx_markdown_anshunus h5 + p, .zarkfx_markdown_anshunus h6 + p {
     margin-top: 0;
 }
+.zarkfx_markdown_anshunus li p,
+.zarkfx_markdown_anshunus li pre {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
 .zarkfx_markdown_anshunus li p.first {
     display: inline-block;
 }

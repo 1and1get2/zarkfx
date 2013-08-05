@@ -749,6 +749,7 @@ FX.register('cycle', ['cycle2/cycle2'], {
         if(!attrs["options"]) {
             $this.cycle(attrs);
         } else {
+            eval(attrs["options"] + ".fx = " + attrs["options"] + ".tr");
             eval("$this.cycle(" + attrs["options"] + ")");
         };
         // 绑定事件

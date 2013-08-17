@@ -1,15 +1,15 @@
 /*
  * DOC_BEGIN
  *
- * Markdown
- * ========
+ * Map
+ * ===
  *
  * 此 fx 基于 `markdown-js <https://github.com/evilstreak/markdown-js>`_ 插件开发，用于 Markdown 格式文本的解析与预览。
  *
  * Options
  * ---------
  *
- * :FX name: markdown
+ * :FX name: map
  * :Description: 用于 Markdown 格式文本的解析与预览
  *
  * .. topic:: Arguments
@@ -53,9 +53,11 @@
  *
  * .. zarkfx:: :demo:
  *
- *    <div fx="markdown">
- *    some **Markdown text** here.
+ *    <div fx="map[lat=26.24533;lng=105.93309;zoom=12;bind_lng=#lng1;bind_lat=#lat1;bind_zoom=#zoom1]">
  *    </div>
+ *    <input id="lat1" />
+ *    <input id="lng1" />
+ *    <input id="zoom1" />
  *
  * 解析 Markdown 文本并将结果放入其他容器
  * --------------------------------------
@@ -104,76 +106,70 @@
 
 
 ;(function(){
-FX.register( "markdown", ["markdown"], {
+    FX.cb_mapInit = function() {
+        delete FX.cb_mapInit;
+    };
+    $('<script type="text/javascript" />').
+    attr("src", "http://maps.googleapis.com/maps/api/js?" +
+        "callback=FX.cb_mapInit&sensor=false&language=zh").
+    appendTo("head");
+
+FX.register( "map", [], {
     style       : "default",
-    tip         : "",
-    realtime    : false,
-    minInterval : 2000,
-    trigger     : ""
+    width       : "400px",
+    height      : "400px",
+    lng         : 0.0,
+    lat         : 0.0,
+    zoom        : 1,
+    bind_lng    : "",
+    bind_lat    : "",
+    bind_zoom   : "",
+    bind_var    : ""
 
 }, function(attrs) {
-    var src = this;
-    var field_src = "innerHTML";
-    if( (src.tagName === "INPUT") || (src.tagName === "TEXTAREA") ) {
-        field_src = "value";
-    };
 
-    var tgt = src;
-    var field_tgt = field_src;
+    var that = this;
 
-    if( (typeof(attrs["tip"]) === "string") && (attrs["tip"] !== "") ) {
-        tgt = $(attrs["tip"])[0];
-        field_tgt = "innerHTML";
-        if( (tgt.tagName === "INPUT") || (tgt.tagName === "TEXTAREA") ) {
-            field_tgt = "value";
-        };
-        if ( attrs.style !== "none" ) {
-            $(tgt).addClass("zarkfx_markdown_default");
-        };
-    };
-
-    var process = function() {
-        if( field_src === "innerHTML" ) {
-            tgt[field_tgt] = markdown.toHTML($(src).text());
-        }else{
-            tgt[field_tgt] = markdown.toHTML($(src).val());
-        };
-    };
-
-    process();
-
-    if(attrs["realtime"]) {
-        var changed = false;
-        var delayed = false;
-
-        var cb_timeout = function() {
-            if(changed) {
-                process();
-                changed = false;
-                delayed = true;
-                setTimeout(cb_timeout, attrs["minInterval"]);
-            } else {
-                delayed = false;
-            }
+    var cb = function() {
+        if(typeof(FX.cb_mapInit) === "function") {
+            setTimeout(cb, 100);
+            return;
         };
 
-        var cb_change = function() {
-            if(!delayed) {
-                process();
-                changed = false;
-                delayed = true;
-                setTimeout(cb_timeout, attrs["minInterval"]);
-            } else {
-                changed = true;
-            };
+        $(that).css({
+            width: attrs["width"],
+            height: attrs["height"]
+        });
+
+        var options = {
+            zoom: attrs["zoom"],
+            center: new google.maps.LatLng(attrs["lat"], attrs["lng"]),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
 
-        $(src).change(cb_change);
-        $(src).keypress(cb_change);
+        var map = new google.maps.Map(that, options);
+
+        if( (typeof(attrs["bind_var"]) === "string") && (attrs["bind_var"] !== "") ) {
+            eval(attrs["bind_var"] + " = map");
+        };
+
+        var mark = new google.maps.Marker({
+            position: options.center,
+            map: map
+        });
+
+        google.maps.event.addListener(map, "rightclick", function(e) {
+            mark.setPosition(e.latLng);
+            mark.setAnimation(google.maps.Animation.DROP);
+            map.panTo(e.latLng);
+            $(attrs["bind_lng"]).val( e.latLng.lng() );
+            $(attrs["bind_lat"]).val( e.latLng.lat() );
+            $(attrs["bind_zoom"]).val( map.getZoom() );
+        });
+
     };
 
-    if( (typeof(attrs["trigger"]) === "string") && (attrs["trigger"] !== "") ) {
-        $(attrs["trigger"]).click(process);
-    };
+    cb();
+
 });
 })();

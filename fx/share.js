@@ -34,7 +34,7 @@ function shareToTencentWeibo(link, title, content, pic, attrs){
         _appkey = encodeURI(attrs.appkey),
         _pic = encodeURI(pic);
 
-    var url = 'http://share.v.t.qq.com/index.php?title='+encodeURIComponent(title+'\n'+content)+'&url='+link+'&appkey='+_appkey+'&pic='+_pic+'&assname='+_assname;
+    var url = 'http://share.v.t.qq.com/index.php?c=share&a=index&title='+encodeURIComponent(title+'\n'+content)+'&url='+link+'&appkey='+_appkey+'&pic='+_pic+'&assname='+_assname;
 
     window.open( url,'分享到腾讯微博', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 

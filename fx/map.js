@@ -4,13 +4,13 @@
  * Map
  * ===
  *
- * 此 fx 基于 `markdown-js <https://github.com/evilstreak/markdown-js>`_ 插件开发，用于 Markdown 格式文本的解析与预览。
+ * 此 fx 用于在网页中嵌入第三方的地图，并可以与网页内的其他元素完成简单的数据交换。
  *
  * Options
  * ---------
  *
  * :FX name: map
- * :Description: 用于 Markdown 格式文本的解析与预览
+ * :Description: 用于嵌入第三方的地图控件
  *
  * .. topic:: Arguments
  *
@@ -24,152 +24,343 @@
  *         - Default
  *         - Values
  *
- *       * - tip
+ *       * - sp
  *         - optional
- *         - 用于指定目标容器，如果为空则对原容器内容进行替换。
- *         - ""
- *         - jquery selector
+ *         - 指定服务提供商。
+ *         - google
+ *         - google | baidu（暂不支持）
  *
- *       * - realtime
+ *       * - setDimen
  *         - optional
- *         - 是否实时更新，用法见 :ref:`example-realtime`。
- *         - false
- *         - true | false
+ *         - 若为 false，本 fx 不会主动设置地图大小，实际大小由外部 CSS 控制
+ *         - true
+ *         - boolean
  *
- *       * - minInterval
+ *       * - width
  *         - optional
- *         - 用于指定最小更新时间间隔，单位为毫秒，防止更新过于频繁拖慢电脑速度。
- *         - 2000
+ *         - 地图区域的宽度，setDimen 为 true 时有效
+ *         - 400
  *         - 正整数
  *
- *       * - trigger
+ *       * - height
  *         - optional
- *         - 用于指定进行手动更新的 HTML 元素（通常为 Button）。可以与实时更新并存。
+ *         - 地图区域的高度，setDimen 为 true 时有效
+ *         - 300
+ *         - 正整数
+ *
+ *       * - lng
+ *         - optional
+ *         - 初始位置的经度
+ *         - 0.0
+ *         - -180.0 至 +180.0
+ *
+ *       * - lat
+ *         - optional
+ *         - 初始位置的纬度
+ *         - 0.0
+ *         - -90.0 至 +90.0
+ *
+ *       * - zoom
+ *         - optional
+ *         - 初始缩放尺度
+ *         - 0
+ *         - 0 至 20 左右（不同的地图服务提供商最大缩放尺度不同）
+ *
+ *       * - bindLng
+ *         - optional
+ *         - 用于绑定存放经度信息的控件
  *         - ""
  *         - jquery selector
  *
- * 直接解析并替换 Markdown 文本
+ *       * - bindLat
+ *         - optional
+ *         - 用于绑定存放纬度信息的控件
+ *         - ""
+ *         - jquery selector
+ *
+ *       * - bindZoom
+ *         - optional
+ *         - 用于绑定存放缩放尺度的控件
+ *         - ""
+ *         - jquery selector
+ *
+ *       * - staticLink
+ *         - optional
+ *         - 向外部 HTML 元素输出静态地图链接地址，可以是 <a>、<img>、<input> 等。
+ *         - ""
+ *         - jquery selector
+ *
+ *       * - lngOff
+ *         - optional
+ *         - 经度校正值
+ *         - 0.0
+ *         - float
+ *
+ *       * - latOff
+ *         - optional
+ *         - 纬度校正值
+ *         - 0.0
+ *         - float
+ *
+ *       * - bind_var
+ *         - optional
+ *         - 开发用，可以把对应的 map 对象与 bind_var 指定的 javascript 变量绑定
+ *         - ""
+ *         - javascript 变量名
+ *
+ * 最基本的使用
+ * ------------
+ *
+ * .. zarkfx:: :demo:
+ *
+ *    <div fx="map" />
+ *
+ * .. zarkfx:: :demo:
+ *
+ *    <div fx="map[width=200;height=200]" />
+ *
+ * .. zarkfx:: :demo:
+ *
+ *    <div style="width:75%;height:200px" fx="map[setDimen=false]" />
+ *
+ * .. zarkfx:: :demo:
+ *
+ *    <div fx="map[lat=39.919;lng=116.397;zoom=12]" />
+ *
+ * 与控件绑定，用于地图位置标定
  * ----------------------------
  *
- * .. zarkfx:: :demo:
- *
- *    <div fx="map[lat=26.24533;lng=105.93309;zoom=12;bind_lng=#lng1;bind_lat=#lat1;bind_zoom=#zoom1]">
- *    </div>
- *    <input id="lat1" />
- *    <input id="lng1" />
- *    <input id="zoom1" />
- *
- * 解析 Markdown 文本并将结果放入其他容器
- * --------------------------------------
+ * 用鼠标右键点地图区域或者用左键拖动标记，输入框的数值会相应地变动；改变输入框的值地图上的内容也会相应地变动。
  *
  * .. zarkfx:: :demo:
  *
- *    <table border="1">
- *        <tr><th>Source</th><th>Result</th></tr>
- *        <tr>
- *            <td><div style="width:400px" fx="markdown[tip=#target1]">some **Markdown text** here.</div></td>
- *            <td><div style="width:400px" id="target1"></div></td>
- *        </tr>
- *    </table>
+ *    <div fx="map[width=400;height=400;bindLng=#lng1;bindLat=#lat1;bindZoom=#zoom1]" />
+ *    <input id="lat1" value="39.919" />
+ *    <input id="lng1" value="116.397" />
+ *    <input id="zoom1" value="12" />
  *
- * .. _example-realtime:
- *
- * 实时解析，适合用来做预览功能
- * ----------------------------
+ * 输出静态链接 <a>
+ * ----------------
  *
  * .. zarkfx:: :demo:
  *
- *    <table border="1">
- *        <tr><th>Source</th><th>Result</th></tr>
- *        <tr>
- *            <td><textarea style="width:400px;height:400px" fx="markdown[tip=#target2;realtime]">some **Markdown text** here.</textarea></td>
- *            <td><div style="width:400px;height:400px" id="target2"></div></td>
- *        </tr>
- *    </table>
+ *    <div fx="map[width=300;height=200;staticLink=#slink1]" />
+ *    <a id="slink1" style="font-size: 200%">static map link here</a>
  *
- * 手动解析，适合用来做手动预览功能
- * --------------------------------
+ * 输出静态链接 <img>
+ * ------------------
  *
  * .. zarkfx:: :demo:
  *
- *    <table border="1">
- *        <tr><th>Source</th><th>Result</th></tr>
- *        <tr>
- *            <td><textarea style="width:400px;height:400px" fx="markdown[tip=#target3;trigger=#preview]">some **Markdown text** here.</textarea></td>
- *            <td><div style="width:400px;height:400px" id="target3"></div></td>
- *        </tr>
- *    </table>
- *    <input type="button" id="preview" value="Preview" />
+ *    <div fx="map[width=300;height=200;staticLink=#slink2]" />
+ *    <img id="slink2" />
+ *
+ * 输出静态链接 <input>
+ * --------------------
+ *
+ * .. zarkfx:: :demo:
+ *
+ *    <div fx="map[width=300;height=300;staticLink=#slink3]" />
+ *    <input id="slink3" style="width: 80%" />
  *
  * DOC_END
  */
 
 
 ;(function(){
-    FX.cb_mapInit = function() {
-        delete FX.cb_mapInit;
-    };
-    $('<script type="text/javascript" />').
-    attr("src", "http://maps.googleapis.com/maps/api/js?" +
-        "callback=FX.cb_mapInit&sensor=false&language=zh").
-    appendTo("head");
+    var mapReady = {google: false, baidu: false};
+    var cb_name = "FX." + FX.getUUID();
 
 FX.register( "map", [], {
     style       : "default",
-    width       : "400px",
-    height      : "400px",
+    sp          : "google",
+    setDimen    : true,
+    width       : 400,
+    height      : 300,
     lng         : 0.0,
     lat         : 0.0,
-    zoom        : 1,
-    bind_lng    : "",
-    bind_lat    : "",
-    bind_zoom   : "",
+    zoom        : 0,
+    bindLng     : "",
+    bindLat     : "",
+    bindZoom    : "",
+    staticLink  : "",
+    lngOff      : 0.0,
+    latOff      : 0.0,
     bind_var    : ""
 
 }, function(attrs) {
-
     var that = this;
-
-    var cb = function() {
-        if(typeof(FX.cb_mapInit) === "function") {
-            setTimeout(cb, 100);
-            return;
+    if(attrs["sp"] === "google") {
+        if( (!mapReady.google) &&
+            (eval("typeof(" + cb_name + "_google)") === "undefined") )
+        {
+            var cb = function() {
+                mapReady.google = true;
+                eval("delete " + cb_name + "_google");
+            };
+            eval(cb_name + "_google = cb");
+            $('<script type="text/javascript" />').
+                attr("src", "http://maps.googleapis.com/maps/api/js?" +
+                        "callback=" + cb_name + "_google&" +
+                        "sensor=false&language=zh").
+                appendTo("head");
         };
 
-        $(that).css({
-            width: attrs["width"],
-            height: attrs["height"]
-        });
+        var cb = function() {
+            if(!mapReady.google) {
+                setTimeout(cb, 100);
+                return;
+            };
 
-        var options = {
-            zoom: attrs["zoom"],
-            center: new google.maps.LatLng(attrs["lat"], attrs["lng"]),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            if(attrs["setDimen"]) {
+                $(that).css({
+                    width: attrs["width"],
+                    height: attrs["height"]
+                });
+            };
+
+            var lng = attrs["lng"] + attrs["lngOff"];
+            var lat = attrs["lat"] + attrs["latOff"];
+            var zoom = attrs["zoom"];
+
+            var map = new google.maps.Map(that, {
+                zoom: zoom,
+                center: new google.maps.LatLng(lat, lng),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            });
+
+            if( (typeof(attrs["bind_var"]) === "string") && (attrs["bind_var"] !== "") ) {
+                try {
+                    eval(attrs["bind_var"] + " = map");
+                } catch(err) {};
+            };
+
+            /**************************************/
+
+            var getObj = function(name) {
+                var ret = false;
+                if( (typeof(attrs[name]) === "string") && (attrs[name] !== "") ) {
+                    try {
+                        ret = $(attrs[name]);
+                    } catch(err) {};
+                };
+                return ret;
+            };
+
+            var bindLng = getObj("bindLng");
+            var bindLat = getObj("bindLat");
+            var bindZoom = getObj("bindZoom");
+            var staticLink = getObj("staticLink");
+
+            if( (bindLng !== false) || (bindLat !== false) ||
+                    (bindZoom !== false) || (staticLink !== false) )
+            {
+                var mark = new google.maps.Marker({
+                    position: map.getCenter(),
+                    draggable: true,
+                    map: map
+                });
+
+                var loadBinds = function() {
+                    if(bindLng !== false) {
+                        lng = parseFloat( bindLng.val() );
+                        if( isNaN(lng) ) {lng = 0.0};
+                        lng += attrs["lngOff"];
+                    };
+                    if(bindLat !== false) {
+                        lat = parseFloat( bindLat.val() );
+                        if( isNaN(lat) ) {lat = 0.0};
+                        lat += attrs["latOff"];
+                    };
+                    if(bindZoom !== false) {
+                        zoom = parseInt( bindZoom.val() );
+                        if( isNaN(zoom) ) {zoom = 0};
+                    };
+                    mark.setPosition( new google.maps.LatLng(lat, lng) );
+                    map.setZoom(zoom);
+                };
+
+                var saveBinds = function() {
+                    var latlng = mark.getPosition();
+                    lng = latlng.lng();
+                    lat = latlng.lat();
+                    zoom = map.getZoom();
+                    if(bindLng !== false) {
+                        bindLng.val(lng - attrs["lngOff"]);
+                    };
+                    if(bindLat !== false) {
+                        bindLat.val(lat - attrs["latOff"]);
+                    };
+                    if(bindZoom !== false) {
+                        bindZoom.val(zoom);
+                    };
+                };
+
+                var saveLink = function() {
+                    if(staticLink !== false) {
+                        var latlng = mark.getPosition();
+                        latlng = latlng.lat() + "," + latlng.lng();
+                        var w = $(that).width();
+                        var h = $(that).height();
+                        if(w > 640) {w = 640};
+                        if(h > 640) {h = 640};
+                        var url = "http://maps.googleapis.com/maps/api/staticmap?" +
+                            "center=" + latlng +
+                            "&zoom=" + map.getZoom() +
+                            "&size=" + w + "x" + h +
+                            "&markers=" + latlng +
+                            "&language=zh&scale=2&sensor=false";
+                        staticLink.each(function(){
+                            if(this.tagName === "A") {
+                                $(this).attr("href", url);
+                            } else if(this.tagName === "IMG") {
+                                $(this).attr("src", url);
+                            } else if(this.tagName === "INPUT") {
+                                $(this).val(url);
+                            } else {
+                                $(this).html(url);
+                            };
+                        });
+                    };
+                };
+
+                loadBinds();
+                if( (attrs["lng"] == 0.0) && (attrs["lat"] == 0.0) ) {
+                    map.setCenter( mark.getPosition() );
+                };
+                saveBinds();
+                saveLink();
+
+                var onMarkChange = function(e) {
+                    mark.setPosition(e.latLng);
+                    map.panTo(e.latLng);
+                    saveBinds();
+                    saveLink();
+                };
+
+                var onBindChange = function() {
+                    loadBinds();
+                    map.panTo( new google.maps.LatLng(lat, lng) );
+                    saveLink();
+                };
+
+                google.maps.event.addListener(map, "rightclick", onMarkChange);
+                google.maps.event.addListener(mark, "dragend", onMarkChange);
+                google.maps.event.addListener(map, "zoom_changed", saveBinds);
+                if(bindLng !== false) {
+                    bindLng.change(onBindChange);
+                };
+                if(bindLat !== false) {
+                    bindLat.change(onBindChange);
+                };
+                if(bindZoom !== false) {
+                    bindZoom.change(onBindChange);
+                };
+            };
         };
-
-        var map = new google.maps.Map(that, options);
-
-        if( (typeof(attrs["bind_var"]) === "string") && (attrs["bind_var"] !== "") ) {
-            eval(attrs["bind_var"] + " = map");
-        };
-
-        var mark = new google.maps.Marker({
-            position: options.center,
-            map: map
-        });
-
-        google.maps.event.addListener(map, "rightclick", function(e) {
-            mark.setPosition(e.latLng);
-            mark.setAnimation(google.maps.Animation.DROP);
-            map.panTo(e.latLng);
-            $(attrs["bind_lng"]).val( e.latLng.lng() );
-            $(attrs["bind_lat"]).val( e.latLng.lat() );
-            $(attrs["bind_zoom"]).val( map.getZoom() );
-        });
-
+        cb();
+    } else if(attrs["sp"] === "baidu") {
+        alert("baidu is not available now.");
     };
-
-    cb();
-
 });
 })();

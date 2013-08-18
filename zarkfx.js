@@ -32,11 +32,9 @@
         FX.IMG_PATH         = FX.PATH + "static/img/";
 
         // 记录是否加载过某些文件
-        FX.loaded_frame     = {};
         FX.loaded_fx        = {};
         FX.loaded_js        = {};
         FX.loaded_css       = {};
-        FX.loaded_frame["jquery-" + $.fn.jquery] = jQuery;
 
         FX.queue            = [];
 
@@ -47,28 +45,7 @@
         };
 
         FX.loadDep = function(type, name) {
-            // 加载jquery，如果要支持加载其它库，jQuery.noConflict(true)这句应该怎么写?
-            if(type === "frame") {
-                if(typeof(FX.loaded_frame[name]) === 'undefined') {
-                    FX.loaded_frame[name] = "loading";
-                    $.ajax({
-                        async:      true,
-                        cache:      true,
-                        dataType:   "script",
-                        type:       "GET",
-                        url:        FX.JS_PATH + name + ".js",
-                        complete:   function(xhr, textStatus) {
-                            if( (textStatus === "success") || (textStatus === "notmodified") ) {
-                                FX.loaded_frame[name] = jQuery.noConflict(true);
-                            } else {
-                                FX.loaded_frame[name] = "failed";
-                                alert("Load frame " + name + " failed.");
-                            };
-                        }
-                    });
-                };
-                return FX.loaded_frame[name];
-            } else if(type === "fx") {
+            if(type === "fx") {
                 if(typeof(FX.loaded_fx[name]) === 'undefined') {
                     FX.loaded_fx[name] = "loading";
                     $.ajax({

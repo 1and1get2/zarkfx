@@ -145,7 +145,7 @@
  * .. zarkfx:: :demo:
  *
  *    <div fx="map[width=300;height=200;staticLink=#slink1]" />
- *    <a id="slink1" style="font-size: 200%">static map link here</a>
+ *    <a id="slink1" target="_blank" style="font-size: 200%">static map link here</a>
  *
  * 输出静态链接 <img>
  * ------------------
@@ -346,7 +346,10 @@ FX.register( "map", [], {
 
                 google.maps.event.addListener(map, "rightclick", onMarkChange);
                 google.maps.event.addListener(mark, "dragend", onMarkChange);
-                google.maps.event.addListener(map, "zoom_changed", saveBinds);
+                google.maps.event.addListener(map, "zoom_changed", function() {
+                    saveBinds();
+                    saveLink();
+                });
                 if(bindLng !== false) {
                     bindLng.change(onBindChange);
                 };

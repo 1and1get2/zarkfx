@@ -157,7 +157,7 @@
 ;(function(){
 
 // 创建一个absolute的div，用于包裹img，超出的部分overflow
-var $body_wrapper = $("<div></div>").appendTo('body').css({
+var $body_wrapper = $('<div class="zarkfx_bgimage"></div>').appendTo('body').css({
     margin: 0,
     padding: 0,
     position: "absolute",
@@ -165,8 +165,7 @@ var $body_wrapper = $("<div></div>").appendTo('body').css({
     width: "100%",
     height: "100%",
     top: 0,
-    left: 0,
-    zIndex: -999999999999
+    left: 0
 });
 
 FX.register('bgimage', [], {
@@ -268,6 +267,7 @@ FX.register('bgimage', [], {
 
     // 隐藏本组内第一张以外的图片
     $wrapper.find('img:not(:first-child)').hide();
+    $wrapper.find('img:first-child').show();
 
     // 处理next和prev按钮的事件
     if (typeof($.data($wrapper[0], 'zarkfx_bgimage_curr_index')) === 'undefined'){

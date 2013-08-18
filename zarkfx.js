@@ -113,14 +113,14 @@
         };
 
         // 加载一些js，然后执行cb。用于fx对js的按需加载
-        FX.readyJs = function(deps, cb){
-            var ready = function(){
+        FX.readyJs = function(deps, cb) {
+            var ready = function() {
                 var ret = true;
-                for(var i in deps){
+                for(var i in deps) {
                     var state = FX.loadDep('js', deps[i]);
-                    if (state === 'loading'){
+                    if (state === 'loading') {
                         ret = false;
-                    }else if (state === 'failed'){
+                    } else if (state === 'failed') {
                         alert('fx load js error:', deps[i])
                         ret = false;
                     };
@@ -131,7 +131,7 @@
             if ( ready() ) {
                 cb && cb();
             } else {
-                window.setTimeout(function(){
+                window.setTimeout(function() {
                     FX.readyJs(deps, cb);
                 }, 10);
             };
@@ -147,11 +147,11 @@
 
         FX.setDefaults = function(attrs, defaults) {
             for(var k in defaults) {
-                if(typeof(attrs[k]) === 'undefined'){
+                if(typeof(attrs[k]) === 'undefined') {
                     attrs[k] = defaults[k];
                 } else {
                     if(typeof(defaults[k]) === "number") {
-                        if (attrs[k].indexOf(".") === -1){
+                        if (attrs[k].indexOf(".") === -1) {
                             attrs[k] = parseInt(attrs[k]);
                         } else {
                             attrs[k] = parseFloat(attrs[k]);
@@ -159,7 +159,7 @@
                     } else if(typeof(defaults[k]) === "boolean") {
                         if (attrs[k] === "true") {
                             attrs[k] = true;
-                        }else if (attrs[k] === "false") {
+                        } else if (attrs[k] === "false") {
                             attrs[k] = false;
                         };
                     };
@@ -190,7 +190,7 @@
                 var attrs = FX.setDefaults(attrs, FX.loaded_fx[name].defaults);
                 var func = FX.loaded_fx[name].func;
                 // 加载样式
-                if (typeof(attrs.style) !== 'undefined' && attrs.style !== 'none'){
+                if (typeof(attrs.style) !== 'undefined' && attrs.style !== 'none') {
                     FX.loadStyle(name, attrs.style);
                     $(that).addClass('zarkfx_' + name + '_' + attrs.style);
                 };
@@ -224,7 +224,7 @@
             // 找到没有运行的(依赖还在加载中)，10ms后再运行
             var remain = [];
             for(var i = 0; i < FX.queue.length; i++) {
-                if(typeof(FX.queue[i]) !== 'undefined'){
+                if(typeof(FX.queue[i]) !== 'undefined') {
                     remain.push(FX.queue[i]);
                 };
             };
@@ -378,7 +378,7 @@
                 try {
                     out = parseOne(t);
                     if(out.name != "") {
-                        if (typeof(ret_fxs[out.name]) === 'undefined'){
+                        if (typeof(ret_fxs[out.name]) === 'undefined') {
                             ret_fxs[out.name] = [];
                         };
                         ret_fxs[out.name].push(out.attrs);

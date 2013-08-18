@@ -81,6 +81,12 @@
  *         - true
  *         - true | false
  *
+ *       * - hashChange
+ *         - optional
+ *         - 当url中#后面的部分改变时, 是否自动switch
+ *         - true
+ *         - true | false
+ *
  * 通过点击开关在多个div中切换
  * -----------------------------------
  *
@@ -125,7 +131,8 @@ FX.register('switch', [], {
     speed:          'normal',
     selectedClass:  '',
     autoHidden:     true,
-    anchor:         true
+    anchor:         true,
+    hashChange:     true
 
 }, function(attrs){
     var $this = $(this);
@@ -159,6 +166,7 @@ FX.register('switch', [], {
         if (attrs.blurA && $this.attr('nodeName') === 'A') {
             $this.blur();
         };
+        // 此处不能return false, 否则url不会变
     };
 
     $this.bind(attrs.on, showSwitch);
@@ -189,6 +197,14 @@ FX.register('switch', [], {
         if (typeof(attrs.target) !== 'undefined'){
             $(attrs.target).hide();
         };
+    };
+
+    if ( attrs.hashChange === true ) {
+        $(window).bind('hashchange ', function(e) {
+            if ( attrs.target === '#'+window.location.href.substr(href.indexOf('#!')+2)) {
+                showSwitch();
+            };
+        });
     };
 
 });

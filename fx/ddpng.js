@@ -45,7 +45,7 @@
 
 ;(function(){
 FX.register('ddpng', [], {}, function(attrs){
-    if($.browser.msie && $.browser.version < 8){
+    if(navigator.userAgent.indexOf('MSIE 6') !== -1 || navigator.userAgent.indexOf('MSIE 7') !== -1){
         try { document.execCommand("BackgroundImageCache", false, true); }
         catch (err) {};
         FX.readyJs(['ddpng'], function(){

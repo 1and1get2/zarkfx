@@ -34,9 +34,9 @@ function shareToTencentWeibo(link, title, content, pic, attrs){
         _appkey = encodeURI(attrs.appkey),
         _pic = encodeURI(pic);
 
-    var url = 'http://share.v.t.qq.com/index.php?c=share&a=index&url='+link+'&appkey='+_appkey+'&pic='+_pic+'&assname='+_assname+'&title='+encodeURIComponent(title+'   '+content);
+    var url = 'http://share.v.t.qq.com/index.php?c=share&a=index&title='+encodeURIComponent(title+'\n'+content)+'&url='+link+'&appkey='+_appkey+'&pic='+_pic+'&assname='+_assname;
 
-    window.open( url,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+    window.open( url,'分享到腾讯微博', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 
 };
 
@@ -46,7 +46,7 @@ function shareToSinaWeibo(link, title, content, pic, attrs){
         type:'3',
         count:'1', /**是否显示分享数，1显示(可选)*/
         appkey: attrs.appkey,
-        title:  content,
+        title:  title + '\n' + content,
         pic: pic,
         ralateUid: attrs.relateUid, /**关联用户的UID，分享微博会@该用户(可选)*/
         rnd: new Date().valueOf()
@@ -62,7 +62,7 @@ function shareToDouban(link, title, content, pic, attrs){
         s2 = document.getSelection,
         s3 = document.selection,
         s = s1?s1():s2?s2():s3?s3.createRange().text:'',
-        r = 'http://www.douban.com/recommend/?url='+e(link)+'&title='+e(title+'   '+content)+'&sel='+e(s)+'&v=0';
+        r = 'http://www.douban.com/recommend/?url='+e(link)+'&title='+e(title+'\n'+content)+'&sel='+e(s)+'&v=0';
 
     var x = function(){
         if(!window.open(r,'douban','toolbar = 0,resizable=1,scrollbars=yes,status=1,width=450,height=330')){
@@ -116,19 +116,19 @@ FX.register('share', [], {
         var content = '', title = '', link = '', pic = '';
 
         if (attrs.content_selector && $(attrs.content_selector).length > 0){
-            content = $(attrs.content_selector).text();
+            content = $(attrs.content_selector).text() || $(attrs.content_selector).val();
         }
         if (attrs.title_selector && $(attrs.title_selector).length > 0){
-            title = $(attrs.title_selector).text();
+            title = $(attrs.title_selector).text() || $(attrs.title_selector).val();
         }
         if (attrs.link_selector && $(attrs.link_selector).length > 0){
-            var link = $(attrs.link_selector).attr('href');
+            var link = $(attrs.link_selector).attr('href') || $(attrs.title_selector).text() || $(attrs.pic_selector).val();
             link = toHTTP(link);
         }else{
             link = window.location.href;
         }
         if (attrs.pic_selector && $(attrs.pic_selector).length > 0){
-            var pic = $(attrs.pic_selector).attr('src') || $(attrs.pic_selector).val();
+            var pic = $(attrs.pic_selector).attr('src') || $(attrs.title_selector).text() || $(attrs.pic_selector).val();
             pic = toHTTP(pic);
         }
 

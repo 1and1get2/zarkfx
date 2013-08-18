@@ -45,8 +45,8 @@
  *       * - autoExpande
  *         - optional
  *         - 自动展开选中项的模式
- *         - prefix
- *         - off | prefix | equal | contain
+ *         - pathname
+ *         - off | pathname | equal | prefix | contain
  *
  *       * - title
  *         - optional
@@ -101,6 +101,7 @@ curr_path = encodeURI(curr_path);
 curr_search = encodeURI(curr_search);
 
 var curr_relative = curr_path.substr(curr_path.lastIndexOf('/') + 1) +  curr_search;
+console.log(window.location)
 
 var isSelected = function(autoExpande, this_url){
     var ret = false;
@@ -110,10 +111,23 @@ var isSelected = function(autoExpande, this_url){
         ret = (curr_href === this_url) || (protocol + '//' + curr_host + this_url === curr_href) || (curr_relative === this_url)
 
     }else if (autoExpande === 'prefix'){
-        ret = (curr_href.indexOf(this_url) === 0) || ((curr_path + curr_search).indexOf(this_url) === 0) || (curr_relative.indexOf(this_url) === 0)
+        ret = (curr_href.indexOf(this_url) === 0) || ((curr_path + curr_search).indexOf(this_url) === 0) || (curr_relative.indexOf(this_url) === 0);
+
+    }else if (autoExpande === 'pathname'){
+        // pathname去掉?后面的部分，比较方式与equal相同
+        if (this_url.indexOf('?') !== -1){
+            this_url = this_url.substr(0, this_url.indexOf('?'));
+        };
+        if (curr_href.indexOf('?') !== -1){
+            curr_href = curr_href.substr(0, curr_href.indexOf('?'));
+        };
+        if (curr_relative.indexOf('?') !== -1){
+            curr_relative = curr_relative.substr(0, curr_relative.indexOf('?'));
+        };
+        ret = (curr_href === this_url) || (protocol + '//' + curr_host + this_url === curr_href) || (curr_relative === this_url);
 
     }else if (autoExpande === 'contain'){
-        ret = curr_href.indexOf(this_url) !== -1
+        ret = curr_href.indexOf(this_url) !== -1;
 
     }else if (autoExpande === 'off'){
         // pass
@@ -123,7 +137,7 @@ var isSelected = function(autoExpande, this_url){
 
 FX.register('accordion', [], {
     style       : 'default',
-    autoExpande : 'prefix', // off prefix contain equal
+    autoExpande : 'pathname',
     title       : 'h1, h2, h3, h4, h5, h6',
     speed       : 150,
     on          : 'click',
@@ -137,7 +151,7 @@ FX.register('accordion', [], {
     $('> ' + attrs.title, $this).each(function(){
         var $this = $(this);
         var next_div = $(this).next('div');
-        var expande = function(){
+        var expand = function(){
             if (next_div.height() !== next_div.stop().height('100%').height()){
                 height = next_div.height('100%').height();
                 next_div.height(0).animate({
@@ -157,11 +171,11 @@ FX.register('accordion', [], {
             };
         };
         if (attrs.on === 'hover'){
-            $this.hover(expande, fold);
+            $this.hover(expand, fold);
         }else{
             $this.bind(attrs.on, function(){
                 if (next_div.height() === 0){
-                    expande();
+                    expand();
                 }else{
                     fold();
                 };

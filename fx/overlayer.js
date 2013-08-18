@@ -58,7 +58,7 @@
 
 
 ;(function(){
-var is_ie6 = $.browser.msie && $.browser.version === 6;
+var is_ie6 = navigator.userAgent.indexOf('MSIE 6') !== -1;
 
 if(is_ie6){ // ie6 hack
     

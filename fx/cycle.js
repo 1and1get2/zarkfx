@@ -722,7 +722,7 @@ FX.register('cycle', ['cycle2/cycle2'], {
     }else if (attrs["tr"] === 'tileSlide' || attrs["tr"] === 'tileBlind'){
         deps.push('cycle2/tile');
 
-    }else if (attrs["tr"] === 'fade' && $.browser.msie && $.browser.version < 8 ){
+    }else if (attrs["tr"] === 'fade' && (navigator.userAgent.indexOf('MSIE 6') !== -1 || navigator.userAgent.indexOf('MSIE 7') !== -1) ){
         deps.push('cycle2/iefade');
     };
 
@@ -749,6 +749,7 @@ FX.register('cycle', ['cycle2/cycle2'], {
         if(!attrs["options"]) {
             $this.cycle(attrs);
         } else {
+            eval(attrs["options"] + ".fx = " + attrs["options"] + ".tr");
             eval("$this.cycle(" + attrs["options"] + ")");
         };
         // 绑定事件

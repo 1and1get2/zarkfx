@@ -1,0 +1,54 @@
+
+.zarkfx_paging ul {
+    margin-left:30px;
+    display:inline-block;
+    height:36px;
+    border-radius:4px;
+    border:1px solid #cecece;
+}
+.zarkfx_paging ul li {
+    height:100%;
+    display:inline-block;
+    border-left:1px solid #cecece;
+    list-style-type:none;
+
+    transition:all 0.1s ease 0s; 
+    -webkit-transition:all 0.1s ease 0s; 
+    -moz-transition:all 0.1s ease 0s;  
+    -ms-transition:all 0.1s ease 0s;  
+}
+.zarkfx_paging ul li:first-child {
+    border-left:0;
+    border-radius:4px 0 0 4px;
+}
+.zarkfx_paging ul li:last-child {
+    border-radius:0 4px 4px 0;
+}
+.zarkfx_paging ul li a {
+    display:block;
+    padding:0 1.2em;
+    height:100%;
+    line-height:36px;
+    color:#0088cc;
+    font-weight:bold;
+
+    transition:all 0.1s ease 0s; 
+    -webkit-transition:all 0.1s ease 0s; 
+    -moz-transition:all 0.1s ease 0s;  
+    -ms-transition:all 0.1s ease 0s;  
+}
+.zarkfx_paging ul li:hover {
+    background-color:#f8f8f8;
+}
+.zarkfx_paging ul li:hover a {
+    color:#0071aa;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected {
+    background-color:#f8f8f8;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a {
+    color:#0071aa;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a:hover {
+    color:#0071aa;
+}

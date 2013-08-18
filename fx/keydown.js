@@ -88,6 +88,7 @@ FX.register('keydown', [], {
                     && ( alt === null   || event.altKey === alt) 
                     && ( shift === null || event.shiftKey === shift)){
                     eval('$(\''+attrs.target+'\').'+attrs.action+'()');
+                    return false;
                 };
             });
             // 修复某些浏览器下div不支持事件冒泡的bug

@@ -119,7 +119,7 @@
  */
 
 ;(function(){
-var is_ie6 = $.browser.msie && $.browser.version == 6;
+var is_ie6 = navigator.userAgent.indexOf('MSIE 6') !== -1;
 
 if(is_ie6){ // ie6 hack
     var getScrollTop = function(){
@@ -183,7 +183,7 @@ FX.register('scroll', [], {
         if (attrs.target === undefined){
             target_top = 0;
         }else{
-            target_top = $(attrs.target).offset().top + jQuery(document).scrollTop();
+            target_top = $(attrs.target).offset().top;
         };
         $body.animate({scrollTop: target_top}, parseInt(attrs.speed));
         return false;

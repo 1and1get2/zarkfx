@@ -179,7 +179,8 @@ FX.register('bgimage', [], {
     tr: 'fade',
     speed: 750,
     autoplay: false,
-    interval: 3000
+    interval: 3000,
+    fixInterval: 100
 
 }, function(attrs){
     var $this = $(this),
@@ -259,7 +260,7 @@ FX.register('bgimage', [], {
     // 把当前图片放到$wrapper中
     $this.appendTo($wrapper);
 
-    window.setInterval(fix, 100);
+    window.setInterval(fix, attrs.fixInterval);
 
     if (attrs.zIndex){
         $this.css('z-index', attrs.zIndex);

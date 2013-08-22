@@ -5,6 +5,19 @@
 .zarkfx_markdown_anshunus code {
     font-family:monospace; 
 }
+.zarkfx_markdown_anshunus p,
+.zarkfx_markdown_anshunus a,
+.zarkfx_markdown_anshunus pre {
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+.zarkfx_markdown_anshunus a {
+    color:#2690DC;
+    font-weight:bold;
+}
+.zarkfx_markdown_anshunus a:hover {
+    text-decoration:underline;
+}
 .zarkfx_markdown_anshunus > *:first-child {
     margin-top: 0 !important;
 }
@@ -90,6 +103,12 @@
 }
 .zarkfx_markdown_anshunus h1 + p, .zarkfx_markdown_anshunus h2 + p, .zarkfx_markdown_anshunus h3 + p, .zarkfx_markdown_anshunus h4 + p, .zarkfx_markdown_anshunus h5 + p, .zarkfx_markdown_anshunus h6 + p {
     margin-top: 0;
+}
+.zarkfx_markdown_anshunus li p,
+.zarkfx_markdown_anshunus li a,
+.zarkfx_markdown_anshunus li pre {
+    white-space:pre-wrap;
+    word-wrap:break-word;
 }
 .zarkfx_markdown_anshunus li p.first {
     display: inline-block;

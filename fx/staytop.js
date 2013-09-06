@@ -38,7 +38,7 @@
  *
  *       * - stayAbove
  *         - optional
- *         - 指定一个页面元素，当
+ *         - 指定一个页面元素，让 staytop 的元素保持在它的上方
  *         - ""
  *         - jquery selector
  *

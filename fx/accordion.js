@@ -81,7 +81,7 @@
  *
  * 新页面中的三个样例分别使用了 default tui zarkpy 样式
  *
- * .. zarkfx:: :demo:
+ * .. zarkfx:: :script:
  *
  *     <a href="/_static/demo/accordion/demo.html" target="_blank" >查看样例</a>
  *

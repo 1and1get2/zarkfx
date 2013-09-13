@@ -16,7 +16,7 @@
  * --------------
  *
  * :FX name: accordion
- * :Description: 手风琴导航
+ * :Description: 确认弹窗提示
  *
  * .. topic:: Arguments
  *

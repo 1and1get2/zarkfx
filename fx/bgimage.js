@@ -94,6 +94,11 @@
  *         - false
  *         - false | true
  *
+ *       * - fixInterval
+ *         - optional
+ *         - 调整图片的间隔时间,当浏览器改变尺寸时需要重新计算各项参数.当同一个页面中此fx使用较多时可能会导致页面变卡, 此时可以给一个较大值, 或者用0禁止调整图片.
+ *         - 100
+ *         - 正整数
  *
  *
  * div为200x150，图片正好显示
@@ -179,7 +184,8 @@ FX.register('bgimage', [], {
     tr: 'fade',
     speed: 750,
     autoplay: false,
-    interval: 3000
+    interval: 3000,
+    fixInterval: 100
 
 }, function(attrs){
     var $this = $(this),
@@ -259,7 +265,9 @@ FX.register('bgimage', [], {
     // 把当前图片放到$wrapper中
     $this.appendTo($wrapper);
 
-    window.setInterval(fix, 100);
+    if ( attrs.fixInterval > 0 ) {
+        window.setInterval(fix, attrs.fixInterval);
+    };
 
     if (attrs.zIndex){
         $this.css('z-index', attrs.zIndex);

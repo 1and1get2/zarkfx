@@ -36,18 +36,48 @@
  *         - 0
  *         - 整数
  *
+ *       * - stayAbove
+ *         - optional
+ *         - 指定一个页面元素，让 staytop 的元素保持在它的上方
+ *         - ""
+ *         - jquery selector
+ *
+ *       * - marginBottom
+ *         - optional
+ *         - 停留时, 与 stayAbove 指定的元素保持的像素距离
+ *         - 0
+ *         - 整数
+ *
  * 停留在最上面
- * --------------
+ * ------------
  *
  * 向下滚动页面, 红块将停留在页面最顶部.
  *
  * .. zarkfx:: :demo:
  *
- *     <div fx="staytop" style="background-color: red; width:300px; height: 50px;" ></div>
+ *     <div fx="staytop" style="background-color:red; width:300px; height:50px;"></div>
  *     <div style="height:500px; width:300px; background-color: blue;"></div>
  *     <div style="height:500px; width:300px; background-color: yellow;"></div>
- *     <div style="height:500px; width:300px; background-color: green;"></div>
- *     <div style="height:500px; width:300px; background-color: black;"></div>
+ *
+ *
+ * 停留在最上面，但可以被下侧的元素往上推
+ * --------------------------------------
+ *
+ * 向下滚动页面, 红块将停留在页面最顶部.
+ *
+ * .. zarkfx:: :demo:
+ *
+ *     <div fx="staytop[stayAbove=#stop]" style="width:290px; border:5px solid black; margin-left:300px;">
+ *         <p>菜单项 1</p>
+ *         <p>菜单项 2</p>
+ *         <p>菜单项 3</p>
+ *     </div>
+ *     <div style="height:500px; width:300px; background-color: green; margin-left:300px;"></div>
+ *     <div id="stop" style="width:290px; border:5px solid black; margin-left:300px;">
+ *         <p style="font-size: large; text-align: center;">到此为止</p>
+ *     </div>
+ *     <div style="height:500px; width:300px; background-color: black; margin-left:300px;"></div>
+ *     <div style="height:2000px; width:300px; margin-left:300px;"></div>
  *
  *
  * DOC_END
@@ -75,26 +105,43 @@ var getElementTop = function(element){
 };
 
 FX.register('staytop', [], {
-    fullWidth: false,
-    marginTop: 0
+    fullWidth       : false,
+    marginTop       : 0,
+    stayAbove       : '',
+    marginBottom    : 0
 
 }, function(attrs){
 
-    var $this = $(this),
-        old_position = getElementTop(this),
-        old_width = $this.width(),
-        old_left = getElementLeft(this);
-    
+    var that = $(this),
+        old_top = getElementTop(this),
+        old_width = that.width();
+
+    var clearFixed = function() {
+        that.css('position', 'static').css('top', '').css('left', '').css('width', old_width);
+    };
+
     $(window).scroll(function(){
-        if ($(document).scrollTop() > (old_position - attrs.marginTop)){
-            $this.css('top', attrs.marginTop).css('position','fixed');
-            if(attrs.fullWidth){
-                $this.css('width', $(window).width()).css('left', 0);
-            }else{
-                $this.css('left', old_left);
+        var scroll_top = $(document).scrollTop();
+        if (scroll_top > (old_top - attrs.marginTop)) {
+            var min_top;
+            if (attrs.stayAbove !== '') {
+                min_top = getElementTop($(attrs.stayAbove)[0]) - attrs.marginBottom - that.height() - scroll_top;
+                if (min_top > attrs.marginTop) {
+                    min_top = attrs.marginTop;
+                };
+            } else {
+                min_top = attrs.marginTop;
             };
-        }else{
-            $this.css('position','static').css('top','').css('left','').css('width',old_width);
+            if (min_top > old_top - scroll_top) {
+                that.css('position', 'fixed').css('top', min_top);
+                if (attrs.fullWidth) {
+                    that.css('width', $(window).width()).css('left', 0);
+                };
+            } else {
+                clearFixed();
+            };
+        } else {
+            clearFixed();
         };
     });
 

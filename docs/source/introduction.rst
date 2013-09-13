@@ -8,7 +8,7 @@ ZarkFX是 `Sparker5 <http://sparker5.com>`_ 团队在实际工作经验中总结
 
 使用ZarkFX只需要加载jquery以及zarkfx.js两个js文件即可，无需其它步骤，比如可在head标签中加入下面的两行(仅为测试，勿用于正式项目):
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
 
 <script src="http://zarkfx.com/_static/zarkfx.js" type="text/javascript" charset="UTF-8"></script>
 

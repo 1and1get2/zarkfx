@@ -1,7 +1,7 @@
 /*
  * DOC_BEGIN
  *
- * img Area Select
+ * Img Area Select
  * ===============
  *
  * 图片区域选择工具，常用于用户头像裁剪等。可以使用此fx让用户在前端选择图片的区域，然后把选择值(4个整数)保存在一个input里，再发给服务器端处理。
@@ -166,7 +166,7 @@
  *
  * <input id="value" type="text" autocomplete="off" />
  *
- * .. zarkfx:: :demo:
+ * .. zarkfx:: :script:
  *
  *     <a href="/_static/demo/imgareaselect/demo1.html" target="_blank" >查看样例1</a>
  *
@@ -179,7 +179,7 @@
  *
  * <img src="/_static/demo/imgareaselect/flower2.jpg" fx="imgareaselect[x2=150; y2=100; resizable=false; persistent=true; handles=false; parent=w2; ]"/>
  *
- * .. zarkfx:: :demo:
+ * .. zarkfx:: :script:
  *
  *     <a href="/_static/demo/imgareaselect/demo2.html" target="_blank" >查看样例2</a>
  *

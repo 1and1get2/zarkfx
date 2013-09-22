@@ -38,7 +38,7 @@
  *
  *       * - stayAbove
  *         - optional
- *         - 指定一个页面元素，让 staytop 的元素保持在它的上方
+ *         - 指定一个页面元素，让 staytop 的元素保持在它的上方, 用于实现部分区间内停留.
  *         - ""
  *         - jquery selector
  *

@@ -271,6 +271,7 @@ FX.register('bgimage', [], {
 
     if (attrs.zIndex){
         $this.css('z-index', attrs.zIndex);
+        $body_wrapper.css('z-index', attrs.zIndex);
     };
 
     // 隐藏本组内第一张以外的图片

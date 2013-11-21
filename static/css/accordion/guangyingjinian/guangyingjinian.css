@@ -14,15 +14,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar {
     background:#A90800;
-    display:block;
-    padding:20px 10px;
-    border-top:1px solid #900701;
     position:relative;
-    font-size:16px;
-    font-weight:bold;
+    border-top:1px solid #900701;
     cursor:pointer;
 }
-
+.zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar ,
+.zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar > a{
+    color:#FFF;
+    font-size:16px;
+    font-weight:bold;
+    text-decoration:none;
+}
+.zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar > a{
+    display:block;
+    padding:20px 10px;
+}
 .zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar .zarkfx_accordion_tri{
     background:url("icon_arrow.png") no-repeat left top transparent;
     width:18px;
@@ -46,6 +52,9 @@ h1, h2, h3, h4, h5, h6 {
 .zarkfx_accordion_guangyingjinian .zarkfx_accordion_expanded_hover {
     color:#F5D769;
 }
+.zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar > a:hover{
+     color:#F5D769;
+}
 .zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar.zarkfx_accordion_folded_hover .zarkfx_accordion_tri {
     display:block;
 }
@@ -56,9 +65,7 @@ h1, h2, h3, h4, h5, h6 {
     background:#900701;
     overflow:hidden;
 }
-.zarkfx_accordion_guangyingjinian .zarkfx_accordion_bar.zarkfx_accordion_expanded{
-    
-}
+
 .zarkfx_accordion_guangyingjinian .zarkfx_accordion_box .zarkfx_accordion_a {
     display:block;
     padding:14px 10px;

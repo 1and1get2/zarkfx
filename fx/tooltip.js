@@ -1,46 +1,39 @@
 /*
  * DOC_BEGIN
  *
- 
+    explode,blind,bounce,clip,drop,fade,fold,highlight,puff,pulsate,scale,shake,slide
  * DOC_END
  * */
 
 ;(function(){
-FX.register('tooltip', [ 'jqueryui-1.10.2/tooltip' ], {            
-    target       : null,
-    style        : 'none',
+FX.register('tooltip', [ 'jqueryui-1.10.2','jqueryui-1.10.2/position','jqueryui-1.10.2/tooltip' ], {  
+    style        : 'smoothness',
     content      : '',
-    disabled     : false,
-    hide         : 'center',
+    tr           : 'fade',
+    duration     : 300,
+    myH          : 'left',
+    atH          : 'left',
+    myV          : 'center+30',
     atV          : 'center',
     collisionH   : 'flip',
-    collisionV   : 'flip',
-    wrapper      : ''
+    collisionV   : 'flip'
 
 }, function(attrs){
-
-    var $this = $(this);                 
-    if (attrs.target){
-        attrs.of = $(attrs.target);
-        attrs.my = attrs.myH + ' ' + attrs.myV;
-        attrs.at = attrs.atH + ' ' + attrs.atV;
-        attrs.collision = attrs.collisionH + ' ' + attrs.collisionV;
-
-        if (attrs.wrapper){
-            $this.appendTo(attrs.wrapper);
-        };
-
-        if (attrs.target === 'mouse') {
-            $( document ).mousemove(function( event ) {
-                attrs.of = event;
-                $this.position(attrs);
-                $this.css('top', parseInt($this.css('top')) - $(document).scrollTop() );
-            });
-        }else{
-            $this.css({position:'absolute'}).position(attrs);
-        };
-
-    };
-
+    var $this = $(this);  
+    
+    if(attrs.tr){
+        attrs.hide = {"effect":attrs.tr,"duration":attrs.duration};
+    }
+    
+    if(attrs.myH || attrs.atH || attrs.myV || attrs.atV || attrs.collisionH|| attrs.collisionV){
+        attrs.position = {
+            "of":$this,
+            "my":attrs.myH + ' ' + attrs.myV,
+            "at":attrs.atH + ' ' + attrs.atV,
+            "collision":attrs.collisionH + ' ' + attrs.collisionV
+        }
+    }
+    $($this).tooltip(attrs);
+    
 });
 })();

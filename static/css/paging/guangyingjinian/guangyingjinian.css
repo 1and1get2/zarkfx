@@ -7,13 +7,14 @@
     float:left;
 }
 .zarkfx_paging_prev,
-.zarkfx_paging_next,
+.zarkfx_paging_next{
+    padding:8px 14px;
+    border-radius:3px;
+}
 .zarkfx_paging ul li,
 .paging-total{
-    padding:8px;
-    -webkit-border-radius:2px;
-       -moz-border-radius:2px;
-            border-radius:2px;
+    padding:8px 10px;
+    border-radius:3px;
 }
 .paging-total{
     color:#898989;

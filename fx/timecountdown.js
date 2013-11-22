@@ -1,61 +1,60 @@
 /*
  * DOC_BEGIN
  *
-    Year         : false,
-    Month        : false,
-    Day          : false,
-    Hour         : false,
-    Minute       : false,
-    Second       : false,
-    month        : false, 
-    day          : false,
-    hour         : false,
-    minute       : false,
-    second       : false,
+    year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second
+    
  * DOC_END
  * */
 
 ;(function(){
 FX.register('timecountdown', [  ], {            
     targetTime   : '',
+    totalSeconds  : '',
     style        : 'none',
     template     : '{Day}天{hour}小时{minute}分'
 
 }, function(attrs){
-    //年的话有1种  1年
-    //月之后的都有2种      1年5月 17月
-    //yyMMdd
-    //yy-mm-dd hh-mm-ss
-    //MM-dd hh
     var $this = $(this);
-    
-    var countdown = function(){
+    var intervalTime = 1000;
+    var distanceTime;
+    if(attrs.totalSeconds){
+        distanceTime = attrs.totalSeconds * 1000;
+    }else{
         var now = new Date();
         var endDate = new Date(attrs.targetTime);
-        var distance = endDate - now ;
-        var   year = Math.floor(distance / (1000*60*60*24*365));
-        var  Month = Math.floor(distance / (1000*60*60*24*30));
-        var    Day = Math.floor(distance / (1000*60*60*24));
-        var   Hour = Math.floor(distance / (1000*60*60));
-        var Minute = Math.floor(distance / (1000*60));
-        var Second = Math.floor(distance / 1000);
+        distanceTime = endDate - now ;
+    }
+    
+    var countdown = function(){
+        distanceTime -= intervalTime;
+        var distance = distanceTime;
+        var year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second;
+        year=Month=Day=Hour=Minute=Second=month=day=hour=minute=second=0;
+        if(distance > 0){
+            year = Math.floor(distance / (1000*60*60*24*365));
+            Month  = Math.floor(distance / (1000*60*60*24*30));
+            Day = Math.floor(distance / (1000*60*60*24));
+            Hour = Math.floor(distance / (1000*60*60));
+            Minute = Math.floor(distance / (1000*60));
+            Second = Math.floor(distance / 1000);
 
-        distance -= year * (1000*60*60*24*365);
-        var month = Math.floor(distance / (1000*60*60*24*30));
+            distance -= year * (1000*60*60*24*365);
+            month = Math.floor(distance / (1000*60*60*24*30));
 
-        distance -= month * (1000*60*60*24*30);
-        var day = Math.floor(distance / (1000*60*60*24));
+            distance -= month * (1000*60*60*24*30);
+            day = Math.floor(distance / (1000*60*60*24));
 
-        distance -= day * (1000*60*60*24);
-        var hour = Math.floor(distance / (1000*60*60));
+            distance -= day * (1000*60*60*24);
+            hour = Math.floor(distance / (1000*60*60));
 
-        distance -= hour * (1000*60*60);
-        var minute = Math.floor(distance / (1000*60));
-       
-        distance -= minute * (1000*60);
-        var second = Math.floor(distance / 1000);
+            distance -= hour * (1000*60*60);
+            minute = Math.floor(distance / (1000*60));
+           
+            distance -= minute * (1000*60);
+            second = Math.floor(distance / 1000);
+        }
 
-        var resultStr = attrs.template;
+        resultStr = attrs.template;
         
         resultStr = resultStr.replace(/{Year}/g,year);
         resultStr = resultStr.replace(/{Month}/g,Month);
@@ -70,6 +69,6 @@ FX.register('timecountdown', [  ], {
         resultStr = resultStr.replace(/{second}/g,second);
         $($this).html(resultStr);
     }
-    window.setInterval(countdown,1000);
+    window.setInterval(countdown,intervalTime);
 });
 })();

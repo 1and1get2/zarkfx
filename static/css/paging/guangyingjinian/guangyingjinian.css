@@ -55,6 +55,7 @@
 .zarkfx_paging_prev,
 .zarkfx_paging_next,
 .zarkfx_paging ul li a {
+    line-height:16px;
     font-size:12px;
     font-weight: bold;
     text-decoration:none;

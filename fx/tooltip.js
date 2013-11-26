@@ -18,11 +18,12 @@
  *
  * :FX name: tooltip
  * :Description: 悬浮提示,使用此fx的元素必须指明title属性,否则没有效果。
+ * :动画效果: 可选的效果有fade,explode,blind,bounce,clip,drop,fold,highlight,puff,pulsate,scale,shake,slide
  *
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 3 1 3
+ *       :widths: 1 1 3 1 2
  *       :header-rows: 1
  *
  *       * - Param
@@ -35,42 +36,42 @@
  *         - optional
  *         - 样式
  *         - smoothness
- *         - none 
+ *         - none | smoothness
  *
  *       * - content
  *         - optional
  *         - 提示框内的内容
- *         - ''
+ *         - -
  *         - 字符串
  *
  *       * - tr
  *         - optional
- *         - 动画效果。jqueryui中的效果有fade,explode,blind,bounce,clip,drop,fold,highlight,puff,pulsate,scale,shake,slide
+ *         - 动画效果
  *         - fade
  *         - none | fade
  *
  *       * - duration
  *         - optional
- *         - 提示消失效果持续的时间。
+ *         - 提示消失效果持续的时间
  *         - 300
  *         - 毫秒
  *
  *       * - myH
  *         - optional
  *         - 用弹出提示框水平的哪个位置去依靠使用此fx元素
- *         - center
+ *         - left
  *         - left | center | right
  *
  *       * - atH
  *         - optional
  *         - 弹出提示框在水平位置上依靠在使用此fx元素的哪个位置
- *         - center
+ *         - left
  *         - left | center | right
  *
  *       * - myV
  *         - optional
  *         - 用弹出提示框垂直的哪个位置去依靠使用此fx元素
- *         - center
+ *         - center + 30
  *         - top | center | bottom
  *
  *       * - atV
@@ -93,19 +94,15 @@
  *
  * :提示: 你还可以给myH、myV、atH、atV加上偏移量，比如 myH=left+10
  *
- * 默认效果
- * -------------------------
  *
- * .. zarkfx:: :demo:
+ * 点击查看样例
+ * ------------
  *
- *      <div title="title" fx="tooltip[content=提示框内容;]">鼠标移上来提示</div>
+ * 因为当前页面的css会影响到tooltip的样式，所以需要点击下面的按钮打开演示页面查看
  *
- * 定位提示框
- * -------------------------
+ * .. zarkfx:: :script:
  *
- * .. zarkfx:: :demo:
- *
- *      <div title="title" fx="tooltip[content=提示;atH=left+30;atV=center;myH=center+50;myV=top;]">提示</div>
+ *     <a href="/_static/demo/tooltip/demo.html" target="_blank" >查看样例</a>
  *
  * DOC_END
  * */

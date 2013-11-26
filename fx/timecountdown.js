@@ -17,12 +17,12 @@
  *
  * :FX name: timecountdown
  * :Description: 倒计时
- * :模版字符串: template参数的类型是"模版字符串"，表示在显示时字符串中用"{}"包裹的参数会被替换为具体的值。比如默认的template='{Day}天{hour}小时{minute}分'会被替换成具体的83天2小时29秒。模版中可以使用的参数有: year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second。大写的表示'总共'，例如'{year}年{month}月'会替换成1年5个月,'{year}年{Month}月',则会替换成1年17个月,当用大写参数时，保证大写参数是第一个，以之前的这个例子只要使用{Month}就可以指明还有17个月了。
+ * :模版字符串: template参数的类型是"模版字符串"，可以随意指定文字，例如:离高考还有{Day}天。字符串中用"{}"包裹的参数会被替换为具体的值。比如默认的template='{Day}天{hour}小时{minute}分'会被替换成具体的83天2小时29秒。模版中可以使用的参数有: year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second。大写的表示'总共'，例如'{year}年{month}月'会替换成1年5个月,'{year}年{Month}月',则会替换成1年17个月,当用大写参数时，保证大写参数是第一个，以之前的这个例子只要使用{Month}就可以指明还有17个月了。
  *
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 4 1 2
+ *       :widths: 1 1 5 1 3
  *       :header-rows: 1
  *
  *       * - Param
@@ -51,9 +51,9 @@
  *
  *       * - template
  *         - optional
- *         - 倒计时文字模版。
- *         - '{Day}天{hour}小时{minute}分'
- *         - 字符串模版,可以随意指定文字，例如:'离高考还有{Day}天'。模板中{}可选择的参数 year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second。
+ *         - 倒计时文字模版。模版中可以使用的{}参数有: year,Month,Day,Hour,Minute,Second,month,day,hour,minute,second。
+ *         - {Day}天{hour}小时{minute}分
+ *         - 字符串模版。
  *
  *
  * 默认效果
@@ -67,12 +67,14 @@
  * -------------------------
  *
  * .. zarkfx:: :demo:
+ *
  *      <div fx="timecountdown[targetTime=2021/12/26 20:00:00;totalSeconds=150;]"></div>
  *
  * 自定义模板
  * -------------------------
  *
  * .. zarkfx:: :demo:
+ *
  *      <div fx="timecountdown[targetTime=2021/12/20;template=离2021年12月20日还有{Day}天;]"></div>
  * 
  * DOC_END

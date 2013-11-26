@@ -22,7 +22,7 @@
  * .. topic:: Arguments
  *
  *    .. list-table::
- *       :widths: 1 1 4 1 2
+ *       :widths: 1 1 3 1 3
  *       :header-rows: 1
  *
  *       * - Param
@@ -45,9 +45,9 @@
  *
  *       * - tr
  *         - optional
- *         - 动画效果。
+ *         - 动画效果。jqueryui中的效果有fade,explode,blind,bounce,clip,drop,fold,highlight,puff,pulsate,scale,shake,slide
  *         - fade
- *         - none,fade,explode,blind,bounce,clip,drop,fold,highlight,puff,pulsate,scale,shake,slide
+ *         - none | fade
  *
  *       * - duration
  *         - optional
@@ -104,7 +104,8 @@
  * -------------------------
  *
  * .. zarkfx:: :demo:
- *      <div title="title" fx="tooltip[content=提示;atH=left+30;atV=center+50;myH=center+20;myV=center+20]">提示</div>
+ *
+ *      <div title="title" fx="tooltip[content=提示;atH=left+30;atV=center;myH=center+50;myV=top;]">提示</div>
  *
  * DOC_END
  * */

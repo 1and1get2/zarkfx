@@ -140,6 +140,10 @@ FX.register('switch', [], {
 
     // 显示某组中的一个switch指定的元素
     var showSwitch = function(){
+        // 如果已经选中，则退出
+        if ($.data($this[0], 'zarkpy_switch_selected') === true) {
+            return;
+        };
         // 先隐藏此组的所有元素
         for(var i in switch_groups[group]){
             var $a = switch_groups[group][i];
@@ -150,6 +154,8 @@ FX.register('switch', [], {
             if (attrs.selectedClass){
                 $a.removeClass(attrs.selectedClass);
             };
+            // 取消此组元素的选中
+            $.data($a[0], 'zarkpy_switch_selected' , false);
         };
         // 显示当前switch指定的元素
         if (typeof(attrs.target) !== 'undefined'){
@@ -166,6 +172,8 @@ FX.register('switch', [], {
         if (attrs.blurA && $this.attr('nodeName') === 'A') {
             $this.blur();
         };
+        // 给$this设置已选中
+        $.data($this[0], 'zarkpy_switch_selected' , true);
         // 此处不能return false, 否则url不会变
     };
 

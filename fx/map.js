@@ -135,8 +135,8 @@
  * .. zarkfx:: :demo:
  *
  *    <div fx="map[width=400;height=400;bindLng=#lng1;bindLat=#lat1;bindZoom=#zoom1]" />
- *    <input id="lat1" value="39.919" />
  *    <input id="lng1" value="116.397" />
+ *    <input id="lat1" value="39.919" />
  *    <input id="zoom1" value="12" />
  *
  * 输出静态链接 <a>

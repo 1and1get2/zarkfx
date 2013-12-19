@@ -137,6 +137,7 @@ FX.register('toggle', [], {
     show:           '',
     toggleHtml:     '',
     tr:             '',
+    trDelay:        10,
     speed:          'normal',
     hideThis:       false,
     hideWay:        'display'
@@ -186,16 +187,8 @@ FX.register('toggle', [], {
     };
 
     var $this = $(this);
-    var switchFunc = function(){
-        // 改变target的显示或隐藏效果
-        $(attrs.target).each(function(){
-            if ( isHide($(this)) ){
-                show($(this));
-            }else{
-                hide($(this));
-            };
-        });
-        
+
+    var switchOther = function(argument) {
         if (attrs.hide) { hide($(attrs.hide)); };
         if (attrs.show) { show($(attrs.show)); };
         if (attrs.hideThis) { hide($this); };
@@ -206,10 +199,53 @@ FX.register('toggle', [], {
                 $this.html($.data(this, 'old_value'));
             };
         };
+    };
+
+    var switchFunc = function(){
+        // 改变target的显示或隐藏效果
+        $(attrs.target).each(function(){
+            if ( !$(this).is(":animated") ){
+                if ( isHide($(this)) ){
+                    show($(this));
+                }else{
+                    hide($(this));
+                };
+            }
+        });
+        switchOther();
     }; // End switchFunc
 
+
+    var switchToShow = function(){
+        $(attrs.target).each(function(){
+            show($(this));
+        });
+        switchOther();
+    }; // End switchToShow
+
+    var switchToHide = function(){
+        $(attrs.target).each(function(){
+            hide($(this));
+        });
+        switchOther();
+    }; // End switchToHide
+
     if (attrs.on === 'hover') {
-        $this.hover(switchFunc, switchFunc);
+        // 同时使用hover和fade效果时，如果被显示的元素在html上处于被hover元素里，
+        // 但布局上处于被hover元素之外（如弹出菜单），就会出现“闪烁”现象，
+        // 因此使用trDelay来避免此bug
+        var last_hover = undefined;
+        $this.mouseover(function() {
+            if ( last_hover ) {
+                window.clearTimeout(last_hover);
+            };
+            last_hover = window.setTimeout(switchToShow, attrs.trDelay);
+        }).mouseout(function() {
+            if ( last_hover ) {
+                window.clearTimeout(last_hover);
+            };
+            last_hover = window.setTimeout(switchToHide, attrs.trDelay);
+        });
     }else{
         $this.bind(attrs.on, switchFunc);
     };

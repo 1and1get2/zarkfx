@@ -1,0 +1,64 @@
+
+.zarkfx_paging,
+.zarkfx_paging_prev,
+.zarkfx_paging_next,
+.zarkfx_paging ul li,
+.paging-total{
+    float:left;
+}
+.zarkfx_paging_prev,
+.zarkfx_paging_next{
+    padding:8px 14px;
+    border-radius:3px;
+}
+.zarkfx_paging ul li,
+.paging-total{
+    padding:8px 10px;
+    border-radius:3px;
+}
+.paging-total{
+    color:#898989;
+    font-size:14px;
+    font-weight: bold;
+}
+
+.zarkfx_paging ul {
+    background:#FFF;
+}
+
+.zarkfx_paging ul li a {
+    display:block;
+    color:#AA0202; 
+}
+.zarkfx_paging ul li:hover {
+    
+}
+.zarkfx_paging ul li:hover a {
+    
+}
+.zarkfx_paging ul li.zarkfx_paging_selected {    
+    background:#AA0202;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a {
+    color:#FFF;
+    background:#AA0202;
+}
+.zarkfx_paging ul li.zarkfx_paging_selected a:hover {
+    color:#FFF;
+}
+.zarkfx_paging_prev,.zarkfx_paging_next{
+    color:#FFF;
+    margin:0 20px;
+    background:#AA0202;
+}
+
+.zarkfx_paging_prev,
+.zarkfx_paging_next,
+.zarkfx_paging ul li a {
+    line-height:16px;
+    font-size:12px;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+
